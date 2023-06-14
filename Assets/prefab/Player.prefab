@@ -217,6 +217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gemsText: {fileID: 0}
+  restoredHealth: 20
+  playerLife: {fileID: 5699698102413312160}
   collectionSoundEffect: {fileID: 7182046250409853107}
 --- !u!114 &5699698102413312160
 MonoBehaviour:
@@ -230,6 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf61192fa3d78e4e83ccaaa032942c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+  healthBar: {fileID: 0}
   deathSoundEffect: {fileID: 6541256710783751537}
 --- !u!82 &2127724330478873948
 AudioSource:

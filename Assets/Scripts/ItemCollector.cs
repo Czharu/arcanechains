@@ -7,6 +7,9 @@ public class Itemcollector : MonoBehaviour
 {
     private int gems = 0;
     [SerializeField] private Text gemsText;
+    [SerializeField] private int restoredHealth = 20;
+
+    public PlayerLife playerLife;
     [SerializeField] private AudioSource collectionSoundEffect;
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.CompareTag("Gem"))
@@ -15,6 +18,7 @@ public class Itemcollector : MonoBehaviour
             collectionSoundEffect.Play();
             gems++;
             gemsText.text = "gems: " + gems;
+            playerLife.Heal(restoredHealth);
         }
     }
 }
