@@ -8,7 +8,7 @@ public class PlayerLife : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
 
-    private int currentHealthPoints;
+    public int currentHealthPoints;
     public int maxHealthPoints = 100;
     public HealthBar healthBar;
     [SerializeField] private AudioSource deathSoundEffect;
@@ -42,6 +42,7 @@ public class PlayerLife : MonoBehaviour
     private void Damage(int i){
         currentHealthPoints -= i;
         healthBar.SetHealth(currentHealthPoints);
+        Debug.Log("Damage Taken");
         if(currentHealthPoints <= 0){
             DeathSequence();
         }
@@ -57,6 +58,7 @@ public class PlayerLife : MonoBehaviour
         deathSoundEffect.Play();
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("death");
+        PlayerInstanceScript.isRespawn = true;
     }
     private void RestartLevel(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
