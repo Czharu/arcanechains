@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class RotateWeaponOnClick : MonoBehaviour
 {
-    
+    public SpriteRenderer characterRenderer, weaponRenderer;
     public GameObject player; // Reference to the player GameObject
     public GameObject arrowPivot; // Reference to the empty GameObject acting as the pivot point
     public GameObject arrow; // Reference to the arrow GameObject
-    private int currentState = 0; // Current state of the arrow rotation
-    private Quaternion originalRotation; // Store the original rotation of the arrow
+    public float delay = 0.3f;
+    private bool attackBlocked;
 
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
-        RotateArrow(currentState); // Rotate the arrow to the initial state
     }
 
     // Update is called once per frame
     void Update()
     {
         faceMouse();
-
         if (Input.GetMouseButtonDown(0)) // Check if left mouse button is clicked
         {
-            ChangeState();
+            Attack();
         }
     }
 
@@ -51,32 +50,29 @@ public class RotateWeaponOnClick : MonoBehaviour
         }
         transform.localScale = scale;
 
-    }
-
-    private void ChangeState()
-    {
-        currentState++; // Increment the state
-
-        if (currentState > 1) // If the state exceeds the number of weapon states, reset it to 0
+        // put weapon behind head layer
+        if(transform.eulerAngles.z > 0 && transform.eulerAngles.z < 180)
         {
-            currentState = 0;
+            weaponRenderer.sortingOrder = characterRenderer.sortingOrder - 1;
         }
-
-        RotateArrow(currentState); // Rotate the arrow to the new state
-    }
-
-    private void RotateArrow(int state)
-    {
-        switch (state)
+        else
         {
-            case 0: // State 0
-                arrow.transform.rotation = originalRotation;
-                break;
-            case 1: // State 1
-                arrow.transform.rotation = Quaternion.Euler(0, 0, -45);
-                break;
-            // Add more cases for additional states if needed
+            weaponRenderer.sortingOrder = characterRenderer.sortingOrder + 1;
         }
     }
+    public void Attack()
+    {
+        if (attackBlocked)
+            return;
+        animator.SetTrigger("AttackLmb");
+        attackBlocked = true;
+        StartCoroutine(DelayAttack());
+        Debug.Log("attack");
+    }
 
+    private IEnumerator DelayAttack()
+    {
+        yield return new WaitForSeconds(delay);
+        attackBlocked = false;
+    }
 }
