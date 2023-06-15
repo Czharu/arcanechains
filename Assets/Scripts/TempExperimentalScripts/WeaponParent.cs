@@ -6,7 +6,7 @@ public class WeaponParent : MonoBehaviour
 {
     public Vector2 Pointerposition { get; set; }
 
-    private void private void Update() {
+    private void Update() {
         transform.right = (Pointerposition - (Vector2)transform.position).normalized;
         
     }
