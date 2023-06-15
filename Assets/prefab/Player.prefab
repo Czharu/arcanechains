@@ -19,9 +19,10 @@ GameObject:
   - component: {fileID: 2127724330478873948}
   - component: {fileID: 7182046250409853107}
   - component: {fileID: 6541256710783751537}
+  - component: {fileID: 3217210565692798294}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf61192fa3d78e4e83ccaaa032942c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealthPoints: 0
   maxHealthPoints: 100
   healthBar: {fileID: 0}
   deathSoundEffect: {fileID: 6541256710783751537}
@@ -523,3 +525,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3217210565692798294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999688644530575487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da31c356b792a0b42afd07f4c61dc57e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
