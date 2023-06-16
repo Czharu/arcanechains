@@ -9,7 +9,7 @@ public class PlayerInstanceScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(!isRespawn){
+        isRespawn = false;
         if (instance != null){
             Destroy(gameObject);
         }
@@ -18,13 +18,16 @@ public class PlayerInstanceScript : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-    else {
-        Destroy(gameObject);
-        isRespawn = false;
+    private void Update() {
+        if (instance != null){
+            if (gameObject.transform.parent == null && !isRespawn){
+                DontDestroyOnLoad(gameObject);
+            }
         }
+    }
     }
 
     
 
     
-}
+
