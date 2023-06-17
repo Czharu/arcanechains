@@ -42,7 +42,6 @@ public class PlayerLife : MonoBehaviour
     private void Damage(int i){
         currentHealthPoints -= i;
         healthBar.SetHealth(currentHealthPoints);
-        Debug.Log("Damage Taken");
         if(currentHealthPoints <= 0){
             DeathSequence();
         }

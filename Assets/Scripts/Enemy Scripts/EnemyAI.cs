@@ -10,7 +10,9 @@ public class EnemyAI : MonoBehaviour
     public float nextWaypointDistance = 3f;
     private Path path;
     int currentWaypoint = 0;
+    #pragma warning disable
     bool reachedEndOfPath = false;    
+    #pragma warning restore
     private Seeker seeker;
     private Rigidbody2D rb;
     public Transform enemyGFX;
