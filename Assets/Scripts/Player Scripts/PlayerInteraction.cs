@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerLife : MonoBehaviour
+public class PlayerInteraction : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
+    private PlayerStats playerStats;
 
-    public int currentHealthPoints;
-    public int maxHealthPoints = 100;
+    public float currentHealthPoints;
+    public float maxHealthPoints = 100f;
     public HealthBar healthBar;
+
     [SerializeField] private AudioSource deathSoundEffect;
 
     // Start is called before the first frame update
@@ -18,6 +20,7 @@ public class PlayerLife : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        playerStats = GetComponent<PlayerStats>();
         currentHealthPoints = maxHealthPoints;
         healthBar.SetMaxHealth(maxHealthPoints);
     }
@@ -29,20 +32,15 @@ public class PlayerLife : MonoBehaviour
     }
     */
 
-    public void Heal(int i){
-        if(currentHealthPoints < maxHealthPoints){
-        currentHealthPoints += i;
+    public void Heal(float i){
+        playerStats.Heal(i);
         healthBar.SetHealth(currentHealthPoints);
-        }
-        else {
-            healthBar.SetHealth(maxHealthPoints);
-        }
     }
 
     private void Damage(int i){
-        currentHealthPoints -= i;
-        healthBar.SetHealth(currentHealthPoints);
-        if(currentHealthPoints <= 0){
+        playerStats.TakeDamage(20f);
+        healthBar.SetHealth(playerStats.currentHealth);
+        if(playerStats.currentHealth <= 0){
             DeathSequence();
         }
     }

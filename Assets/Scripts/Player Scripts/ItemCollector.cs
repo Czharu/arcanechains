@@ -9,7 +9,7 @@ public class Itemcollector : MonoBehaviour
     [SerializeField] private Text gemsText;
     [SerializeField] private int restoredHealth = 20;
 
-    public PlayerLife playerLife;
+    public PlayerInteraction playerLife;
     [SerializeField] private AudioSource collectionSoundEffect;
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.CompareTag("Gem"))

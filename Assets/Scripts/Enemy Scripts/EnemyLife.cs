@@ -19,8 +19,8 @@ public class EnemyLife : MonoBehaviour
 
     private void Damage(float i){
         currentHealthPoints -= i;
-        if(currentHealthPoints < 0){
-
+        if(currentHealthPoints <= 0){
+            this.killEnemy();
         }
     }
 
@@ -30,9 +30,15 @@ public class EnemyLife : MonoBehaviour
     }
     */
 
-    private void OnCollisionCollision2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.CompareTag("Player")){
             Damage(20);
         }
     }
+
+    private void killEnemy(){
+        Destroy(gameObject);
+    }
+
+    
 }
