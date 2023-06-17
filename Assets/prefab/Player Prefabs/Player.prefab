@@ -524,9 +524,8 @@ MonoBehaviour:
   moveSpeed: 7
   jumpHeight: 14
   jumpSoundEffect: {fileID: 2283458522293693917}
-  movement: {fileID: -3609360278915717418, guid: 6390a4d9f6ad6ba46aca009da45fa45d, type: 3}
-  attack1: {fileID: 4475583559492500841, guid: 6390a4d9f6ad6ba46aca009da45fa45d, type: 3}
-  pointerPosition: {fileID: 4257345905333438586, guid: 6390a4d9f6ad6ba46aca009da45fa45d, type: 3}
+  attack: {fileID: 4475583559492500841, guid: 6390a4d9f6ad6ba46aca009da45fa45d, type: 3}
+  weaponParent: {fileID: 7870079306587945743}
 --- !u!95 &4303412063435665570
 Animator:
   serializedVersion: 5

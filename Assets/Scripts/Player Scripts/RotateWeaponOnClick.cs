@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RotateWeaponOnClick : MonoBehaviour
 {
@@ -21,11 +22,8 @@ public class RotateWeaponOnClick : MonoBehaviour
     void Update()
     {
         faceMouse();
-        if (Input.GetMouseButtonDown(0)) // Check if left mouse button is clicked
-        {
-            Attack();
-        }
     }
+
 
     private void faceMouse()
     {
@@ -75,4 +73,6 @@ public class RotateWeaponOnClick : MonoBehaviour
         yield return new WaitForSeconds(delay);
         attackBlocked = false;
     }
+
+
 }

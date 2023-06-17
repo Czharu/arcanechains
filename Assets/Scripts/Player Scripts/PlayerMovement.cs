@@ -17,9 +17,10 @@ public class PlayerMovement : MonoBehaviour
 
     private enum MovementState  { idle, running, jumping, falling }
     [SerializeField] private AudioSource jumpSoundEffect;
-
     //Controls input references
-    private float horizontal;
+    [SerializeField] private InputActionReference attack;
+    [SerializeField] private RotateWeaponOnClick weaponParent;
+        private float horizontal;
 
     // Start is called before the first frame update
     void Start()
@@ -137,5 +138,22 @@ public class PlayerMovement : MonoBehaviour
             sprite.flipX = false;
         }
          
-    }  
+    }
+    
+    //perform attack
+    private void OnEnable()
+    {
+        attack.action.performed += PerformAttack;
+    }
+
+    private void OnDisable()
+    {
+        attack.action.performed -= PerformAttack;
+        
+    }
+
+    private void PerformAttack(InputAction.CallbackContext obj)
+    {
+        weaponParent.Attack();
+    }
 }
