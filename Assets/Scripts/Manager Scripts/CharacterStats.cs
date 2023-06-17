@@ -3,23 +3,22 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    public float maxHealth = 100f;
-    public float currentHealth { get; private set; }
+    public int maxHealth = 100;
+    public int currentHealth { get; private set; }
    public Stat damage;
    public Stat armor;
+   public Stat evasion;
 
    private void Awake() {
     currentHealth = maxHealth;
    }
 
    private void Update() {
-    if(Input.GetKeyDown(KeyCode.T))
-    {
-        TakeDamage(10f);
-    }
+
    }
 
-   public void TakeDamage(float damage){
+   public void TakeDamage(int damage){
+    if(calcHiterat() == true){
     damage -= armor.GetValue();
     damage = Mathf.Clamp(damage, 0, int.MaxValue);
     currentHealth -= damage;
@@ -27,12 +26,23 @@ public class CharacterStats : MonoBehaviour
         Die();
     }
    }
+   }
 
-       public void Heal(float i){
+       public void Heal(int i){
         if(currentHealth < maxHealth){
         currentHealth += i;
         }
     }
+
+    private bool calcHiterat(){
+        float rnd = Random.Range(0f, 100f);
+        if(rnd >= evasion.GetValue()){
+        return true;
+    } else {
+        return false;
+    }
+    }
+
 
     public virtual void Die(){
         //Meant to be overwritte

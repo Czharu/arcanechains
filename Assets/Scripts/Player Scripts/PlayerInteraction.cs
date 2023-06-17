@@ -32,13 +32,13 @@ public class PlayerInteraction : MonoBehaviour
     }
     */
 
-    public void Heal(float i){
+    public void Heal(int i){
         playerStats.Heal(i);
         healthBar.SetHealth(currentHealthPoints);
     }
 
     private void Damage(int i){
-        playerStats.TakeDamage(20f);
+        playerStats.TakeDamage(20);
         healthBar.SetHealth(playerStats.currentHealth);
         if(playerStats.currentHealth <= 0){
             DeathSequence();

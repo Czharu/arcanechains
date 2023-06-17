@@ -5,16 +5,21 @@ using Pathfinding;
 
 public class EnemyGFX : MonoBehaviour
 {
-    public AIPath aiPath;
-    
+    private SpriteRenderer sprite;
+    private EnemyAIGroundedChase enemyTransform;
 
+    void Start(){
+        sprite = GetComponent<SpriteRenderer>();
+        enemyTransform = GetComponentInParent<EnemyAIGroundedChase>();
+    }
     // Update is called once per frame
     void Update()
     {
-        if(aiPath.desiredVelocity.x >= 0.01f){
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        } else if (aiPath.desiredVelocity.x <= -0.01f){
-            transform.localScale = new Vector3(1f, 1f, 1f);
+        if(enemyTransform.chasingRight == true){
+            sprite.flipX = true;
+        }
+        else{
+            sprite.flipX = false;
         }
     }
 }
