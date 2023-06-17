@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ObjectPersistence : MonoBehaviour
 {
+    [HideInInspector]
+    public string objectID;
+    private void Awake() {
+        objectID = name + transform.position.ToString();
+    }
     void Start()
     {
         for (int a = 0; a < Object.FindObjectsOfType<ObjectPersistence>().Length; a++){
