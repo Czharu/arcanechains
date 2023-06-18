@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class EnemyLife : MonoBehaviour
+public class EnemyLife : CharacterStats
 {
-    public float currentHealthPoints;
 
-    public float maxHealthPoints = 100;
+    
+    //unity attack hit reference
+    public UnityEvent<GameObject> OnHitWithReference, OnDeathWithReference;
+    [SerializeField] private bool isDead = false;
     void Start()
     {
-        currentHealthPoints = maxHealthPoints;
+        isDead = false;
     }
 
     void Update()
@@ -17,10 +20,20 @@ public class EnemyLife : MonoBehaviour
         
     }
 
-    private void Damage(float i){
-        currentHealthPoints -= i;
-        if(currentHealthPoints <= 0){
+    private void Damage(int i, GameObject sender){
+        if (isDead)
+            return;
+        if (sender.layer == gameObject.layer)
+            return;
+
+        TakeDamage(i);
+        if(currentHealth <= 0){
             this.killEnemy();
+            isDead = true;
+        }
+        else
+        {
+            OnDeathWithReference?.Invoke(sender);
         }
     }
 
@@ -32,7 +45,7 @@ public class EnemyLife : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.CompareTag("Player")){
-            Damage(20);
+            Damage(20, collision.gameObject);
         }
     }
 

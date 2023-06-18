@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2926911634886239665}
   - component: {fileID: 7560028761690531978}
   - component: {fileID: 6559182831322620209}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2919767617100611482}
   - component: {fileID: 7870079306587945743}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponParentObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 2393602821371180497}
   - component: {fileID: 6211589337662305630}
   - component: {fileID: 7390272260510863662}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 5026818173666861306}
   - component: {fileID: 7058364884304356465}
   - component: {fileID: 482192457700151751}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -987,7 +987,7 @@ GameObject:
   - component: {fileID: 7681542646892929756}
   - component: {fileID: 4771953955605796298}
   - component: {fileID: 4142777242751673663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1124,7 +1124,7 @@ GameObject:
   - component: {fileID: 8955065499858711042}
   - component: {fileID: 6630482600580867120}
   - component: {fileID: 5038821626108726142}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Gems Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1202,7 +1202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3329461547961431233}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CircleOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1239,6 +1239,10 @@ PrefabInstance:
     - target: {fileID: 1948100198187577057, guid: 7007c50b8f20ab94b8794d035ec20e35, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289488816748295149, guid: 7007c50b8f20ab94b8794d035ec20e35, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2643102223757561755, guid: 7007c50b8f20ab94b8794d035ec20e35, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1348,9 +1352,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3994973768845801873, guid: 7007c50b8f20ab94b8794d035ec20e35, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8556407359908809817, guid: 7007c50b8f20ab94b8794d035ec20e35, type: 3}
       propertyPath: m_Name
       value: Health Bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556407359908809817, guid: 7007c50b8f20ab94b8794d035ec20e35, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 528100529660496991, guid: 7007c50b8f20ab94b8794d035ec20e35, type: 3}
