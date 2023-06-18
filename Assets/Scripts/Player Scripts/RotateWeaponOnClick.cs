@@ -13,6 +13,11 @@ public class RotateWeaponOnClick : MonoBehaviour
     private bool attackBlocked;
 
     public Animator animator;
+
+    //weapon contact
+    public Transform circleOrigin;
+    public float radius;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,5 +79,21 @@ public class RotateWeaponOnClick : MonoBehaviour
         attackBlocked = false;
     }
 
+    //weapon damage trigger components
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Vector3 position = circleOrigin == null ? Vector3.zero : circleOrigin.position;
+        Gizmos.DrawWireSphere(position, radius);
+        
+    }
+
+    public void DetectColliders()
+    {
+        foreach (Collider2D collider in Physics2D.OverlapCircleAll(circleOrigin.position,radius))
+        {
+            Debug.Log(collider.name);
+        }
+    }
 }
