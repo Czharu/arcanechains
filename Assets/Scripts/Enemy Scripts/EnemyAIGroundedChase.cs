@@ -18,6 +18,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     [SerializeField] int attackDistance = 2;
 
     [SerializeField] private LayerMask jumpableGround;
+    bool isColliding = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,21 +31,17 @@ public class EnemyAIGroundedChase : MonoBehaviour
     private void FixedUpdate() {
     {
         float distanceFromPlayer = playerTransform.position.x - transform.position.x;
+        if(!isColliding && jumpCooldown == 0){
         if(isChasing){
             if(transform.position.x > playerTransform.position.x){
-                transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+                //transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+                rb.velocity = new Vector2(moveSpeed * -1, rb.velocity.y);
                 chasingRight = false;
-                if(jumpCooldown > 0)
-                {
-                jumpCooldown --;
-                }
             }
             if(transform.position.x < playerTransform.position.x){
-                transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+                //transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+                rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
                 chasingRight = true;
-                if(jumpCooldown > 0){
-                jumpCooldown--;
-                }
             
         }
         }
@@ -54,12 +51,16 @@ public class EnemyAIGroundedChase : MonoBehaviour
                 isChasing = true;
             }
         }
-        if(isChasing && jumpCooldown == 0){
+        if(isChasing){
             if(Mathf.Abs(distanceFromPlayer) < attackDistance) {
             isChasing = false;
             JumpAttack();
             jumpCooldown = 100;
             }
+        }
+        }
+        else if(jumpCooldown > 0){
+            jumpCooldown--;
         }
 }
 }
@@ -75,7 +76,24 @@ public class EnemyAIGroundedChase : MonoBehaviour
 
         if (IsGrounded())
         {
+            rb.velocity.Set(distanceFromPlayer, 0);
             rb.AddForce(new Vector2(distanceFromPlayer, jumpHeight), ForceMode2D.Impulse);
+        }
+    }
+
+        private void OnCollisionStay2D(Collision2D collision) {
+        if(collision.gameObject.CompareTag("Player")){
+            isColliding = true;
+            rb.velocity.Set(0, 0);
+
+        }
+
+        
+    }
+
+    private void OnCollisionExit2D(Collision2D collision) {
+        if(collision.gameObject.CompareTag("Player")){
+            isColliding = false;
         }
     }
 }
