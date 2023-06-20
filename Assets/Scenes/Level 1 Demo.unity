@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 54472926}
   m_Layer: 0
   m_Name: Dino
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,11 +170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0605d8b855c254f42a6636f013e360f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2
   playerTransform: {fileID: 0}
   chasingRight: 0
-  chaseDistance: 5
-  jumpHeight: 5
+  chaseDistance: 7
+  jumpCooldown: 0
+  jumpHeight: 2
   attackDistance: 2
   jumpableGround:
     serializedVersion: 2
