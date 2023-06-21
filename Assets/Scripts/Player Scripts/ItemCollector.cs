@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Itemcollector : MonoBehaviour
 {
+    public Item item;
     private int gems = 0;
     [SerializeField] private Text gemsText;
     [SerializeField] private int restoredHealth = 20;
@@ -14,11 +15,20 @@ public class Itemcollector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.CompareTag("Gem"))
         {
-            Destroy(collision.gameObject);
+            PickUp(collision.gameObject);
             collectionSoundEffect.Play();
             gems++;
             gemsText.text = "gems: " + gems;
             playerLife.Heal(restoredHealth);
         }
+    }
+
+    void PickUp(GameObject gameObject){
+        Debug.Log("Picking up" + item.name);
+        bool wasPickedUp = Inventory.instance.Add(item);
+
+        if(wasPickedUp){
+        Destroy(gameObject);
+    }
     }
 }
