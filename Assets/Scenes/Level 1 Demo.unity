@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 54472926}
   m_Layer: 0
   m_Name: Dino
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,10 +170,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0605d8b855c254f42a6636f013e360f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2
   playerTransform: {fileID: 0}
   chasingRight: 0
-  chaseDistance: 5
+  chaseDistance: 7
+  jumpCooldown: 0
+  jumpHeight: 2
+  attackDistance: 2
+  jumpableGround:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!61 &54472926
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -773,8 +779,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafd2f9e980d33d469d7c264e83abec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealthPoints: 0
-  maxHealthPoints: 100
+  maxHealth: 100
+  damage:
+    baseValue: 0
+  armor:
+    baseValue: 0
+  evasion:
+    baseValue: 0
+  OnHitWithReference:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathWithReference:
+    m_PersistentCalls:
+      m_Calls: []
+  isDead: 0
 --- !u!4 &509907705 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7497247121482115959, guid: c950dbe99bc0a05408de20a4a96d9d96, type: 3}
