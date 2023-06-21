@@ -20,7 +20,7 @@ public class EnemyLife : CharacterStats
         
     }
 
-    private void Damage(int i, GameObject sender){
+    public void Damage(int i, GameObject sender){
         if (isDead)
             return;
         if (sender.layer == gameObject.layer)

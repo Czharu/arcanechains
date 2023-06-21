@@ -94,6 +94,11 @@ public class RotateWeaponOnClick : MonoBehaviour
         foreach (Collider2D collider in Physics2D.OverlapCircleAll(circleOrigin.position,radius))
         {
             Debug.Log(collider.name);
+            EnemyLife health;
+            if(health = collider.GetComponent<EnemyLife>())
+            {
+                health.Damage(100, transform.parent.gameObject);
+            }
         }
     }
 }
