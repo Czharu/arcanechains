@@ -5,20 +5,17 @@ using UnityEngine.UI;
 
 public class Itemcollector : MonoBehaviour
 {
+    /*
     public Item item;
-    private int gems = 0;
-    [SerializeField] private Text gemsText;
     [SerializeField] private int restoredHealth = 20;
 
     public PlayerInteraction playerLife;
     [SerializeField] private AudioSource collectionSoundEffect;
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.CompareTag("Gem"))
+        if(collision.gameObject.CompareTag("Item"))
         {
             PickUp(collision.gameObject);
             collectionSoundEffect.Play();
-            gems++;
-            gemsText.text = "gems: " + gems;
             playerLife.Heal(restoredHealth);
         }
     }
@@ -31,4 +28,5 @@ public class Itemcollector : MonoBehaviour
         Destroy(gameObject);
     }
     }
+    */
 }
