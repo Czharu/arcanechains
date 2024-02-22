@@ -18,9 +18,12 @@ public class RotateWeaponOnClick : MonoBehaviour
     public Transform circleOrigin;
     public float radius;
 
+    private PlayerStats playerStats;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerStats = GetComponentInParent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -65,6 +68,9 @@ public class RotateWeaponOnClick : MonoBehaviour
     }
     public void Attack()
     {
+        if(GameObject.FindFirstObjectByType<InventoryUI>().GetInventoryState() == false){
+            return;
+        }
         if (attackBlocked)
             return;
         animator.SetTrigger("AttackLmb");
@@ -97,7 +103,7 @@ public class RotateWeaponOnClick : MonoBehaviour
             EnemyLife health;
             if(health = collider.GetComponent<EnemyLife>())
             {
-                health.Damage(100, transform.parent.gameObject);
+                health.Damage(playerStats.damage.GetValue(), transform.parent.gameObject);
             }
         }
     }

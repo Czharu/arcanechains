@@ -7,7 +7,7 @@ public class PlayerStats : CharacterStats
     // Start is called before the first frame update
     void Start()
     {
-          
+          EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
     }
 
     // Update is called once per frame
@@ -16,6 +16,19 @@ public class PlayerStats : CharacterStats
         
     }
 
+    void OnEquipmentChanged(Equipment newItem, Equipment oldItem){
+        if(newItem != null){
+        armor.AddModifier(newItem.armorModifier);
+        evasion.AddModifier(newItem.evasionModifier);
+        damage.AddModifier(newItem.damageModifier);
+        }
+
+        if(oldItem != null){
+        armor.RemoveModifier(newItem.armorModifier);
+        evasion.RemoveModifier(newItem.evasionModifier);
+        damage.RemoveModifier(newItem.damageModifier);
+        }
+    }
 
     }
 

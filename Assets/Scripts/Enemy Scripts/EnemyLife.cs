@@ -44,9 +44,6 @@ public class EnemyLife : CharacterStats
     */
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if(collision.gameObject.CompareTag("Player")){
-            Damage(20, collision.gameObject);
-        }
     }
 
     private void killEnemy(){
