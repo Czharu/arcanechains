@@ -5,8 +5,9 @@ using UnityEngine.Events;
 
 public class EnemyLife : CharacterStats
 {
+    [SerializeField] private GameObject coinPrefab; // Assign this in the Unity Inspector
 
-    
+
     //unity attack hit reference
     public UnityEvent<GameObject> OnHitWithReference, OnDeathWithReference;
     [SerializeField] private bool isDead = false;
@@ -17,17 +18,19 @@ public class EnemyLife : CharacterStats
 
     void Update()
     {
-        
+
     }
 
-    public void Damage(float i, GameObject sender){
+    public void Damage(float i, GameObject sender)
+    {
         if (isDead)
             return;
         if (sender.layer == gameObject.layer)
             return;
 
         TakeDamage(i);
-        if(currentHealth <= 0){
+        if (currentHealth <= 0)
+        {
             this.killEnemy();
             isDead = true;
         }
@@ -43,12 +46,18 @@ public class EnemyLife : CharacterStats
     }
     */
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
     }
 
-    private void killEnemy(){
+    private void killEnemy()
+    {
+        if (coinPrefab != null)
+        {
+            Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 
-    
+
 }
