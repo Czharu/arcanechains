@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-   [SerializeField] public int maxHealth = 100;
-   [SerializeField] public int currentHealth { get; private set; }
+   [SerializeField] public float maxHealth = 100;
+   [SerializeField] public float currentHealth { get; private set; }
    public Stat damage;
    public Stat armor;
    public Stat evasion;
@@ -17,10 +17,10 @@ public class CharacterStats : MonoBehaviour
 
    }
 
-   public void TakeDamage(int damage){
+   public void TakeDamage(float damage){
     if(calcHiterat() == true){
     damage -= armor.GetValue();
-    damage = Mathf.Clamp(damage, 0, int.MaxValue);
+    damage = Mathf.Clamp(damage, 0, float.MaxValue);
     currentHealth -= damage;
     if(currentHealth <= 0){
         Die();
@@ -28,7 +28,7 @@ public class CharacterStats : MonoBehaviour
    }
    }
 
-       public void Heal(int i){
+       public void Heal(float i){
         if(currentHealth < maxHealth){
         currentHealth += i;
         }

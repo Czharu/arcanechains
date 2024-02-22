@@ -32,7 +32,6 @@ public class RotateWeaponOnClick : MonoBehaviour
         faceMouse();
     }
 
-
     private void faceMouse()
     {
 
@@ -52,12 +51,12 @@ public class RotateWeaponOnClick : MonoBehaviour
         }
         else if (direction.x > 0)
         {
-            scale.y =1;
+            scale.y = 1;
         }
         transform.localScale = scale;
 
         // put weapon behind head layer
-        if(transform.eulerAngles.z > 0 && transform.eulerAngles.z < 180)
+        if (transform.eulerAngles.z > 0 && transform.eulerAngles.z < 180)
         {
             weaponRenderer.sortingOrder = characterRenderer.sortingOrder - 1;
         }
@@ -68,7 +67,8 @@ public class RotateWeaponOnClick : MonoBehaviour
     }
     public void Attack()
     {
-        if(GameObject.FindFirstObjectByType<InventoryUI>().GetInventoryState() == false){
+        if (GameObject.FindFirstObjectByType<InventoryUI>().GetInventoryState() == false)
+        {
             return;
         }
         if (attackBlocked)
@@ -92,16 +92,16 @@ public class RotateWeaponOnClick : MonoBehaviour
         Gizmos.color = Color.blue;
         Vector3 position = circleOrigin == null ? Vector3.zero : circleOrigin.position;
         Gizmos.DrawWireSphere(position, radius);
-        
+
     }
 
     public void DetectColliders()
     {
-        foreach (Collider2D collider in Physics2D.OverlapCircleAll(circleOrigin.position,radius))
+        foreach (Collider2D collider in Physics2D.OverlapCircleAll(circleOrigin.position, radius))
         {
             Debug.Log(collider.name);
             EnemyLife health;
-            if(health = collider.GetComponent<EnemyLife>())
+            if (health = collider.GetComponent<EnemyLife>())
             {
                 health.Damage(playerStats.damage.GetValue(), transform.parent.gameObject);
             }
