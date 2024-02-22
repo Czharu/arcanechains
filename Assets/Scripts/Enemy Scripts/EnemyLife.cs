@@ -31,7 +31,7 @@ public class EnemyLife : CharacterStats
         TakeDamage(i);
         if (currentHealth <= 0)
         {
-            this.killEnemy();
+            this.KillEnemy();
             isDead = true;
         }
         else
@@ -50,11 +50,31 @@ public class EnemyLife : CharacterStats
     {
     }
 
-    private void killEnemy()
+    private void KillEnemy()
     {
         if (coinPrefab != null)
         {
-            Instantiate(coinPrefab, transform.position, Quaternion.identity);
+             GameObject coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
+            // Get the Rigidbody2D component of the coin
+            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
+
+            // Check if the Rigidbody2D component was found
+            if (coinRb != null)
+            {
+                coinRb.gravityScale = 1;
+                // Generate a random direction
+                Vector2 randomDirection = Random.insideUnitCircle.normalized;
+                // Ensure there's enough horizontal force
+                randomDirection.x = randomDirection.x < 0 ? Mathf.Min(randomDirection.x, -0.5f) : Mathf.Max(randomDirection.x, 0.5f);
+            
+                // Define the force strength
+                float forceStrength = Random.Range(12f, 13f); // Adjust the range as needed
+
+                // Apply the force to the coin
+                Debug.Log($"Ejecting coin with direction {randomDirection} and force {forceStrength}");
+                coinRb.AddForce(randomDirection * forceStrength, ForceMode2D.Impulse);
+            }
+
         }
         Destroy(gameObject);
     }
