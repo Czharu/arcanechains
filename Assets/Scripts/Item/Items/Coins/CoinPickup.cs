@@ -21,6 +21,7 @@ public class CoinPickup : MonoBehaviour
     private void PickUp()
     {
         // Implement pickup logic, such as incrementing coin count
+        CoinManager.Instance.AddCoins(1);
         Debug.Log("Coin picked up!");
     }
 }
