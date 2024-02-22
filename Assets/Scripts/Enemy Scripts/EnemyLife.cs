@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class EnemyLife : CharacterStats
 {
     [SerializeField] private GameObject coinPrefab; // Assign this in the Unity Inspector
-
+    public int numberOfCoinsToDrop = 5; // Default to 5, set this in the Inspector for each enemy
 
     //unity attack hit reference
     public UnityEvent<GameObject> OnHitWithReference, OnDeathWithReference;
@@ -52,29 +52,32 @@ public class EnemyLife : CharacterStats
 
     private void KillEnemy()
     {
-        if (coinPrefab != null)
+        for (int i = 0; i < numberOfCoinsToDrop; i++)
         {
-             GameObject coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
-            // Get the Rigidbody2D component of the coin
-            Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
-
-            // Check if the Rigidbody2D component was found
-            if (coinRb != null)
+            if (coinPrefab != null)
             {
-                coinRb.gravityScale = 1;
-                // Generate a random direction
-                Vector2 randomDirection = Random.insideUnitCircle.normalized;
-                // Ensure there's enough horizontal force
-                randomDirection.x = randomDirection.x < 0 ? Mathf.Min(randomDirection.x, -0.5f) : Mathf.Max(randomDirection.x, 0.5f);
-            
-                // Define the force strength
-                float forceStrength = Random.Range(12f, 13f); // Adjust the range as needed
+                GameObject coin = Instantiate(coinPrefab, transform.position, Quaternion.identity);
+                // Get the Rigidbody2D component of the coin
+                Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
 
-                // Apply the force to the coin
-                Debug.Log($"Ejecting coin with direction {randomDirection} and force {forceStrength}");
-                coinRb.AddForce(randomDirection * forceStrength, ForceMode2D.Impulse);
+                // Check if the Rigidbody2D component was found
+                if (coinRb != null)
+                {
+                    coinRb.gravityScale = 1;
+                    // Generate a random direction
+                    Vector2 randomDirection = Random.insideUnitCircle.normalized;
+                    // Ensure there's enough horizontal force
+                    randomDirection.x = randomDirection.x < 0 ? Mathf.Min(randomDirection.x, -0.5f) : Mathf.Max(randomDirection.x, 0.5f);
+
+                    // Define the force strength
+                    float forceStrength = Random.Range(5f, 5f); // Adjust the range as needed
+
+                    // Apply the force to the coin
+                    Debug.Log($"Ejecting coin with direction {randomDirection} and force {forceStrength}");
+                    coinRb.AddForce(randomDirection * forceStrength, ForceMode2D.Impulse);
+                }
+
             }
-
         }
         Destroy(gameObject);
     }
