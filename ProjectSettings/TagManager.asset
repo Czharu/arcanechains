@@ -8,6 +8,8 @@ TagManager:
   - Gem
   - Enemy
   - Item
+  - MapSpawnPoint
+  - Rooms
   layers:
   - Default
   - TransparentFX
