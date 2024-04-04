@@ -10,6 +10,7 @@ TagManager:
   - Item
   - MapSpawnPoint
   - Rooms
+  - OneWayPlatform
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Ground
   - Player
   - Collectible
-  - 
+  - OneWayPlatform
   - 
   - 
   - 

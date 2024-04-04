@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;// include the appropriate namespace for the Tilemap classes
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,15 +13,16 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
 
     [SerializeField] private LayerMask jumpableGround;
-    [SerializeField]private float moveSpeed = 7f;
-    [SerializeField]private float jumpHeight = 14f;
+    [SerializeField] private float moveSpeed = 7f;
+    [SerializeField] private float jumpHeight = 14f;
 
-    private enum MovementState  { idle, running, jumping, falling }
+
+    private enum MovementState { idle, running, jumping, falling }
     [SerializeField] private AudioSource jumpSoundEffect;
     //Controls input references
     [SerializeField] private InputActionReference attack;
     [SerializeField] private RotateWeaponOnClick weaponParent;
-        private float horizontal;
+    private float horizontal;
 
     // Start is called before the first frame update
     void Start()
@@ -34,33 +36,35 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {       
+    {
         rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
         faceMouse2();
         UpdateAnimationState();
     }
 
-    private void UpdateAnimationState(){
+    private void UpdateAnimationState()
+    {
         MovementState state;
-        if(horizontal > 0f)
+        if (horizontal > 0f)
         {
             state = MovementState.running;
             sprite.flipX = false;
         }
-        else if(horizontal < 0f)
+        else if (horizontal < 0f)
         {
             state = MovementState.running;
             sprite.flipX = true;
         }
-        else {
+        else
+        {
             state = MovementState.idle;
         }
 
-        if(rb.velocity.y > .1f && IsGrounded() == false)
+        if (rb.velocity.y > .1f && IsGrounded() == false)
         {
             state = MovementState.jumping;
         }
-        else if(rb.velocity.y < -.1f && IsGrounded() == false)
+        else if (rb.velocity.y < -.1f && IsGrounded() == false)
         {
             state = MovementState.falling;
         }
@@ -70,21 +74,21 @@ public class PlayerMovement : MonoBehaviour
 
     private bool JumpCheck()
     {
-        if(IsGrounded())
+        if (IsGrounded())
         {
             jumpStage = 1;
             return true;
         }
-        else if(jumpStage == 1)
-            {
-                jumpStage++;
-                return true;
-            }
+        else if (jumpStage == 1)
+        {
+            jumpStage++;
+            return true;
+        }
         else
         {
             return false;
         }
-        
+
     }
 
     private bool IsGrounded()
@@ -92,11 +96,11 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .2f, jumpableGround);
     }
 
-//Calls Player Input/Events components
+    //Calls Player Input/Events components
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
-        
+
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -107,17 +111,16 @@ public class PlayerMovement : MonoBehaviour
             jumpSoundEffect.Play();
         }
 
-        //slows jump if button released
+        // Slows jump if button released
         if (context.canceled && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-        
-        
     }
 
+
     //Getting the player to face the mouse
-        private void faceMouse2()
+    private void faceMouse2()
     {
 
         Vector3 mousePosition = Input.mousePosition;
@@ -128,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
             mousePosition.y - sprite.transform.position.y
         );
 
-                
+
         if (direction.x < 0)
         {
             sprite.flipX = true;
@@ -137,19 +140,21 @@ public class PlayerMovement : MonoBehaviour
         {
             sprite.flipX = false;
         }
-         
+
     }
-    
+
     //perform attack
     private void OnEnable()
     {
         attack.action.performed += PerformAttack;
+
     }
 
     private void OnDisable()
     {
         attack.action.performed -= PerformAttack;
-        
+
+
     }
 
     private void PerformAttack(InputAction.CallbackContext obj)
