@@ -123,37 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &628822372
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 628822373}
-  m_Layer: 0
-  m_Name: RoomParentGameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &628822373
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 628822372}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4899611, y: 0.5155404, z: 0.08114354}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &751617633
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,9 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11497e3c34858db459d95f77899550fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomWhiteObj: {fileID: 5733134278072071994, guid: 00e0fb8ad2346c148b63afa1b45a5835, type: 3}
-  roomPrefabs:
-  - {fileID: 622450131799948420, guid: c3414fe027eedfa468182406fe226c8e, type: 3}
+  roomWhiteObj: {fileID: 5733134278072071994, guid: f449ff1051b4c9e48ba5ca8837ea3c24, type: 3}
 --- !u!4 &751617635
 Transform:
   m_ObjectHideFlags: 0
