@@ -11,29 +11,8 @@ public class LevelGeneration : MonoBehaviour
         public Vector2 position;
         public int type; // For example, 0 could mean a normal room, 1 could mean a special room, etc.
         public bool up, down, left, right; // Door information
-        //One Door
-        public GameObject[] roomU_Prefabs; // Prefabs for rooms with an Up door only
-        public GameObject[] roomR_Prefabs;
-        public GameObject[] roomD_Prefabs;
-        public GameObject[] roomL_Prefabs;
-        // Two Doors
-        public GameObject[] roomUR_Prefabs;
-        public GameObject[] roomUD_Prefabs;
-        public GameObject[] roomUL_Prefabs;
-        public GameObject[] roomRD_Prefabs;
-        public GameObject[] roomRL_Prefabs;
-        public GameObject[] roomDL_Prefabs;
-        //Three Doors
-        public GameObject[] roomURD_Prefabs;
-        public GameObject[] roomURL_Prefabs;
-        public GameObject[] roomUDL_Prefabs;
-        public GameObject[] roomRDL_Prefabs;
-        //Four Doors
-        public GameObject[] roomURDL_Prefabs;
-
-
         public GameObject prefab;
-        // Add additional data as necessary
+
     }
     List<RoomData> generatedRoomData = new List<RoomData>();
 
@@ -43,6 +22,32 @@ public class LevelGeneration : MonoBehaviour
     int gridSizeX, gridSizeY, numberOfRooms = 20;
     public GameObject roomWhiteObj;
     public GameObject[] roomPrefabs; // Array to hold various room prefabs
+    //One Door
+
+    public GameObject[] roomU_Prefabs; // Prefabs for rooms with an Up door only
+    public GameObject[] roomR_Prefabs;
+    public GameObject[] roomD_Prefabs;
+    public GameObject[] roomL_Prefabs;
+    // Two Doors
+    public GameObject[] roomUR_Prefabs;
+    public GameObject[] roomUD_Prefabs;
+    public GameObject[] roomUL_Prefabs;
+    public GameObject[] roomRD_Prefabs;
+    public GameObject[] roomRL_Prefabs;
+    public GameObject[] roomDL_Prefabs;
+    //Three Doors
+    public GameObject[] roomURD_Prefabs;
+    public GameObject[] roomURL_Prefabs;
+    public GameObject[] roomUDL_Prefabs;
+    public GameObject[] roomRDL_Prefabs;
+    //Four Doors
+    public GameObject[] roomURDL_Prefabs;
+
+    public GameObject[] defaultRoomPrefab;
+
+
+    public GameObject prefab;
+    // Add additional data as necessary
 
     void Start()
     {
@@ -92,14 +97,9 @@ public class LevelGeneration : MonoBehaviour
             takenPositions.Insert(0, checkPos);
             //
 
-            // Determine door layout
-            bool up = // logic to determine if there's a door going up
-            bool right = // logic for right door
-            bool down = // logic for down door
-            bool left = // logic for left door
 
             // Pick a prefab based on the door layout
-            GameObject chosenPrefab = PickPrefab(up, right, down, left);
+            //GameObject chosenPrefab = PickPrefab(up, right, down, left);
 
 
             // Create and store room data instead of instantiating the room
@@ -107,15 +107,48 @@ public class LevelGeneration : MonoBehaviour
             {
                 position = checkPos,
                 type = DetermineRoomType(), // You'll create this method to determine the room type
-                up = up,
-                down = down,
-                left = left,
-                right = right,
-                prefab = chosenPrefab // Use the method to index into the prefab array
+
             };
 
             generatedRoomData.Add(newRoomData);
         }
+
+        // Step 2: Assign door configurations
+        for (int x = 0; x < gridSizeX * 2; x++)
+        {
+            for (int y = 0; y < gridSizeY * 2; y++)
+            {
+                if (rooms[x, y] == null) continue;
+
+                // Determine doors based on the presence of adjacent rooms
+                bool up = (y + 1 < gridSizeY * 2) && rooms[x, y + 1] != null;
+                bool right = (x + 1 < gridSizeX * 2) && rooms[x + 1, y] != null;
+                bool down = (y - 1 >= 0) && rooms[x, y - 1] != null;
+                bool left = (x - 1 >= 0) && rooms[x - 1, y] != null;
+
+                // Find corresponding RoomData and set its doors
+                RoomData roomData = generatedRoomData.Find(r => r.position == new Vector2(x - gridSizeX, y - gridSizeY));
+                if (roomData != null)
+                {
+                    roomData.up = up;
+                    roomData.right = right;
+                    roomData.down = down;
+                    roomData.left = left;
+                    roomData.prefab = PickPrefab(up, right, down, left); // Now this call will work because we have the door information
+                }
+            }
+        }
+        // Step 3: Assign prefabs based on door configurations
+        //foreach (RoomData roomData in generatedRoomData)
+        //{
+        //    // Determine door layout for the room
+        //    roomData.up = rooms[x, y].doorTop;
+        //    roomData.down = rooms[x, y].doorBot;
+        //    roomData.left = rooms[x, y].doorLeft;
+        //    roomData.right = rooms[x, y].doorRight;
+        //    // Pick and assign a prefab based on the door layout
+        //    roomData.prefab = PickPrefab(roomData.up, roomData.right, roomData.down, roomData.left);
+        //}
     }
 
     GameObject PickPrefab(bool up, bool right, bool down, bool left)
@@ -123,26 +156,27 @@ public class LevelGeneration : MonoBehaviour
         // Your logic to pick the correct prefab based on door configuration
         // One Door
         if (up && !right && !down && !left) return roomU_Prefabs[Random.Range(0, roomU_Prefabs.Length)];
-        if (!up && right && !down && !left) return roomR_Prefabs[Random.Range(0, roomR_Prefabs.Length)];
-        if (!up && !right && down && !left) return roomD_Prefabs[Random.Range(0, roomD_Prefabs.Length)];
-        if (!up && !right && !down && left) return roomL_Prefabs[Random.Range(0, roomL_Prefabs.Length)];
+        else if (!up && right && !down && !left) return roomR_Prefabs[Random.Range(0, roomR_Prefabs.Length)];
+        else if (!up && !right && down && !left) return roomD_Prefabs[Random.Range(0, roomD_Prefabs.Length)];
+        else if (!up && !right && !down && left) return roomL_Prefabs[Random.Range(0, roomL_Prefabs.Length)];
         // Two Door
-        if (up && right && !down && !left) return roomUR_Prefabs[Random.Range(0, roomUR_Prefabs.Length)];
-        if (up && !right && down && !left) return roomUD_Prefabs[Random.Range(0, roomUD_Prefabs.Length)];
-        if (up && !right && !down && left) return roomUL_Prefabs[Random.Range(0, roomUL_Prefabs.Length)];
-        if (!up && right && down && !left) return roomRD_Prefabs[Random.Range(0, roomRD_Prefabs.Length)];
-        if (!up && right && !down && left) return roomRL_Prefabs[Random.Range(0, roomRL_Prefabs.Length)];
-        if (!up && !right && down && left) return roomDL_Prefabs[Random.Range(0, roomDL_Prefabs.Length)];
+        else if (up && right && !down && !left) return roomUR_Prefabs[Random.Range(0, roomUR_Prefabs.Length)];
+        else if (up && !right && down && !left) return roomUD_Prefabs[Random.Range(0, roomUD_Prefabs.Length)];
+        else if (up && !right && !down && left) return roomUL_Prefabs[Random.Range(0, roomUL_Prefabs.Length)];
+        else if (!up && right && down && !left) return roomRD_Prefabs[Random.Range(0, roomRD_Prefabs.Length)];
+        else if (!up && right && !down && left) return roomRL_Prefabs[Random.Range(0, roomRL_Prefabs.Length)];
+        else if (!up && !right && down && left) return roomDL_Prefabs[Random.Range(0, roomDL_Prefabs.Length)];
         // Three Door
-        if (up && right && down && !left) return roomURD_Prefabs[Random.Range(0, roomURD_Prefabs.Length)];
-        if (up && right && !down && left) return roomURL_Prefabs[Random.Range(0, roomURL_Prefabs.Length)];
-        if (up && !right && down && left) return roomUDL_Prefabs[Random.Range(0, roomUDL_Prefabs.Length)];
-        if (!up && right && down && left) return roomRDL_Prefabs[Random.Range(0, roomRDL_Prefabs.Length)];
+        else if (up && right && down && !left) return roomURD_Prefabs[Random.Range(0, roomURD_Prefabs.Length)];
+        else if (up && right && !down && left) return roomURL_Prefabs[Random.Range(0, roomURL_Prefabs.Length)];
+        else if (up && !right && down && left) return roomUDL_Prefabs[Random.Range(0, roomUDL_Prefabs.Length)];
+        else if (!up && right && down && left) return roomRDL_Prefabs[Random.Range(0, roomRDL_Prefabs.Length)];
         // Four Door
-        if (up && right && down && left) return roomURDL_Prefabs[Random.Range(0, roomURDL_Prefabs.Length)];
+        else if (up && right && down && left) return roomURDL_Prefabs[Random.Range(0, roomURDL_Prefabs.Length)];
         // Add more conditions for each room type
 
-        return defaultRoomPrefab; // Fallback if no condition is met
+        // Add a default return at the end of the method
+        return defaultRoomPrefab[Random.Range(0, defaultRoomPrefab.Length)]; // Fallback if no condition is met
     }
 
     int DetermineRoomType()
