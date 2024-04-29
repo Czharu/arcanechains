@@ -44,6 +44,7 @@ public class LevelGeneration : MonoBehaviour
     public GameObject[] roomURDL_Prefabs;
 
     public GameObject[] defaultRoomPrefab;
+    public GameObject[] specialRoomPrefab;// starting room
 
 
     public GameObject prefab;
@@ -72,8 +73,18 @@ public class LevelGeneration : MonoBehaviour
         Vector2 checkPos = Vector2.zero;
         //magic numbers to cratee leses clump or stuff
         float randomCompare = 0.2f, randomCompareStart = 0.2f, randomCompareEnd = 0.01f;
+
+        // Instantiate starting (special) room directly as i don't know why it skips this room
+        RoomData startRoomData = new RoomData
+        {
+            position = Vector2.zero,
+            type = 1,
+            prefab = specialRoomPrefab[0], // Assuming specialRoomPrefab is an array of one
+        };
+        generatedRoomData.Add(startRoomData);
+
         //add rooms
-        for (int i = 0; i < numberOfRooms - 1; i++)
+        for (int i = 1; i < numberOfRooms - 1; i++)
         {
             float randomPerc = ((float)i) / (((float)numberOfRooms - 1));
             randomCompare = Mathf.Lerp(randomCompareStart, randomCompareEnd, randomPerc);
@@ -101,16 +112,21 @@ public class LevelGeneration : MonoBehaviour
             // Pick a prefab based on the door layout
             //GameObject chosenPrefab = PickPrefab(up, right, down, left);
 
+            int roomType = DetermineRoomType(); // Determine the room type here
 
-            // Create and store room data instead of instantiating the room
-            RoomData newRoomData = new RoomData
             {
-                position = checkPos,
-                type = DetermineRoomType(), // You'll create this method to determine the room type
 
-            };
 
-            generatedRoomData.Add(newRoomData);
+                // Create and store room data instead of instantiating the room
+                RoomData newRoomData = new RoomData
+                {
+                    position = checkPos,
+                    type = roomType, // You'll create this method to determine the room type
+
+                };
+
+                generatedRoomData.Add(newRoomData);
+            }
         }
 
         // Step 2: Assign door configurations
@@ -136,19 +152,12 @@ public class LevelGeneration : MonoBehaviour
                     roomData.left = left;
                     roomData.prefab = PickPrefab(up, right, down, left); // Now this call will work because we have the door information
                 }
+
+
+
             }
         }
-        // Step 3: Assign prefabs based on door configurations
-        //foreach (RoomData roomData in generatedRoomData)
-        //{
-        //    // Determine door layout for the room
-        //    roomData.up = rooms[x, y].doorTop;
-        //    roomData.down = rooms[x, y].doorBot;
-        //    roomData.left = rooms[x, y].doorLeft;
-        //    roomData.right = rooms[x, y].doorRight;
-        //    // Pick and assign a prefab based on the door layout
-        //    roomData.prefab = PickPrefab(roomData.up, roomData.right, roomData.down, roomData.left);
-        //}
+
     }
 
     GameObject PickPrefab(bool up, bool right, bool down, bool left)
@@ -182,14 +191,15 @@ public class LevelGeneration : MonoBehaviour
     int DetermineRoomType()
     {
         // Logic to determine the room type
-        // For now, we'll just return a random room type
-        return Random.Range(0, roomPrefabs.Length);
+        // For now, we'll just return a zero
+        return 0;
     }
 
     public void InstantiateGameplayRooms() //You will need to call InstantiateGameplayRooms() when you want to generate the actual gameplay rooms, perhaps after the player finishes the planning phase or presses a 'Start Game' button.
     {
         foreach (RoomData roomData in generatedRoomData)
         {
+            Debug.Log($"Instantiating room at position {roomData.position} with prefab {roomData.prefab.name}");
             // Calculate the position where the room should be instantiated
             Vector3 roomPosition = new Vector3(roomData.position.x * 100, roomData.position.y * 100, 0); // Multiply by 10 or room size
 
@@ -363,8 +373,8 @@ public class LevelGeneration : MonoBehaviour
                 continue;
             }
             Vector2 drawPos = room.gridPos;
-            drawPos.x *= 2;
-            drawPos.y *= 2;
+            drawPos.x = drawPos.x * 2 + 50;//move minimap out the way
+            drawPos.y = drawPos.y * 2 + 50;
             MapSpriteSelector mapper = ObjectPersistence.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
             mapper.type = room.type;
             mapper.up = room.doorTop;
