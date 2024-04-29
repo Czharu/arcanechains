@@ -46,6 +46,8 @@ public class LevelGeneration : MonoBehaviour
     public GameObject[] defaultRoomPrefab;
     public GameObject[] specialRoomPrefab;// starting room
 
+    public GameObject[] endRoomPrefab; //ending room
+
 
     public GameObject prefab;
     // Add additional data as necessary
@@ -84,7 +86,7 @@ public class LevelGeneration : MonoBehaviour
         generatedRoomData.Add(startRoomData);
 
         //add rooms
-        for (int i = 1; i < numberOfRooms - 1; i++)
+        for (int i = 1; i < numberOfRooms; i++)
         {
             float randomPerc = ((float)i) / (((float)numberOfRooms - 1));
             randomCompare = Mathf.Lerp(randomCompareStart, randomCompareEnd, randomPerc);
@@ -112,7 +114,7 @@ public class LevelGeneration : MonoBehaviour
             // Pick a prefab based on the door layout
             //GameObject chosenPrefab = PickPrefab(up, right, down, left);
 
-            int roomType = DetermineRoomType(); // Determine the room type here
+            int roomType = (i < numberOfRooms - 1) ? 0 : 2; // If it's the last room, set type to 2 for the end room // Determine the room type here
 
             {
 
@@ -150,7 +152,7 @@ public class LevelGeneration : MonoBehaviour
                     roomData.right = right;
                     roomData.down = down;
                     roomData.left = left;
-                    roomData.prefab = PickPrefab(up, right, down, left); // Now this call will work because we have the door information
+                    roomData.prefab = (roomData.type == 2) ? endRoomPrefab[0] : PickPrefab(up, right, down, left); // Now this call will work because we have the door information
                 }
 
 
