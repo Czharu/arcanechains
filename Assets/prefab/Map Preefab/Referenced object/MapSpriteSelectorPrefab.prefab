@@ -119,3 +119,4 @@ MonoBehaviour:
   type: 0
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   enterColor: {r: 0, g: 1, b: 0.09626794, a: 1}
+  endColor: {r: 1, g: 0, b: 0, a: 1}

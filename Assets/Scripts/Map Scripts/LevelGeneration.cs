@@ -61,17 +61,17 @@ public class LevelGeneration : MonoBehaviour
         gridSizeX = Mathf.RoundToInt(worldSize.x);
         gridSizeY = Mathf.RoundToInt(worldSize.y);
         CreateRooms();
-        SetRoomDoors();
-        DrawMap();
+        SetRoomDoors();        
         InstantiateGameplayRooms();
+        DrawMap();
     }
 
     void CreateRooms()
     {
         //setup
         rooms = new Room[gridSizeX * 2, gridSizeY * 2];
-        rooms[gridSizeX, gridSizeY] = new Room(Vector2.zero, 1);
-        takenPositions.Insert(0, Vector2.zero);
+        rooms[gridSizeX, gridSizeY] = new Room(Vector2.zero, 1); 
+        takenPositions.Insert(0, Vector2.zero);//i'm retarded and this sets 1st room to type 0?
         Vector2 checkPos = Vector2.zero;
         //magic numbers to cratee leses clump or stuff
         float randomCompare = 0.2f, randomCompareStart = 0.2f, randomCompareEnd = 0.01f;
@@ -80,7 +80,7 @@ public class LevelGeneration : MonoBehaviour
         RoomData startRoomData = new RoomData
         {
             position = Vector2.zero,
-            type = 1,
+            type = 0,
             prefab = specialRoomPrefab[0], // Assuming specialRoomPrefab is an array of one
         };
         generatedRoomData.Add(startRoomData);
@@ -106,15 +106,16 @@ public class LevelGeneration : MonoBehaviour
                     print("error: could not create with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
             }
             //finalize position
-            rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, 0);
-            takenPositions.Insert(0, checkPos);
+            int roomType = (i < numberOfRooms - 1) ? 0 : 2; // If it's the last room, set type to 2 for the end room // Determine the room type here
+
+            rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, roomType); //roomType is minimap coloring here
+            takenPositions.Insert(0, checkPos); //this is probs where it could be refactored if needed.
             //
 
 
-            // Pick a prefab based on the door layout
-            //GameObject chosenPrefab = PickPrefab(up, right, down, left);
+            
 
-            int roomType = (i < numberOfRooms - 1) ? 0 : 2; // If it's the last room, set type to 2 for the end room // Determine the room type here
+            
 
             {
 
@@ -383,6 +384,7 @@ public class LevelGeneration : MonoBehaviour
             mapper.down = room.doorBot;
             mapper.right = room.doorRight;
             mapper.left = room.doorLeft;
+            Debug.Log("room type" + room.type);
 
         }
     }

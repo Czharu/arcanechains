@@ -8,7 +8,7 @@ public class MapSpriteSelector : MonoBehaviour
     public Sprite   spU, spD, spR,spL, spUD, spRL, spUR, spUL, spDR, spDL, spULD, spRUL, spDRU, spLDR, spUDRL; //rooms sprites
     public bool up, down, left, right;
     public int type; // 0: normal, :enter
-    public Color normalColor, enterColor;
+    public Color normalColor, enterColor, endColor;
     Color mainColor;
     SpriteRenderer rend;
 
@@ -76,8 +76,13 @@ public class MapSpriteSelector : MonoBehaviour
     void PickColor(){
         if (type == 0){
             mainColor = normalColor;
+            Debug.Log("Picking normal color for room at position " + transform.position);
         }else if (type == 1){
             mainColor = enterColor;
+            Debug.Log("Picking enter color for room at position " + transform.position);
+        }else if (type == 2){
+            mainColor = endColor;
+            Debug.Log("Picking end color for room at position " + transform.position);
         }
         rend.color = mainColor;
     }
