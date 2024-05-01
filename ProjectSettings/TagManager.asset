@@ -11,6 +11,10 @@ TagManager:
   - MapSpawnPoint
   - Rooms
   - OneWayPlatform
+  - DoorUp
+  - DoorRight
+  - DoorDown
+  - DoorLeft
   layers:
   - Default
   - TransparentFX

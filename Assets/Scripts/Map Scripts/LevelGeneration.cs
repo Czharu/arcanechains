@@ -61,7 +61,7 @@ public class LevelGeneration : MonoBehaviour
         gridSizeX = Mathf.RoundToInt(worldSize.x);
         gridSizeY = Mathf.RoundToInt(worldSize.y);
         CreateRooms();
-        SetRoomDoors();        
+        SetRoomDoors();
         InstantiateGameplayRooms();
         DrawMap();
     }
@@ -70,8 +70,8 @@ public class LevelGeneration : MonoBehaviour
     {
         //setup
         rooms = new Room[gridSizeX * 2, gridSizeY * 2];
-        rooms[gridSizeX, gridSizeY] = new Room(Vector2.zero, 1); 
-        takenPositions.Insert(0, Vector2.zero);//i'm retarded and this sets 1st room to type 0?
+        rooms[gridSizeX, gridSizeY] = new Room(Vector2.zero, 1); //i'm retarded and this i think sets 1st minimap room to type 1?
+        takenPositions.Insert(0, Vector2.zero);
         Vector2 checkPos = Vector2.zero;
         //magic numbers to cratee leses clump or stuff
         float randomCompare = 0.2f, randomCompareStart = 0.2f, randomCompareEnd = 0.01f;
@@ -110,12 +110,12 @@ public class LevelGeneration : MonoBehaviour
 
             rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, roomType); //roomType is minimap coloring here
             takenPositions.Insert(0, checkPos); //this is probs where it could be refactored if needed.
-            //
+                                                //
 
 
-            
 
-            
+
+
 
             {
 
@@ -207,7 +207,27 @@ public class LevelGeneration : MonoBehaviour
             Vector3 roomPosition = new Vector3(roomData.position.x * 100, roomData.position.y * 100, 0); // Multiply by 10 or room size
 
             // Instantiate the room prefab at the calculated position
-            Instantiate(roomData.prefab, roomPosition, Quaternion.identity);
+            GameObject roomInstance = Instantiate(roomData.prefab, roomPosition, Quaternion.identity);
+
+            // Assuming doors are named and have the Door script attached
+            SetupDoors(roomInstance, roomData);
+        }
+    }
+
+    private void SetupDoors(GameObject roomInstance, RoomData roomData)
+    {
+        if (roomData.up) SetupDoor(roomInstance, "DoorUp", new Vector2(roomData.position.x, roomData.position.y + 1));
+        if (roomData.down) SetupDoor(roomInstance, "DoorDown", new Vector2(roomData.position.x, roomData.position.y - 1));
+        if (roomData.left) SetupDoor(roomInstance, "DoorLeft", new Vector2(roomData.position.x - 1, roomData.position.y));
+        if (roomData.right) SetupDoor(roomInstance, "DoorRight", new Vector2(roomData.position.x + 1, roomData.position.y));
+    }
+
+    private void SetupDoor(GameObject room, string doorName, Vector2 leadsTo)
+    {
+        Door door = room.transform.Find(doorName)?.GetComponent<Door>();
+        if (door != null)
+        {
+            door.leadsToRoomPosition = new Vector3(leadsTo.x * 100, leadsTo.y * 100, 0); // Adjust the multiplier as needed
         }
     }
 

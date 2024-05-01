@@ -42,6 +42,12 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimationState();
     }
 
+    public void SetPosition(Vector3 newPosition) // public method to set the player's position
+    {
+        transform.position = newPosition;
+        rb.velocity = Vector2.zero; // Resetting velocity to avoid continuous movement after teleporting
+    }
+
     private void UpdateAnimationState()
     {
         MovementState state;
