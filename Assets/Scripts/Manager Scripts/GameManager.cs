@@ -22,21 +22,47 @@ public class GameManager : MonoBehaviour
 
     public void TransitionToRoom(Vector2 roomPosition, string doorTag)
     {
-        RoomData targetRoom = FindRoomByPosition(roomPosition);
-        if (targetRoom != null)
+        RoomData currentRoom = FindRoomByPosition(roomPosition);
+        if (currentRoom != null)
         {
-            GameObject correspondingDoor = FindCorrespondingDoor(targetRoom, doorTag);
-            if (correspondingDoor != null)
+            RoomData targetRoom = FindAdjacentRoom(currentRoom, doorTag);
+            if (targetRoom != null)
             {
-                Vector3 offset = CalculateOffset(doorTag);
-                Vector3 newPosition = correspondingDoor.transform.position + offset;
-                FindObjectOfType<PlayerMovement>().transform.position = newPosition;
-            }
-            else
-            {
-                Debug.LogError("Corresponding door not found in the target room.");
+                GameObject correspondingDoor = FindCorrespondingDoor(targetRoom, doorTag);
+                if (correspondingDoor != null)
+                {
+                    Vector3 offset = CalculateOffset(doorTag);
+                    Vector3 newPosition = correspondingDoor.transform.position + offset;
+                    FindObjectOfType<PlayerMovement>().transform.position = newPosition;
+                }
+                else
+                {
+                    Debug.LogError("Corresponding door not found in the target room.");
+                }
             }
         }
+    }
+
+    private RoomData FindAdjacentRoom(RoomData currentRoom, string doorTag)
+    {
+        Vector2 adjacentPosition = currentRoom.position;
+        switch (doorTag)
+        {
+            case "DoorRight":
+                adjacentPosition += Vector2.right;
+                break;
+            case "DoorLeft":
+                adjacentPosition += Vector2.left;
+                break;
+            case "DoorUp":
+                adjacentPosition += Vector2.up;
+                break;
+            case "DoorDown":
+                adjacentPosition += Vector2.down;
+                break;
+        }
+
+        return LevelGeneration.Instance.generatedRoomData.FirstOrDefault(room => room.position == adjacentPosition);
     }
 
     private RoomData FindRoomByPosition(Vector2 position)
