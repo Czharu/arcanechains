@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    // Track the player's current room position.
+    public Vector2 currentPlayerRoomPosition;
+
     private void Awake()
     {
         if (Instance == null)
@@ -22,7 +25,8 @@ public class GameManager : MonoBehaviour
 
     public void TransitionToRoom(Vector2 roomPosition, string doorTag)
     {
-        RoomData currentRoom = FindRoomByPosition(roomPosition);
+        // Use currentPlayerRoomPosition instead of passing a static position
+        RoomData currentRoom = FindRoomByPosition(currentPlayerRoomPosition);
         if (currentRoom != null)
         {
             RoomData targetRoom = FindAdjacentRoom(currentRoom, doorTag);
@@ -34,6 +38,9 @@ public class GameManager : MonoBehaviour
                     Vector3 offset = CalculateOffset(doorTag);
                     Vector3 newPosition = correspondingDoor.transform.position + offset;
                     FindObjectOfType<PlayerMovement>().transform.position = newPosition;
+
+                    // Update the currentPlayerRoomPosition to the new room's position
+                    currentPlayerRoomPosition = targetRoom.position;
                 }
                 else
                 {
@@ -83,13 +90,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+// the door teleportation offsets
     private Vector3 CalculateOffset(string doorTag)
     {
         float offsetDistance = 4.0f; // Adjust as necessary to fit your game's scale
         switch (doorTag)
         {
-            case "DoorUp": return new Vector3(0, -offsetDistance, 0); // Adjust direction if necessary
-            case "DoorDown": return new Vector3(0, offsetDistance, 0);
+            case "DoorUp": return new Vector3(0, offsetDistance, 0); // Adjust direction if necessary
+            case "DoorDown": return new Vector3(0, -offsetDistance, 0);
             case "DoorLeft": return new Vector3(-offsetDistance, 0, 0);
             case "DoorRight": return new Vector3(offsetDistance, 0, 0);
             default: return Vector3.zero;
