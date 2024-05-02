@@ -5,16 +5,21 @@ using UnityEngine;
 //https://www.youtube.com/watch?v=nADIYwgKHv4
 public class LevelGeneration : MonoBehaviour
 {
-    [System.Serializable]
-    public class RoomData
-    {
-        public Vector2 position;
-        public int type; // For example, 0 could mean a normal room, 1 could mean a special room, etc.
-        public bool up, down, left, right; // Door information
-        public GameObject prefab;
+    public static LevelGeneration Instance;
+    public List<RoomData> generatedRoomData = new List<RoomData>();  // Make this public or provide a public getter to access it from GameManager
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
-    List<RoomData> generatedRoomData = new List<RoomData>();
 
     Vector2 worldSize = new Vector2(4, 4);
     Room[,] rooms;
@@ -210,24 +215,12 @@ public class LevelGeneration : MonoBehaviour
             GameObject roomInstance = Instantiate(roomData.prefab, roomPosition, Quaternion.identity);
 
             // Assuming doors are named and have the Door script attached
-            SetupDoors(roomInstance, roomData);
-        }
-    }
-
-    private void SetupDoors(GameObject roomInstance, RoomData roomData)
-    {
-        if (roomData.up) SetupDoor(roomInstance, "DoorUp", new Vector2(roomData.position.x, roomData.position.y + 1));
-        if (roomData.down) SetupDoor(roomInstance, "DoorDown", new Vector2(roomData.position.x, roomData.position.y - 1));
-        if (roomData.left) SetupDoor(roomInstance, "DoorLeft", new Vector2(roomData.position.x - 1, roomData.position.y));
-        if (roomData.right) SetupDoor(roomInstance, "DoorRight", new Vector2(roomData.position.x + 1, roomData.position.y));
-    }
-
-    private void SetupDoor(GameObject room, string doorName, Vector2 leadsTo)
-    {
-        Door door = room.transform.Find(doorName)?.GetComponent<Door>();
-        if (door != null)
-        {
-            door.leadsToRoomPosition = new Vector3(leadsTo.x * 100, leadsTo.y * 100, 0); // Adjust the multiplier as needed
+            // SetupDoors(roomInstance, roomData);
+            // Assign doors to be telleported to
+            roomData.doorUp = roomInstance.transform.Find("DoorUp")?.gameObject;
+            roomData.doorDown = roomInstance.transform.Find("DoorDown")?.gameObject;
+            roomData.doorLeft = roomInstance.transform.Find("DoorLeft")?.gameObject;
+            roomData.doorRight = roomInstance.transform.Find("DoorRight")?.gameObject;
         }
     }
 

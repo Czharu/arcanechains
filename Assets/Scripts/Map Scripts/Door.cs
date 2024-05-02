@@ -9,6 +9,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public Vector2 leadsToRoomPosition;
+    public string correspondingDoorTag; // Tag to find the corresponding door in the next room
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

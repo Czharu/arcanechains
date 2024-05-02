@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;  // Include this for Linq
 
 public class GameManager : MonoBehaviour
 {
@@ -21,39 +22,51 @@ public class GameManager : MonoBehaviour
 
     public void TransitionToRoom(Vector2 roomPosition, string doorTag)
     {
-        Vector3 newPosition = CalculateDoorPosition(roomPosition, doorTag);
-        Debug.Log("Transition to room at: " + roomPosition + ", spawn at: " + newPosition);
-
-        // Find the PlayerMovement component and update the position
-        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
-        if (playerMovement != null)
+        RoomData targetRoom = FindRoomByPosition(roomPosition);
+        if (targetRoom != null)
         {
-            playerMovement.SetPosition(newPosition);
-        }
-        else
-        {
-            Debug.LogError("PlayerMovement component not found on any GameObject!");
+            GameObject correspondingDoor = FindCorrespondingDoor(targetRoom, doorTag);
+            if (correspondingDoor != null)
+            {
+                Vector3 offset = CalculateOffset(doorTag);
+                Vector3 newPosition = correspondingDoor.transform.position + offset;
+                FindObjectOfType<PlayerMovement>().transform.position = newPosition;
+            }
+            else
+            {
+                Debug.LogError("Corresponding door not found in the target room.");
+            }
         }
     }
 
-    private Vector3 CalculateDoorPosition(Vector2 roomPosition, string doorTag)
+    private RoomData FindRoomByPosition(Vector2 position)
     {
-        // Adjust these values to match your room size and the correct offset
-        float offsetX = 2f; // Change to match your grid size
-        float offsetY = 2f; // Change to match your grid size
-
+        if (LevelGeneration.Instance != null)
+            return LevelGeneration.Instance.generatedRoomData.FirstOrDefault(room => room.position == position);
+        return null;
+    }
+    private GameObject FindCorrespondingDoor(RoomData room, string doorTag)
+    {
         switch (doorTag)
         {
-            case "DoorUp":
-                return new Vector3(roomPosition.x, roomPosition.y + offsetY, 0);
-            case "DoorDown":
-                return new Vector3(roomPosition.x, roomPosition.y - offsetY, 0);
-            case "DoorLeft":
-                return new Vector3(roomPosition.x - offsetX, roomPosition.y, 0);
-            case "DoorRight":
-                return new Vector3(roomPosition.x + offsetX, roomPosition.y, 0);
-            default:
-                return new Vector3(roomPosition.x, roomPosition.y, 0); // Default return to room center
+            case "DoorUp": return room.doorDown;
+            case "DoorDown": return room.doorUp;
+            case "DoorLeft": return room.doorRight;
+            case "DoorRight": return room.doorLeft;
+            default: return null;
+        }
+    }
+
+    private Vector3 CalculateOffset(string doorTag)
+    {
+        float offsetDistance = 4.0f; // Adjust as necessary to fit your game's scale
+        switch (doorTag)
+        {
+            case "DoorUp": return new Vector3(0, -offsetDistance, 0); // Adjust direction if necessary
+            case "DoorDown": return new Vector3(0, offsetDistance, 0);
+            case "DoorLeft": return new Vector3(-offsetDistance, 0, 0);
+            case "DoorRight": return new Vector3(offsetDistance, 0, 0);
+            default: return Vector3.zero;
         }
     }
 }
