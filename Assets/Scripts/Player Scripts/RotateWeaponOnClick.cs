@@ -100,7 +100,16 @@ public class RotateWeaponOnClick : MonoBehaviour
         foreach (Collider2D collider in Physics2D.OverlapCircleAll(circleOrigin.position, radius))
         {
             Debug.Log(collider.name);
-            EnemyLife health;
+
+            // Try getting the BossLifeComponent
+            BossLifeComponent bossHealth = collider.GetComponent<BossLifeComponent>();
+            if (bossHealth != null)
+            {
+                bossHealth.Damage(playerStats.damage.GetValue(), transform.parent.gameObject);
+                continue;  // Skip checking other components if we have dealt damage to a boss
+            }
+
+            EnemyLife health; //standard enemy life script added to enemies
             if (health = collider.GetComponent<EnemyLife>())
             {
                 health.Damage(playerStats.damage.GetValue(), transform.parent.gameObject);
