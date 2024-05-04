@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/End Menu.unity
     guid: c53e4da732e97ab44a2e67efa4812477
+  - enabled: 1
+    path: Assets/Scenes/map Generated.unity
+    guid: 9775943543a8cb04c8eb961bb22f6373
+  - enabled: 1
+    path: Assets/Scenes/Level 1 Boss Scene.unity
+    guid: 36903dfac453c4f41bda93de4c19222b
   m_configObjects: {}
