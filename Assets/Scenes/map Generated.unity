@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11497e3c34858db459d95f77899550fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generatedRoomData: []
   roomWhiteObj: {fileID: 5733134278072071994, guid: 00e0fb8ad2346c148b63afa1b45a5835, type: 3}
   roomPrefabs:
   - {fileID: 622450131799948420, guid: c3414fe027eedfa468182406fe226c8e, type: 3}
@@ -184,13 +185,13 @@ MonoBehaviour:
   roomRDL_Prefabs:
   - {fileID: 3459875762988706994, guid: a89ca54c4946ac241916516bb16f6cb3, type: 3}
   roomURDL_Prefabs:
-  - {fileID: 3406074551966920461, guid: 0bbfbda7b4a49d740a536798ac8d734d, type: 3}
+  - {fileID: 2688474651273127910, guid: 5a43583a997b65a4d957a666c9e81842, type: 3}
   defaultRoomPrefab:
   - {fileID: 2688474651273127910, guid: 5a43583a997b65a4d957a666c9e81842, type: 3}
   specialRoomPrefab:
   - {fileID: 3406074551966920461, guid: 0bbfbda7b4a49d740a536798ac8d734d, type: 3}
   endRoomPrefab:
-  - {fileID: 2688474651273127910, guid: 5a43583a997b65a4d957a666c9e81842, type: 3}
+  - {fileID: 2688474651273127910, guid: 8db273323d7fb5d40a2559838937aa93, type: 3}
   prefab: {fileID: 622450131799948420, guid: c3414fe027eedfa468182406fe226c8e, type: 3}
 --- !u!4 &751617635
 Transform:
@@ -236,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9749993b2f4dddf40b82993e85f64ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPlayerRoomPosition: {x: 0, y: 0}
 --- !u!4 &2057826172
 Transform:
   m_ObjectHideFlags: 0
