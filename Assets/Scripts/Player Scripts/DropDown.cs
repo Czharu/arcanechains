@@ -6,7 +6,7 @@ public class DropDown : MonoBehaviour
 {
     public string oneWayPlatformLayerName = "OneWayPlatform";
     public string playerLayerName = "Player";
-    private void Update()
+    private void Update()//Game Performance optimisation can be done on this
     {
         if (Input.GetAxis("Vertical") < 0)
         {

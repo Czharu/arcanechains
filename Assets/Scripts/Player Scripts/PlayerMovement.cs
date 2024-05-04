@@ -99,7 +99,17 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .2f, jumpableGround);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpableGround);
+        if (raycastHit.collider != null)
+        {
+            // Check if the collider belongs to a OneWayPlatform and if the player is above the platform
+            if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform") &&
+                (transform.position.y > raycastHit.collider.bounds.center.y))
+            {
+                return true;
+            }
+        }
+        return raycastHit.collider != null;
     }
 
     //Calls Player Input/Events components

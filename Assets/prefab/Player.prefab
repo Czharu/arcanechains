@@ -332,19 +332,19 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5815872996984673737}
-  - {fileID: 8991541381253192346}
+  - {fileID: 486898675374010263}
   - {fileID: 1711828488262250021}
   - {fileID: 6997945473969050916}
-  - {fileID: 4951376340284865640}
+  - {fileID: 4521405601861273961}
   - {fileID: 3965674696348200555}
-  - {fileID: 8753979533609462054}
+  - {fileID: 249372525249698859}
   - {fileID: 910649556116565939}
   - {fileID: 5367921926236920194}
-  - {fileID: 2703413090783634419}
+  - {fileID: 6885409120000169724}
   - {fileID: 8084604519042261992}
-  - {fileID: 7438462450268633652}
+  - {fileID: 2104072510076292925}
   - {fileID: 5480090467739939260}
-  - {fileID: 1245975662758591148}
+  - {fileID: 7729031003239681957}
   - {fileID: 309393019027297474}
   - {fileID: 6312419033058134649}
   m_Father: {fileID: 8681151755420781885}
@@ -466,7 +466,7 @@ Transform:
   - {fileID: 8015609235450893920}
   - {fileID: 8813698481062370821}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3873659384314590763
 SpriteRenderer:
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpableGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   moveSpeed: 7
   jumpHeight: 14
   jumpSoundEffect: {fileID: 4377763425850888228}
@@ -1826,7 +1826,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
---- !u!224 &1245975662758591148 stripped
+--- !u!224 &7729031003239681957 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8793719162772190478, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
   m_PrefabInstance: {fileID: 1245975662758591147}
@@ -2199,7 +2199,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
---- !u!224 &2703413090783634419 stripped
+--- !u!224 &6885409120000169724 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8793719162772190478, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
   m_PrefabInstance: {fileID: 2703413090783634418}
@@ -2808,7 +2808,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
---- !u!224 &4951376340284865640 stripped
+--- !u!224 &4521405601861273961 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8793719162772190478, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
   m_PrefabInstance: {fileID: 4951376340284865639}
@@ -3020,7 +3020,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
---- !u!224 &7438462450268633652 stripped
+--- !u!224 &2104072510076292925 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8793719162772190478, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
   m_PrefabInstance: {fileID: 7438462450268633651}
@@ -3338,7 +3338,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
---- !u!224 &8753979533609462054 stripped
+--- !u!224 &249372525249698859 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8793719162772190478, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
   m_PrefabInstance: {fileID: 8753979533609462053}
@@ -3452,7 +3452,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
---- !u!224 &8991541381253192346 stripped
+--- !u!224 &486898675374010263 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8793719162772190478, guid: 005d030d46fb0854ebdfb032f9d677d7, type: 3}
   m_PrefabInstance: {fileID: 8991541381253192345}
