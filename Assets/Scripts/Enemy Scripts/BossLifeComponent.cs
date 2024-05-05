@@ -38,7 +38,7 @@ public class BossLifeComponent : CharacterStats
         // Replace the rock with a broken version (non-animated sprite)
         if (brokenRockPrefab != null)
         {
-            Instantiate(brokenRockPrefab, transform.position, Quaternion.identity);
+            Instantiate(brokenRockPrefab, transform.position, transform.rotation);
         }
 
         // Destroy the original rock
