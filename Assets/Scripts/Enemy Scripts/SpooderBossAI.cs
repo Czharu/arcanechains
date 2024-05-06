@@ -10,6 +10,10 @@ public class SpooderBossAI : MonoBehaviour
     public GameObject MouthPosition;
 
     private Animator anim;
+    // animators
+    public Animator headAnimator;
+    public Animator leftlegsAnimator;
+    public Animator rightlegsAnimator;
 
     private void Start()
     {
@@ -145,4 +149,22 @@ public class SpooderBossAI : MonoBehaviour
         //ShootLaser();
         // Additional effects and damage logic here
     }
+
+
+    //Triggers for animatons on Animator
+    public void PlayHeadChange()
+    {
+        headAnimator.SetTrigger("HeadChange");
+    }
+
+    public void PlayLeftLegsSwing()
+    {
+        leftlegsAnimator.SetTrigger("LeftLegsSwing");
+    }
+
+    public void PlayRightLegsSwing()
+    {
+        rightlegsAnimator.SetTrigger("RightLegsSwing");
+    }
 }
+
