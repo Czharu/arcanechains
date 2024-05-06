@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //script to attach to attack state in the Animator to ensure that once the state completes, the transition back to "Idle" is triggered
+//This script is no longer used, exit time seems better.
 public class ResetIdleStateMachineBehaviour : StateMachineBehaviour
 {
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -7,6 +7,7 @@ public class SpooderBossAI : MonoBehaviour
     private int lastAttackIndex = -1;
     [SerializeField] private float delayBetweenAttacks = 2.0f;
     [SerializeField] private GameObject laserPrefab;
+    public GameObject MouthPosition;
 
     private Animator anim;
 
@@ -80,12 +81,12 @@ public class SpooderBossAI : MonoBehaviour
     private void Attack1()
     {
         anim.SetTrigger("Attack1");
-        ShootLaser();
+        // ShootLaser();
         // Additional effects and damage logic here
     }
-    private void ShootLaser()//Continuously spawning and destroying GameObjects (like lasers) can be performance-intensive. Consider implementing an object pooling system for the lasers if they are spawned frequently.
+    public void ShootLaser()//Continuously spawning and destroying GameObjects (like lasers) can be performance-intensive. Consider implementing an object pooling system for the lasers if they are spawned frequently.
     {
-        Vector3 position = transform.position; // Adjust the position based on where the eyes are, if needed
+        Vector3 position = MouthPosition.transform.position;  // Use the eye position GameObject
         GameObject laserInstance = Instantiate(laserPrefab, position, Quaternion.identity);
         //laserInstance.transform.SetParent(transform); // Optionally, you might not need this if you want the laser to move independently of the boss
 
@@ -105,43 +106,43 @@ public class SpooderBossAI : MonoBehaviour
     private void Attack2()
     {
         anim.SetTrigger("Attack2");
-        ShootLaser();
+        //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack3()
     {
         anim.SetTrigger("Attack3");
-        ShootLaser();
+        //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack4()
     {
         anim.SetTrigger("Attack4");
-        ShootLaser();
+        //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack5()
     {
         anim.SetTrigger("Attack5");
-        ShootLaser();
+        //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack6()
     {
         anim.SetTrigger("Attack6");
-        ShootLaser();
+        //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack7()
     {
         anim.SetTrigger("Attack7");
-        ShootLaser();
+        //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack8()
     {
         anim.SetTrigger("Attack8");
-        ShootLaser();
+        //ShootLaser();
         // Additional effects and damage logic here
     }
 }
