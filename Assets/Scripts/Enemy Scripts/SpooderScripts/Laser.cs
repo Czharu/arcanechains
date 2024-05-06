@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
+    public float speed = 5f; // Speed of the laser
+    private Vector3 direction; // Direction towards the player
+    public LayerMask collisionMask; // Layers the laser can collide with
     private Animator animator;
     void Awake()
     {
@@ -11,6 +14,26 @@ public class Laser : MonoBehaviour
     }
     void Start()
     {
-        Destroy(gameObject, 2f); // Destroys the laser after 2 seconds
+        // Optional: Destroy the laser after a certain time to ensure it doesn't exist forever if it never hits anything
+        Destroy(gameObject, 5f);
+    }
+    private void Update()
+    {
+        // Move the laser
+        //Debug.Log("Moving laser at speed: " + speed + " with direction: " + direction);
+        transform.position += direction * speed * Time.deltaTime;
+    }
+    public void Initialize(Vector3 targetPosition)
+    {
+        direction = (targetPosition - transform.position).normalized; // Set the direction based on target
+        //Debug.Log("Direction set: " + direction);  // Log to verify the direction
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (collisionMask == (collisionMask | (1 << other.gameObject.layer)))
+        {
+            Debug.Log("Laser collided with: " + other.gameObject.name);
+            Destroy(gameObject); // Destroys the laser on collision
+        }
     }
 }

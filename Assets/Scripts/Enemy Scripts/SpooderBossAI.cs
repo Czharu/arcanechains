@@ -86,17 +86,19 @@ public class SpooderBossAI : MonoBehaviour
     private void ShootLaser()//Continuously spawning and destroying GameObjects (like lasers) can be performance-intensive. Consider implementing an object pooling system for the lasers if they are spawned frequently.
     {
         Vector3 position = transform.position; // Adjust the position based on where the eyes are, if needed
-        Quaternion rotation = Quaternion.identity; // Adjust the rotation if needed
+        GameObject laserInstance = Instantiate(laserPrefab, position, Quaternion.identity);
+        //laserInstance.transform.SetParent(transform); // Optionally, you might not need this if you want the laser to move independently of the boss
 
-        // Instantiate the laser prefab at the boss's position with no rotation
-        GameObject laserInstance = Instantiate(laserPrefab, position, rotation);
-
-        // Set the parent of the laserInstance to this GameObject (the boss)
-        laserInstance.transform.SetParent(transform);
-
-        // Optionally, you might want to set the local position or rotation if needed
-        laserInstance.transform.localPosition = new Vector3(0, 0, 0); // Adjust this if the laser needs to be offset
-        laserInstance.transform.localRotation = Quaternion.identity; // Adjust if the laser should have a specific rotation relative to the boss
+        //Assuming you have a way to find the player, e.g., tagging the player with "Player" tag
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Laser laserComponent = laserInstance.GetComponent<Laser>();
+            if (laserComponent != null)
+            {
+                laserComponent.Initialize(player.transform.position);
+            }
+        }
     }
 
     // Define other attacks similarly...
