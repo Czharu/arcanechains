@@ -37,8 +37,8 @@ public class PlayerInteraction : MonoBehaviour
         healthBar.SetHealth(currentHealthPoints);
     }
 
-    private void Damage(int i){
-        playerStats.TakeDamage(20);
+    public void Damage(int i){
+        playerStats.TakeDamage(i);
         healthBar.SetHealth(playerStats.currentHealth);
         if(playerStats.currentHealth <= 0){
             DeathSequence();

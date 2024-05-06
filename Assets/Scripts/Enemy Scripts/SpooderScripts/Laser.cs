@@ -33,7 +33,20 @@ public class Laser : MonoBehaviour
         if (collisionMask == (collisionMask | (1 << other.gameObject.layer)))
         {
             Debug.Log("Laser collided with: " + other.gameObject.name);
-            Destroy(gameObject); // Destroys the laser on collision
+
+            // Check if the collided object is the player
+            if (other.gameObject.CompareTag("Player"))
+            {
+                // Access the CharacterStats script on the player and apply damage
+                PlayerInteraction playerStats = other.gameObject.GetComponent<PlayerInteraction>();
+                if (playerStats != null)
+                {
+                    playerStats.Damage(10); // Assume 10 is the damage value
+                }
+            }
+
+            // Destroy the laser whether it hits the player or not
+            Destroy(gameObject);
         }
     }
 }

@@ -22,6 +22,7 @@ public class CharacterStats : MonoBehaviour
     damage -= armor.GetValue();
     damage = Mathf.Clamp(damage, 0, float.MaxValue);
     currentHealth -= damage;
+    Debug.Log(transform.name + " takes " + damage + " damage, current health: " + currentHealth);
     if(currentHealth <= 0){
         Die();
     }
