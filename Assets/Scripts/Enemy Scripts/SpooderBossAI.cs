@@ -5,8 +5,10 @@ using UnityEngine;
 public class SpooderBossAI : MonoBehaviour
 {
     private int lastAttackIndex = -1;
-    [SerializeField] private float delayBetweenAttacks = 2.0f;
+
     [SerializeField] private GameObject laserPrefab;
+    public GameObject starLaserPrefab;
+    public GameObject StarLazerOriginPoint;
     public GameObject MouthPosition;
 
     private Animator anim;
@@ -25,9 +27,14 @@ public class SpooderBossAI : MonoBehaviour
     {
         while (true) // Keeps the boss continuously performing attacks
         {
-            yield return new WaitForSeconds(delayBetweenAttacks); // Wait for the specified delay
+            
             int attackIndex = GetRandomAttackIndex();
             PerformAttack(attackIndex);
+            // Specific delay after Attack2
+            if (attackIndex >= 1)  // Assuming index 1 corresponds to Attack2
+            {
+                yield return new WaitForSeconds(11);  // Additional 10 second wait after Attack2
+            }
             lastAttackIndex = attackIndex; // Update the last attack index
         }
     }
@@ -88,6 +95,57 @@ public class SpooderBossAI : MonoBehaviour
         // ShootLaser();
         // Additional effects and damage logic here
     }
+
+
+    // Define other attacks similarly...
+    private void Attack2()
+    {
+        anim.SetTrigger("Attack2");
+        
+        //ShootLaser();
+        // Additional effects and damage logic here
+    }
+    private void Attack3()
+    {
+        anim.SetTrigger("Attack2");
+        
+        //ShootLaser();
+        // Additional effects and damage logic here
+    }
+    private void Attack4()
+    {
+        anim.SetTrigger("Attack2");
+        
+        //ShootLaser();
+        // Additional effects and damage logic here
+    }
+    private void Attack5()
+    {
+        anim.SetTrigger("Attack2");
+        
+        //ShootLaser();
+        // Additional effects and damage logic here
+    }
+    private void Attack6()
+    {
+        anim.SetTrigger("Attack2");
+        
+        //ShootLaser();
+        // Additional effects and damage logic here
+    }
+    private void Attack7()
+    {
+        anim.SetTrigger("Attack7");
+        //ShootLaser();
+        // Additional effects and damage logic here
+    }
+    private void Attack8()
+    {
+        anim.SetTrigger("Attack8");
+        //ShootLaser();
+        // Additional effects and damage logic here
+    }
+    //Attacks Called through Animation Clip  Events
     public void ShootLaser()//Continuously spawning and destroying GameObjects (like lasers) can be performance-intensive. Consider implementing an object pooling system for the lasers if they are spawned frequently.
     {
         Vector3 position = MouthPosition.transform.position;  // Use the eye position GameObject
@@ -106,52 +164,24 @@ public class SpooderBossAI : MonoBehaviour
         }
     }
 
-    // Define other attacks similarly...
-    private void Attack2()
+    public void ShootStarLaser()
     {
-        anim.SetTrigger("Attack2");
-        //ShootLaser();
-        // Additional effects and damage logic here
+        starLaserPrefab.transform.position = StarLazerOriginPoint.transform.position; // Move the existing object to the origin point
+        
+        leftlegsAnimator.SetTrigger("LeftLegAttack2");
+        starLaserPrefab.SetActive(true);  // Activate the existing object  // Ensure the prefab is active
+
+        StartCoroutine(DisableAfterDelay(starLaserPrefab, 9.5f));  // Disable the object after 10 seconds
     }
-    private void Attack3()
+
+    private IEnumerator DisableAfterDelay(GameObject obj, float delay)// disables game object after x seconds
     {
-        anim.SetTrigger("Attack3");
-        //ShootLaser();
-        // Additional effects and damage logic here
-    }
-    private void Attack4()
-    {
-        anim.SetTrigger("Attack4");
-        //ShootLaser();
-        // Additional effects and damage logic here
-    }
-    private void Attack5()
-    {
-        anim.SetTrigger("Attack5");
-        //ShootLaser();
-        // Additional effects and damage logic here
-    }
-    private void Attack6()
-    {
-        anim.SetTrigger("Attack6");
-        //ShootLaser();
-        // Additional effects and damage logic here
-    }
-    private void Attack7()
-    {
-        anim.SetTrigger("Attack7");
-        //ShootLaser();
-        // Additional effects and damage logic here
-    }
-    private void Attack8()
-    {
-        anim.SetTrigger("Attack8");
-        //ShootLaser();
-        // Additional effects and damage logic here
+        yield return new WaitForSeconds(delay);
+        obj.SetActive(false);
     }
 
 
-    //Triggers for animatons on Animator
+    //Child Animator Triggers for animatons on Animator
     public void PlayHeadChange()
     {
         headAnimator.SetTrigger("HeadChange");
