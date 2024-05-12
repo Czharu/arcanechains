@@ -8,6 +8,7 @@ public class SpooderBossAI : MonoBehaviour
 
     [SerializeField] private GameObject laserPrefab;
     public GameObject starLaserPrefab;
+    public GameObject starLaserPrefabReverse;
     public GameObject StarLazerOriginPoint;
     public GameObject MouthPosition;
 
@@ -107,28 +108,28 @@ public class SpooderBossAI : MonoBehaviour
     }
     private void Attack3()
     {
-        anim.SetTrigger("Attack2");
+        anim.SetTrigger("Attack3");
         
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack4()
     {
-        anim.SetTrigger("Attack2");
+        anim.SetTrigger("Attack3");
         
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack5()
     {
-        anim.SetTrigger("Attack2");
+        anim.SetTrigger("Attack3");
         
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack6()
     {
-        anim.SetTrigger("Attack2");
+        anim.SetTrigger("Attack3");
         
         //ShootLaser();
         // Additional effects and damage logic here
@@ -172,6 +173,15 @@ public class SpooderBossAI : MonoBehaviour
         starLaserPrefab.SetActive(true);  // Activate the existing object  // Ensure the prefab is active
 
         StartCoroutine(DisableAfterDelay(starLaserPrefab, 9.5f));  // Disable the object after 10 seconds
+    }
+    public void ShootStarLaserReverse()
+    {
+        starLaserPrefabReverse.transform.position = StarLazerOriginPoint.transform.position; // Move the existing object to the origin point
+        
+        rightlegsAnimator.SetTrigger("RightLegsAttack3");
+        starLaserPrefabReverse.SetActive(true);  // Activate the existing object  // Ensure the prefab is active
+
+        StartCoroutine(DisableAfterDelay(starLaserPrefabReverse, 9.5f));  // Disable the object after 10 seconds
     }
 
     private IEnumerator DisableAfterDelay(GameObject obj, float delay)// disables game object after x seconds
