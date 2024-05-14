@@ -17,6 +17,7 @@ public class SpooderBossAI : MonoBehaviour
     public Animator headAnimator;
     public Animator leftlegsAnimator;
     public Animator rightlegsAnimator;
+    public GameObject[] defensiveOrbs; // Assign this via the Inspector or fetch dynamically for Compass45()
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class SpooderBossAI : MonoBehaviour
     {
         while (true) // Keeps the boss continuously performing attacks
         {
-            
+
             int attackIndex = GetRandomAttackIndex();
             PerformAttack(attackIndex);
             // Specific delay after Attack2
@@ -102,41 +103,41 @@ public class SpooderBossAI : MonoBehaviour
     private void Attack2()
     {
         anim.SetTrigger("Attack2");
-        
+
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack3()
     {
         anim.SetTrigger("Attack3");
-        
+
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack4()
     {
-        anim.SetTrigger("Attack3");
-        
+        anim.SetTrigger("Attack4");
+
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack5()
     {
-        anim.SetTrigger("Attack3");
-        
+        anim.SetTrigger("Attack4");
+
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack6()
     {
-        anim.SetTrigger("Attack3");
-        
+        anim.SetTrigger("Attack4");
+
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack7()
     {
-        anim.SetTrigger("Attack7");
+        anim.SetTrigger("Attack4");
         //ShootLaser();
         // Additional effects and damage logic here
     }
@@ -160,7 +161,8 @@ public class SpooderBossAI : MonoBehaviour
             Laser laserComponent = laserInstance.GetComponent<Laser>();
             if (laserComponent != null)
             {
-                laserComponent.Initialize(player.transform.position);
+                // Initialize aiming at the player
+                laserComponent.Initialize(player.transform.position, 5f);  // Fast laser
             }
         }
     }
@@ -168,7 +170,7 @@ public class SpooderBossAI : MonoBehaviour
     public void ShootStarLaser()
     {
         starLaserPrefab.transform.position = StarLazerOriginPoint.transform.position; // Move the existing object to the origin point
-        
+
         leftlegsAnimator.SetTrigger("LeftLegAttack2");
         starLaserPrefab.SetActive(true);  // Activate the existing object  // Ensure the prefab is active
 
@@ -177,11 +179,59 @@ public class SpooderBossAI : MonoBehaviour
     public void ShootStarLaserReverse()
     {
         starLaserPrefabReverse.transform.position = StarLazerOriginPoint.transform.position; // Move the existing object to the origin point
-        
+
         rightlegsAnimator.SetTrigger("RightLegsAttack3");
         starLaserPrefabReverse.SetActive(true);  // Activate the existing object  // Ensure the prefab is active
 
         StartCoroutine(DisableAfterDelay(starLaserPrefabReverse, 9.5f));  // Disable the object after 10 seconds
+    }
+    // Define the directions for Compass45
+    private Vector3[] compass45Directions = new Vector3[]
+    {
+        new Vector3(-1, -1, 0).normalized,
+        new Vector3(1, 1, 0).normalized,
+        new Vector3(-1, 1, 0).normalized,
+        new Vector3(1, -1, 0).normalized
+    };
+
+    public void Compass45()
+    {
+        StartCoroutine(SpawnLasersWithDelay());
+    }
+    private IEnumerator SpawnLasersWithDelay()
+    {
+        // Determine the direction of iteration
+        bool reverse = Random.value > 0.5;
+        // Create a temporary list of orbs to potentially reverse the order
+        List<GameObject> orbs = new List<GameObject>(defensiveOrbs);
+        if (reverse)
+        {
+            orbs.Reverse();
+        }
+        foreach (GameObject orb in orbs)
+        {
+            yield return new WaitForSeconds(0.3f);  // Wait for 0.1 seconds before spawning the next laser
+            foreach (Vector3 dir in compass45Directions)
+            {
+                SpawnLaserAtOrb(orb, dir, 1.5f);  // Spawn laser
+
+            }
+        }
+    }
+
+    void SpawnLaserAtOrb(GameObject orb, Vector3 direction, float speed)
+    {
+        Vector3 spawnPosition = orb.transform.position; // Get the position of the orb
+        GameObject laserInstance = Instantiate(laserPrefab, spawnPosition, Quaternion.identity);
+        Laser laserComponent = laserInstance.GetComponent<Laser>();
+
+        if (laserComponent != null)
+        {
+            // Calculate the direction vector for 45 degrees downward and to the left
+            //Vector3 direction = new Vector3(-1, -1, 0).normalized;
+            laserComponent.Initialize(direction, speed, true); // Set the direction without targeting the player
+            laserComponent.DisableAnimator(); // Disable the animator if it exists
+        }
     }
 
     private IEnumerator DisableAfterDelay(GameObject obj, float delay)// disables game object after x seconds

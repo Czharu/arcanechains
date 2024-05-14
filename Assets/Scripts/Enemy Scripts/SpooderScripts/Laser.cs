@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    public float speed = 5f; // Speed of the laser
+    public float speed; // Public to set default in Inspector and modify dynamically
     private Vector3 direction; // Direction towards the player
     public LayerMask collisionMask; // Layers the laser can collide with
     private Animator animator;
@@ -15,7 +15,7 @@ public class Laser : MonoBehaviour
     void Start()
     {
         // Optional: Destroy the laser after a certain time to ensure it doesn't exist forever if it never hits anything
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 20f);
     }
     private void Update()
     {
@@ -23,10 +23,27 @@ public class Laser : MonoBehaviour
         //Debug.Log("Moving laser at speed: " + speed + " with direction: " + direction);
         transform.position += direction * speed * Time.deltaTime;
     }
-    public void Initialize(Vector3 targetPosition)
+    // New Initialize method with an optional parameter
+    public void Initialize(Vector3 targetPosition, float customSpeed, bool isDirectional = false)
     {
-        direction = (targetPosition - transform.position).normalized; // Set the direction based on target
-        //Debug.Log("Direction set: " + direction);  // Log to verify the direction
+        speed = customSpeed; // Set the speed as provided
+        if (isDirectional)
+        {
+            // If it's directional, the targetPosition argument is actually the direction vector
+            direction = targetPosition.normalized;
+        }
+        else
+        {
+            // Calculate direction to the target position
+            direction = (targetPosition - transform.position).normalized;
+        }
+    }
+    public void DisableAnimator()
+    {
+        if (animator != null)
+        {
+            animator.enabled = false; // Disable the animator
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
