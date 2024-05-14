@@ -123,27 +123,27 @@ public class SpooderBossAI : MonoBehaviour
     }
     private void Attack5()
     {
-        anim.SetTrigger("Attack4");
+        anim.SetTrigger("Attack1");
 
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack6()
     {
-        anim.SetTrigger("Attack4");
+        anim.SetTrigger("Attack1");
 
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack7()
     {
-        anim.SetTrigger("Attack4");
+        anim.SetTrigger("Attack1");
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack8()
     {
-        anim.SetTrigger("Attack8");
+        anim.SetTrigger("Attack1");
         //ShootLaser();
         // Additional effects and damage logic here
     }
