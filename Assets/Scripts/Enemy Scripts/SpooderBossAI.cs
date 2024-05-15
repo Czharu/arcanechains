@@ -123,27 +123,27 @@ public class SpooderBossAI : MonoBehaviour
     }
     private void Attack5()
     {
-        anim.SetTrigger("Attack1");
+        anim.SetTrigger("Attack5");
 
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack6()
     {
-        anim.SetTrigger("Attack1");
+        anim.SetTrigger("Attack5");
 
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack7()
     {
-        anim.SetTrigger("Attack1");
+        anim.SetTrigger("Attack5");
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack8()
     {
-        anim.SetTrigger("Attack1");
+        anim.SetTrigger("Attack5");
         //ShootLaser();
         // Additional effects and damage logic here
     }
@@ -238,6 +238,48 @@ public class SpooderBossAI : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         obj.SetActive(false);
+    }
+
+    public void OutShoot()
+    {
+        StartCoroutine(OutShootSequence());
+    }
+
+    private IEnumerator OutShootSequence()
+    {
+        List<GameObject> lasers = new List<GameObject>();
+
+        
+
+        // Instantiate lasers at each orb and store them in a list.
+        foreach (GameObject orb in defensiveOrbs)
+        {
+            Vector3 spawnPosition = orb.transform.position;
+            GameObject laserInstance = Instantiate(laserPrefab, spawnPosition, Quaternion.identity);
+            Laser laserComponent = laserInstance.GetComponent<Laser>();
+            if (laserComponent != null)
+            {
+                // Calculate direction from the boss to the orb
+                Vector3 directionFromBossToOrb = (orb.transform.position - transform.position).normalized;
+
+                laserComponent.Initialize(directionFromBossToOrb, 0f, true); // Initialize with zero speed.
+                Debug.Log(directionFromBossToOrb);
+            }
+            lasers.Add(laserInstance);
+        }
+
+        // Wait for 3 seconds before firing them.
+        yield return new WaitForSeconds(3);
+
+        // Set each laser to move in the opposite direction to the boss with the intended speed.
+        foreach (GameObject laser in lasers)
+        {
+            Laser laserComponent = laser.GetComponent<Laser>();
+            if (laserComponent != null)
+            {
+                laserComponent.SetSpeed(3f); // Set the speed after 3 seconds.
+            }
+        }
     }
 
 

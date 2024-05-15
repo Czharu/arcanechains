@@ -66,4 +66,13 @@ public class Laser : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed; // Update the speed at which the laser will move.
+        if (speed > 0 && direction != Vector3.zero)  // Make sure there is a direction set when setting speed.
+        {
+            direction.Normalize();
+            direction *= speed;  // Apply the new speed to the direction
+        }
+    }
 }
