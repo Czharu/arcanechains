@@ -19,6 +19,9 @@ public class SpooderBossAI : MonoBehaviour
     public Animator rightlegsAnimator;
     public GameObject[] defensiveOrbs; // Assign this via the Inspector or fetch dynamically for Compass45()
 
+     // Define delays for each attack
+    private float[] attackDelays = new float[] { 1f, 13f, 13f, 7f, 4f, 2f, 1f, 1f };
+
     private void Start()
     {
         anim = GetComponent<Animator>();// the Animator is expected always to be on the same GameObject as your script
@@ -29,14 +32,10 @@ public class SpooderBossAI : MonoBehaviour
     {
         while (true) // Keeps the boss continuously performing attacks
         {
-
             int attackIndex = GetRandomAttackIndex();
             PerformAttack(attackIndex);
-            // Specific delay after Attack2
-            if (attackIndex >= 1)  // Assuming index 1 corresponds to Attack2
-            {
-                yield return new WaitForSeconds(11);  // Additional 10 second wait after Attack2
-            }
+            yield return new WaitForSeconds(attackDelays[attackIndex]); // Wait for the specified delay after each attack
+            Debug.Log(attackDelays[attackIndex]);
             lastAttackIndex = attackIndex; // Update the last attack index
         }
     }
@@ -130,20 +129,20 @@ public class SpooderBossAI : MonoBehaviour
     }
     private void Attack6()
     {
-        anim.SetTrigger("Attack5");
+        anim.SetTrigger("Attack1");
 
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack7()
     {
-        anim.SetTrigger("Attack5");
+        anim.SetTrigger("Attack1");
         //ShootLaser();
         // Additional effects and damage logic here
     }
     private void Attack8()
     {
-        anim.SetTrigger("Attack5");
+        anim.SetTrigger("Attack1");
         //ShootLaser();
         // Additional effects and damage logic here
     }
@@ -173,8 +172,13 @@ public class SpooderBossAI : MonoBehaviour
 
         leftlegsAnimator.SetTrigger("LeftLegAttack2");
         starLaserPrefab.SetActive(true);  // Activate the existing object  // Ensure the prefab is active
-
-        StartCoroutine(DisableAfterDelay(starLaserPrefab, 9.5f));  // Disable the object after 10 seconds
+        // Find the StarWarning child and enable its collider after 1 second
+        StarBeam starBeam = starLaserPrefab.GetComponentInChildren<StarBeam>();
+        if (starBeam != null)
+        {
+            starBeam.EnableColliderAfterDelay(2f);
+        }
+        StartCoroutine(DisableAfterDelay(starLaserPrefab, 11.5f));  // Disable the object after 10 seconds
     }
     public void ShootStarLaserReverse()
     {
@@ -182,8 +186,13 @@ public class SpooderBossAI : MonoBehaviour
 
         rightlegsAnimator.SetTrigger("RightLegsAttack3");
         starLaserPrefabReverse.SetActive(true);  // Activate the existing object  // Ensure the prefab is active
-
-        StartCoroutine(DisableAfterDelay(starLaserPrefabReverse, 9.5f));  // Disable the object after 10 seconds
+        // Find the StarWarning child and enable its collider after 1 second
+        StarBeam starBeam = starLaserPrefabReverse.GetComponentInChildren<StarBeam>();
+        if (starBeam != null)
+        {
+            starBeam.EnableColliderAfterDelay(2f);
+        }
+        StartCoroutine(DisableAfterDelay(starLaserPrefabReverse, 11.5f));  // Disable the object after 10 seconds
     }
     // Define the directions for Compass45
     private Vector3[] compass45Directions = new Vector3[]
@@ -249,7 +258,7 @@ public class SpooderBossAI : MonoBehaviour
     {
         List<GameObject> lasers = new List<GameObject>();
 
-        
+
 
         // Instantiate lasers at each orb and store them in a list.
         foreach (GameObject orb in defensiveOrbs)
@@ -263,7 +272,7 @@ public class SpooderBossAI : MonoBehaviour
                 Vector3 directionFromBossToOrb = (orb.transform.position - transform.position).normalized;
 
                 laserComponent.Initialize(directionFromBossToOrb, 0f, true); // Initialize with zero speed.
-                Debug.Log(directionFromBossToOrb);
+                //Debug.Log(directionFromBossToOrb);
             }
             lasers.Add(laserInstance);
         }
