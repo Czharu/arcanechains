@@ -7,7 +7,8 @@ public class EnemyAIGroundedChase : MonoBehaviour
     public float moveSpeed = 0.2f; // Speed of the enemy
     public Transform playerTransform; // Reference to the player's transform
     private bool isChasing;
-    public bool chasingRight = false;
+
+    public bool chasingRight = true;
     public float chaseDistance = 7; // Distance at which the enemy starts chasing
     private Rigidbody2D rb;
     private BoxCollider2D coll;
@@ -37,21 +38,19 @@ public class EnemyAIGroundedChase : MonoBehaviour
             float distanceFromPlayer = playerTransform.position.x - transform.position.x;
             if (!isColliding && jumpCooldown == 0)
             {
-                if (isChasing)
+                if (isChasing) //revised code such that it calculates if the enemy should be flipped
                 {
-                    if (transform.position.x > playerTransform.position.x)
+                    if (distanceFromPlayer < 0 && chasingRight)
                     {
-                        //transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-                        rb.velocity = new Vector2(moveSpeed * -1, rb.velocity.y);
                         chasingRight = false;
+                        Flip();
                     }
-                    if (transform.position.x < playerTransform.position.x)
+                    else if (distanceFromPlayer > 0 && !chasingRight)
                     {
-                        //transform.position += Vector3.right * moveSpeed * Time.deltaTime;
-                        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
                         chasingRight = true;
-
+                        Flip();
                     }
+                    rb.velocity = new Vector2(chasingRight ? moveSpeed : -moveSpeed, rb.velocity.y);// simplified movement direction code
                 }
 
                 else
@@ -123,6 +122,15 @@ public class EnemyAIGroundedChase : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isColliding = false;
+        }
+    }
+    void Flip()
+    {
+        if (IsGrounded())
+        {
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1;
+            transform.localScale = localScale;
         }
     }
 }
