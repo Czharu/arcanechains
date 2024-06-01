@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAIGroundedChase : MonoBehaviour
+public class SheepAIGroundedChase : MonoBehaviour
 {
     public float moveSpeed = 0.2f; // Speed of the enemy
     public Transform playerTransform; // Reference to the player's transform
