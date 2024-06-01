@@ -11,21 +11,23 @@ public class EnemyAIGroundedChase : MonoBehaviour
     public float chaseDistance = 7; // Distance at which the enemy starts chasing
     private Rigidbody2D rb;
     private BoxCollider2D coll;
+    private Animator anim; // Reference to the Animator component
     public int jumpCooldown = 0;
 
-    [SerializeField] int jumpHeight = 2; // Height of the jump
+    [SerializeField] private int jumpHeight = 2; // Height of the jump
     [SerializeField] private float jumpStrength = 5f; // Strength of the horizontal jump
 
-    [SerializeField] int attackDistance = 2; // Distance at which the enemy attacks
+    [SerializeField] private int attackDistance = 2; // Distance at which the enemy attacks
 
     [SerializeField] private LayerMask jumpableGround; // Layer mask to check if the enemy is grounded
-    bool isColliding = false;
+    private bool isColliding = false;
     // Start is called before the first frame update
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>(); // Initialize the Animator component
     }
 
     // Update is called once per frame
@@ -73,6 +75,15 @@ public class EnemyAIGroundedChase : MonoBehaviour
             {
                 jumpCooldown--;
             }
+            // Set the animation state
+            if (isChasing)
+            {
+                anim.SetBool("Chase", true);
+            }
+            else
+            {
+                anim.SetBool("Chase", false);
+            }
         }
     }
 
@@ -90,6 +101,8 @@ public class EnemyAIGroundedChase : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y); // Reset horizontal velocity
             float horizontalForce = distanceFromPlayer > 0 ? jumpStrength : -jumpStrength; // Determine the direction of the horizontal force
             rb.AddForce(new Vector2(horizontalForce, jumpHeight), ForceMode2D.Impulse); // Apply the jump force
+            // Trigger the JumpAttack animation
+            anim.SetTrigger("JumpAttack");
         }
     }
 
