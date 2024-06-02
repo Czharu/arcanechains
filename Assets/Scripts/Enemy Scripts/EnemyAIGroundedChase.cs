@@ -21,6 +21,8 @@ public class EnemyAIGroundedChase : MonoBehaviour
     [SerializeField] private int attackDistance = 2; // Distance at which the enemy attacks
 
     [SerializeField] private LayerMask jumpableGround; // Layer mask to check if the enemy is grounded
+    [SerializeField] private bool enableJumpAttack = true; // Enable/Disable jump attack
+    [SerializeField] private float flipOffset = 0.5f; // Offset to prevent flipping when directly below the player
     private bool isColliding = false;
     // Start is called before the first frame update
     void Start()
@@ -40,16 +42,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
             {
                 if (isChasing) //revised code such that it calculates if the enemy should be flipped
                 {
-                    if (distanceFromPlayer < 0 && chasingRight)
-                    {
-                        chasingRight = false;
-                        Flip();
-                    }
-                    else if (distanceFromPlayer > 0 && !chasingRight)
-                    {
-                        chasingRight = true;
-                        Flip();
-                    }
+                    
                     rb.velocity = new Vector2(chasingRight ? moveSpeed : -moveSpeed, rb.velocity.y);// simplified movement direction code
                 }
 
@@ -60,7 +53,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
                         isChasing = true;
                     }
                 }
-                if (isChasing)
+                if (isChasing && enableJumpAttack) // Jump attack when close enough to the player and jump attack is enabled
                 { // Jump attack when close enough to the player
                     if (Mathf.Abs(distanceFromPlayer) < attackDistance)
                     {
