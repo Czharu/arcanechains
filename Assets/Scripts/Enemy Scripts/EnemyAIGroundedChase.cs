@@ -42,7 +42,16 @@ public class EnemyAIGroundedChase : MonoBehaviour
             {
                 if (isChasing) //revised code such that it calculates if the enemy should be flipped
                 {
-                    
+                    if (distanceFromPlayer < -flipOffset && chasingRight)
+                    {
+                        chasingRight = false;
+                        Flip();
+                    }
+                    else if (distanceFromPlayer > flipOffset && !chasingRight)
+                    {
+                        chasingRight = true;
+                        Flip();
+                    }
                     rb.velocity = new Vector2(chasingRight ? moveSpeed : -moveSpeed, rb.velocity.y);// simplified movement direction code
                 }
 
@@ -117,12 +126,12 @@ public class EnemyAIGroundedChase : MonoBehaviour
             isColliding = false;
         }
     }
-    void Flip()
+    void Flip()// flips the direction the enemy is facing when grounded based on side of the player it is
     {
         if (IsGrounded())
         {
             Vector3 localScale = transform.localScale;
-            localScale.x *= -1;
+            localScale.x = chasingRight ? Mathf.Abs(localScale.x) : -Mathf.Abs(localScale.x);
             transform.localScale = localScale;
         }
     }
