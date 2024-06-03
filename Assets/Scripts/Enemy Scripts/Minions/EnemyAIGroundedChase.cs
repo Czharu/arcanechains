@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAIGroundedChase : MonoBehaviour
 {
-    public float moveSpeed = 0.2f; // Speed of the enemy
+    public float moveSpeed = 2f; // Speed of the enemy
     public Transform playerTransform; // Reference to the player's transform
     private bool isChasing;
 
@@ -14,16 +14,20 @@ public class EnemyAIGroundedChase : MonoBehaviour
     private BoxCollider2D coll;
     private Animator anim; // Reference to the Animator component
     public int jumpCooldown = 0;
+    public int standAttackCooldown = 0;
 
-    [SerializeField] private int jumpHeight = 2; // Height of the jump
-    [SerializeField] private float jumpStrength = 5f; // Strength of the horizontal jump
-
-    [SerializeField] private int attackDistance = 2; // Distance at which the enemy attacks
-
-    [SerializeField] private LayerMask jumpableGround; // Layer mask to check if the enemy is grounded
+    //attack cchangeable values and toggles
     [SerializeField] private bool enableJumpAttack = true; // Enable/Disable jump attack
+    [SerializeField] private int attackDistance = 2; // Distance at which the enemy performs jump attack
+    [SerializeField] private int jumpHeight = 2; // Height of the jump
+    [SerializeField] private float jumpStrength = 5f; // Strength of the horizontal jump    
+    [SerializeField] private bool enableStandAttack = true; // Enable/Disable standing attack
+    [SerializeField] private int standAttackDistance = 1; // Distance at which the enemy performs standing attack
+    //other chaneable values    
     [SerializeField] private float flipOffset = 0.5f; // Offset to prevent flipping when directly below the player
+    [SerializeField] private LayerMask jumpableGround; // Layer mask to check if the enemy is grounded
     private bool isColliding = false;
+    private AttackHandler attackHandler; // attached script to manage the attacks
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +35,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>(); // Initialize the Animator component
+        attackHandler = GetComponent<AttackHandler>(); // Get the AttackHandler component
     }
 
     // Update is called once per frame
@@ -38,7 +43,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     {
         {
             float distanceFromPlayer = playerTransform.position.x - transform.position.x;
-            if (!isColliding && jumpCooldown == 0)
+            if (!isColliding && jumpCooldown == 0 && standAttackCooldown == 0)
             {
                 if (isChasing) //revised code such that it calculates if the enemy should be flipped
                 {
@@ -67,14 +72,22 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     if (Mathf.Abs(distanceFromPlayer) < attackDistance)
                     {
                         isChasing = false;
-                        JumpAttack();
+                        attackHandler?.JumpAttack(playerTransform.position, jumpHeight, jumpStrength);
                         jumpCooldown = 100; // Cooldown duration for the next jump attack
                     }
                 }
+                // Standing attack when close enough to the player and stand attack is enabled
+                if (isChasing && enableStandAttack && Mathf.Abs(distanceFromPlayer) < standAttackDistance) 
+                {
+                    isChasing = false;
+                    attackHandler?.StandAttack();
+                    standAttackCooldown = 100; // Cooldown duration for the next standing attack
+                }
             }
-            else if (jumpCooldown > 0)
+            else //recover cooldowns
             {
-                jumpCooldown--;
+            if (jumpCooldown > 0) jumpCooldown--;
+            if (standAttackCooldown > 0) standAttackCooldown--;
             }
             // Set the animation state
             if (isChasing)
@@ -93,19 +106,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .2f, jumpableGround);
     }
 
-    void JumpAttack()
-    {
-        float distanceFromPlayer = playerTransform.position.x - transform.position.x;
 
-        if (IsGrounded())
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y); // Reset horizontal velocity
-            float horizontalForce = distanceFromPlayer > 0 ? jumpStrength : -jumpStrength; // Determine the direction of the horizontal force
-            rb.AddForce(new Vector2(horizontalForce, jumpHeight), ForceMode2D.Impulse); // Apply the jump force
-            // Trigger the JumpAttack animation
-            anim.SetTrigger("JumpAttack");
-        }
-    }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
