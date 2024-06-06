@@ -9,7 +9,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     private bool isChasing;
 
     public bool chasingRight = true;
-    public float chaseDistance = 7; // Distance at which the enemy starts chasing
+    public float chaseDistance = 7f; // Distance at which the enemy starts chasing
     private Rigidbody2D rb;
     private BoxCollider2D coll;
     private Animator anim; // Reference to the Animator component
@@ -22,27 +22,31 @@ public class EnemyAIGroundedChase : MonoBehaviour
     [SerializeField] private int jumpHeight = 2; // Height of the jump
     [SerializeField] private float jumpStrength = 5f; // Strength of the horizontal jump    
     [SerializeField] private bool enableStandAttack = true; // Enable/Disable standing attack
-    [SerializeField] private int standAttackDistance = 1; // Distance at which the enemy performs standing attack
+    [SerializeField] private int standAttackDistance = 2; // Distance at which the enemy performs standing attack
     //other chaneable values    
-    [SerializeField] private float flipOffset = 0.5f; // Offset to prevent flipping when directly below the player
+    [SerializeField] private float flipOffset = 2f; // Offset to prevent flipping when directly below the player
     [SerializeField] private LayerMask jumpableGround; // Layer mask to check if the enemy is grounded
     private bool isColliding = false;
     private AttackHandler attackHandler; // attached script to manage the attacks
+    // Reference to the child GameObject with animations
+    private Transform enemyChild;
+    private BoxCollider2D childCollider; // Reference to the child's BoxCollider2D
     // Start is called before the first frame update
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<BoxCollider2D>();
-        anim = GetComponent<Animator>(); // Initialize the Animator component
-        attackHandler = GetComponent<AttackHandler>(); // Get the AttackHandler component
+        rb = GetComponent<Rigidbody2D>();        
+        anim = GetComponentInChildren<Animator>(); // Initialize the Animator component
+        attackHandler = GetComponentInChildren<AttackHandler>(); // Get the AttackHandler component
+        enemyChild = transform.GetChild(0); // Get the child GameObject (assuming it's the first child)
+        childCollider = enemyChild.GetComponent<BoxCollider2D>(); // Get the child's BoxCollider2D
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
         {
-            float distanceFromPlayer = playerTransform.position.x - transform.position.x;
+            float distanceFromPlayer = playerTransform.position.x - enemyChild.position.x;
             if (!isColliding && jumpCooldown == 0 && standAttackCooldown == 0)
             {
                 if (isChasing) //revised code such that it calculates if the enemy should be flipped
@@ -62,7 +66,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
 
                 else
                 {
-                    if (Vector2.Distance(transform.position, playerTransform.position) < chaseDistance)
+                    if (Vector2.Distance(enemyChild.position, playerTransform.position) < chaseDistance)
                     {
                         isChasing = true;
                     }
@@ -103,7 +107,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .2f, jumpableGround);
+        return Physics2D.BoxCast(childCollider.bounds.center, childCollider.bounds.size, 0f, Vector2.down, .2f, jumpableGround);
     }
 
 
@@ -131,9 +135,9 @@ public class EnemyAIGroundedChase : MonoBehaviour
     {
         if (IsGrounded())
         {
-            Vector3 localScale = transform.localScale;
+            Vector3 localScale = enemyChild.localScale;
             localScale.x = chasingRight ? Mathf.Abs(localScale.x) : -Mathf.Abs(localScale.x);
-            transform.localScale = localScale;
+            enemyChild.localScale = localScale;
         }
     }
 }
