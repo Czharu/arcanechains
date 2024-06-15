@@ -15,6 +15,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     private Animator anim; // Reference to the Animator component
     public int jumpCooldown = 0;
     public int standAttackCooldown = 0;
+    public int rangedAttackCooldown = 0;
 
     //attack cchangeable values and toggles
     [SerializeField] private bool enableJumpAttack = true; // Enable/Disable jump attack
@@ -23,6 +24,15 @@ public class EnemyAIGroundedChase : MonoBehaviour
     [SerializeField] private float jumpStrength = 5f; // Strength of the horizontal jump    
     [SerializeField] private bool enableStandAttack = true; // Enable/Disable standing attack
     [SerializeField] private int standAttackDistance = 2; // Distance at which the enemy performs standing attack
+    // Ranged attack settings
+    [SerializeField] private bool enableRangedAttack = true; // Enable/Disable ranged attack
+    [SerializeField] private int rangedAttackDistanceMin = 3; // Minimum distance for ranged attack
+    [SerializeField] private int rangedAttackDistanceMax = 17; // Maximum distance for ranged attack
+    [SerializeField] private GameObject projectilePrefab; // Prefab for the projectile
+    [SerializeField] private Transform projectileSpawnPoint; // Position where the projectile will be spawned
+    [SerializeField] private int numberOfProjectiles = 3; // Number of projectiles to be spawned
+    [SerializeField] private float timeBetweenProjectiles = 0.5f; // Time between each projectile spawn
+
     //other chaneable values    
     [SerializeField] private float flipOffset = 2f; // Offset to prevent flipping when directly below the player
     [SerializeField] private LayerMask jumpableGround; // Layer mask to check if the enemy is grounded
@@ -35,7 +45,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        rb = GetComponent<Rigidbody2D>();        
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>(); // Initialize the Animator component
         attackHandler = GetComponentInChildren<AttackHandler>(); // Get the AttackHandler component
         enemyChild = transform.GetChild(0); // Get the child GameObject (assuming it's the first child)
@@ -81,17 +91,25 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     }
                 }
                 // Standing attack when close enough to the player and stand attack is enabled
-                if (isChasing && enableStandAttack && Mathf.Abs(distanceFromPlayer) < standAttackDistance) 
+                if (isChasing && enableStandAttack && Mathf.Abs(distanceFromPlayer) < standAttackDistance)
                 {
                     isChasing = false;
                     attackHandler?.StandAttack();
                     standAttackCooldown = 100; // Cooldown duration for the next standing attack
                 }
+                if (isChasing && enableRangedAttack && Mathf.Abs(distanceFromPlayer) >= rangedAttackDistanceMin && Mathf.Abs(distanceFromPlayer) <= rangedAttackDistanceMax) // Ranged attack when within range and enabled
+                {
+                    isChasing = false;
+                    anim.SetTrigger("RangedAttack"); // Trigger the initial ranged attack animation
+                    StartCoroutine(RangedAttackCoroutine());
+                    rangedAttackCooldown = 200; // Cooldown duration for the next ranged attack
+                }
             }
             else //recover cooldowns
             {
-            if (jumpCooldown > 0) jumpCooldown--;
-            if (standAttackCooldown > 0) standAttackCooldown--;
+                if (jumpCooldown > 0) jumpCooldown--;
+                if (standAttackCooldown > 0) standAttackCooldown--;
+                if (rangedAttackCooldown > 0) rangedAttackCooldown--;
             }
             // Set the animation state
             if (isChasing)
@@ -139,5 +157,14 @@ public class EnemyAIGroundedChase : MonoBehaviour
             localScale.x = chasingRight ? Mathf.Abs(localScale.x) : -Mathf.Abs(localScale.x);
             enemyChild.localScale = localScale;
         }
+    }
+    private IEnumerator RangedAttackCoroutine()
+    {
+        for (int i = 0; i < numberOfProjectiles; i++)
+        {
+            attackHandler?.RangedAttack(projectilePrefab, projectileSpawnPoint.position);
+            yield return new WaitForSeconds(timeBetweenProjectiles);
+        }
+        anim.SetTrigger("RangedAttackFinished"); // Trigger the return bacck to normal
     }
 }

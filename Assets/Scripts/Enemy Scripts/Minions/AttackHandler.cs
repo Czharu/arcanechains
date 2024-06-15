@@ -55,6 +55,17 @@ public class AttackHandler : MonoBehaviour
         //anim.applyRootMotion = false;
     }
 
+    public void RangedAttack(GameObject projectilePrefab, Vector2 spawnPosition)
+    {
+        // Play the firing animation (if any)
+        anim.SetTrigger("FireProjectile");
+
+        // Instantiate the projectile at the specified position
+        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+
+        // Additional setup for the projectile can be done here (e.g., setting velocity, damage, etc.)
+    }
+
     private bool IsGrounded()//trigger box collider to check if grounded for jump
     {
         BoxCollider2D coll = GetComponent<BoxCollider2D>();
