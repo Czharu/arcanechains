@@ -30,7 +30,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     [SerializeField] private int rangedAttackDistanceMax = 17; // Maximum distance for ranged attack
     [SerializeField] private GameObject projectilePrefab; // Prefab for the projectile
     [SerializeField] private Transform projectileSpawnPoint; // Position where the projectile will be spawned
-    [SerializeField] private int numberOfProjectiles = 3; // Number of projectiles to be spawned
+    [SerializeField] private int numberOfProjectiles = 1; // Number of projectiles to be spawned
     [SerializeField] private float timeBetweenProjectiles = 0.5f; // Time between each projectile spawn
 
     //other chaneable values    
@@ -97,19 +97,25 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     attackHandler?.StandAttack();
                     standAttackCooldown = 100; // Cooldown duration for the next standing attack
                 }
-                if (isChasing && enableRangedAttack && Mathf.Abs(distanceFromPlayer) >= rangedAttackDistanceMin && Mathf.Abs(distanceFromPlayer) <= rangedAttackDistanceMax) // Ranged attack when within range and enabled
+                //removed chase requirement for ranged attack
+                if (enableRangedAttack && Mathf.Abs(distanceFromPlayer) >= rangedAttackDistanceMin && Mathf.Abs(distanceFromPlayer) <= rangedAttackDistanceMax && rangedAttackCooldown == 0) // Ranged attack when within range and enabled
                 {
+                    rangedAttackCooldown = 200; // Cooldown duration for the next ranged attack
                     isChasing = false;
                     anim.SetTrigger("RangedAttack"); // Trigger the initial ranged attack animation
                     StartCoroutine(RangedAttackCoroutine());
-                    rangedAttackCooldown = 200; // Cooldown duration for the next ranged attack
+                    
+                }
+                else
+                {
+                    if (rangedAttackCooldown > 0) rangedAttackCooldown--;
                 }
             }
             else //recover cooldowns
             {
                 if (jumpCooldown > 0) jumpCooldown--;
                 if (standAttackCooldown > 0) standAttackCooldown--;
-                if (rangedAttackCooldown > 0) rangedAttackCooldown--;
+                
             }
             // Set the animation state
             if (isChasing)
@@ -162,7 +168,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     {
         for (int i = 0; i < numberOfProjectiles; i++)
         {
-            attackHandler?.RangedAttack(projectilePrefab, projectileSpawnPoint.position);
+            attackHandler?.RangedAttack(projectilePrefab, projectileSpawnPoint);
             yield return new WaitForSeconds(timeBetweenProjectiles);
         }
         anim.SetTrigger("RangedAttackFinished"); // Trigger the return bacck to normal
