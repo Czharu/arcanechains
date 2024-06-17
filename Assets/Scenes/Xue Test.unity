@@ -1093,6 +1093,10 @@ GameObject:
   m_Component:
   - component: {fileID: 615172851}
   - component: {fileID: 615172852}
+  - component: {fileID: 615172853}
+  - component: {fileID: 615172854}
+  - component: {fileID: 615172855}
+  - component: {fileID: 615172856}
   m_Layer: 0
   m_Name: Waifu
   m_TagString: Untagged
@@ -1168,6 +1172,123 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &615172853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615172850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ddea2481762634a962adac0fd247c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileDelay: 1
+  projectileGravity: 0.1
+  projectileForwardVelocity: -5
+  flipProjectile180: 0
+--- !u!70 &615172854
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615172850}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.046803236, y: 0.033397913}
+  m_Size: {x: 0.89814806, y: 3.7791386}
+  m_Direction: 0
+--- !u!61 &615172855
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615172850}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.046943665, y: -0.0041251183}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8557787, y: 3.7607112}
+  m_EdgeRadius: 0
+--- !u!95 &615172856
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615172850}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9092b154cd7a1524bb02fd7260c88446, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &640345569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,6 +1892,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ddea2481762634a962adac0fd247c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileDelay: 0.5
+  projectileGravity: 0
+  projectileForwardVelocity: 5
+  flipProjectile180: 0
 --- !u!70 &1073725255
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -6041,7 +6166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477796985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4373, y: 0.06, z: 0}
+  m_LocalPosition: {x: -0.04, y: 0.002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24537,6 +24662,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2091379667}
+  - component: {fileID: 2091379668}
+  - component: {fileID: 2091379669}
   m_Layer: 0
   m_Name: WaifuParent
   m_TagString: Untagged
@@ -24560,6 +24687,69 @@ Transform:
   m_Father: {fileID: 1556533684}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2091379668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091379666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0605d8b855c254f42a6636f013e360f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  playerTransform: {fileID: 273276805}
+  chasingRight: 1
+  chaseDistance: 1
+  jumpCooldown: 0
+  standAttackCooldown: 0
+  rangedAttackCooldown: 0
+  enableJumpAttack: 0
+  attackDistance: 2
+  jumpHeight: 2
+  jumpStrength: 5
+  enableStandAttack: 0
+  standAttackDistance: 2
+  enableRangedAttack: 1
+  rangedAttackDistanceMin: 0
+  rangedAttackDistanceMax: 55
+  projectilePrefab: {fileID: 6045586363094262682, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+  projectileSpawnPoint: {fileID: 1477796986}
+  numberOfProjectiles: 1
+  timeBetweenProjectiles: 0.5
+  flipOffset: 2
+  jumpableGround:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!50 &2091379669
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091379666}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 1
+  m_Mass: 3.2211132
+  m_LinearDrag: 1
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &2141040691
 GameObject:
   m_ObjectHideFlags: 0
@@ -25185,6 +25375,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 915ab42359eedcd48af6ec9643a7d2b9, type: 3}
+--- !u!1001 &6585220567345474256
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 429460968577977476, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078804495306758934, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045586363094262682, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
+      propertyPath: m_Name
+      value: CrossbowBolt
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0ed3a3970e5197e47aee648059709083, type: 3}
 --- !u!1001 &8720472097998022077
 PrefabInstance:
   m_ObjectHideFlags: 0
