@@ -1264,6 +1264,7 @@ MonoBehaviour:
     baseValue: 0
   coinPrefab: {fileID: 5731035647836046021, guid: b6974188f96c7be43a053b7d02ea5f39, type: 3}
   numberOfCoinsToDrop: 5
+  destroyParent: 1
   OnHitWithReference:
     m_PersistentCalls:
       m_Calls: []
@@ -1337,6 +1338,7 @@ MonoBehaviour:
     baseValue: 0
   coinPrefab: {fileID: 5731035647836046021, guid: b6974188f96c7be43a053b7d02ea5f39, type: 3}
   numberOfCoinsToDrop: 5
+  destroyParent: 0
   OnHitWithReference:
     m_PersistentCalls:
       m_Calls: []
@@ -2248,6 +2250,7 @@ MonoBehaviour:
     baseValue: 0
   coinPrefab: {fileID: 5731035647836046021, guid: b6974188f96c7be43a053b7d02ea5f39, type: 3}
   numberOfCoinsToDrop: 5
+  destroyParent: 0
   OnHitWithReference:
     m_PersistentCalls:
       m_Calls: []

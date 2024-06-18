@@ -7,6 +7,7 @@ public class EnemyLife : CharacterStats
 {
     [SerializeField] private GameObject coinPrefab; // Assign this in the Unity Inspector
     public int numberOfCoinsToDrop = 5; // Default to 5, set this in the Inspector for each enemy
+    [SerializeField] private bool destroyParent = false; // Toggle to choose whether to destroy the parent or not
 
     //unity attack hit reference
     public UnityEvent<GameObject> OnHitWithReference, OnDeathWithReference;
@@ -79,7 +80,14 @@ public class EnemyLife : CharacterStats
 
             }
         }
+        if (destroyParent && transform.parent != null)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+        else
+        {
         Destroy(gameObject);
+        }
     }
 
 
