@@ -212,7 +212,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
         for (int i = 0; i < numberOfProjectiles; i++)
         {
             yield return new WaitForSeconds(delay);
-            attackHandler?.RangedAttack(projectilePrefab, projectileSpawnPoint);
+            attackHandler?.RangedAttack(projectilePrefab, projectileSpawnPoint, chasingRight);
             yield return new WaitForSeconds(timeBetweenProjectiles);
         }
         if (HasParameter("RangedAttackFinished", anim))

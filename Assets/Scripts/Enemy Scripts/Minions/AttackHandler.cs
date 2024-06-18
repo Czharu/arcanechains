@@ -112,11 +112,11 @@ public class AttackHandler : MonoBehaviour
         //anim.applyRootMotion = false;
     }
 
-    public void RangedAttack(GameObject projectilePrefab, Transform projectileSpawnPoint)
+    public void RangedAttack(GameObject projectilePrefab, Transform projectileSpawnPoint, bool facingRight)
     {
-        StartCoroutine(RangedAttackCoroutine(projectilePrefab, projectileSpawnPoint));
+        StartCoroutine(RangedAttackCoroutine(projectilePrefab, projectileSpawnPoint, facingRight));
     }
-    private IEnumerator RangedAttackCoroutine(GameObject projectilePrefab, Transform projectileSpawnPoint)
+    private IEnumerator RangedAttackCoroutine(GameObject projectilePrefab, Transform projectileSpawnPoint, bool facingRight)
     {
         // Play the firing animation (if any)
         if (HasParameter("StandingAttack", anim))
@@ -149,6 +149,13 @@ public class AttackHandler : MonoBehaviour
         projectile.transform.parent = null;
 
         // Apply any additional logic for the projectile (e.g., setting velocity, enabling physics, etc.)
+        // Flip the Y-scale if the enemy is facing left
+        if (facingRight)// banna not comming out like how it is gripped without this
+        {
+            Vector3 scale = projectile.transform.localScale;
+            scale.y *= -1;
+            projectile.transform.localScale = scale;
+        }
 
         if (projectileRb != null)
         {
