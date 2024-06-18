@@ -35,8 +35,13 @@ public class AttackHandler : MonoBehaviour
     }
     public void StandAttack()
     {
-        // Stop the enemy's movement
-        parentRb.velocity = Vector2.zero;
+        // Stop the enemy's movement alternative
+        // parentRb.velocity = Vector2.zero;
+        // Stop the enemy's horizontal movement
+        parentRb.velocity = new Vector2(0, parentRb.velocity.y);
+
+        // Reset the enemy's rotational velocity
+        parentRb.angularVelocity = 0;
 
         // Trigger the StandingAttack animation in the enemy
         anim.SetTrigger("StandingAttack");

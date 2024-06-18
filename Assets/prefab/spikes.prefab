@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7497247121482115959}
   - component: {fileID: 4208248023300396228}
   - component: {fileID: 187869082064931714}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spikes
   m_TagString: Trap
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4208248023300396228
 SpriteRenderer:

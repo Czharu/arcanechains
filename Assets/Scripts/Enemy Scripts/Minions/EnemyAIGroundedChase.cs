@@ -23,7 +23,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     [SerializeField] private int jumpHeight = 2; // Height of the jump
     [SerializeField] private float jumpStrength = 5f; // Strength of the horizontal jump    
     [SerializeField] private bool enableStandAttack = true; // Enable/Disable standing attack
-    [SerializeField] private int standAttackDistance = 2; // Distance at which the enemy performs standing attack
+    [SerializeField] private float standAttackDistance = 2; // Distance at which the enemy performs standing attack
     //Stand attak also is the minimum distane that chase is deactivated at
     // Ranged attack settings
     [SerializeField] private bool enableRangedAttack = true; // Enable/Disable ranged attack
@@ -106,7 +106,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     }
                 }
                 // Standing attack when close enough to the player and stand attack is enabled
-                if (isChasing && enableStandAttack && Mathf.Abs(distanceFromPlayer) < standAttackDistance)
+                if (isChasing && enableStandAttack && Mathf.Abs(Vector2.Distance(enemyChild.position, playerTransform.position)) < standAttackDistance)
                 {
                     isChasing = false;
                     attackHandler?.StandAttack();
