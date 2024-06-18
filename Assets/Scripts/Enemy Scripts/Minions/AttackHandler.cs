@@ -19,6 +19,14 @@ public class AttackHandler : MonoBehaviour
         anim = GetComponent<Animator>(); // Initialize the Animator component
 
     }
+    private bool HasParameter(string paramName, Animator animator)// to get rid of animator parameter caution events
+    {
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+            if (param.name == paramName) return true;
+        }
+        return false;
+    }
 
 
     public void JumpAttack(Vector2 targetPosition, int jumpHeight, float jumpStrength)
@@ -30,7 +38,11 @@ public class AttackHandler : MonoBehaviour
             parentRb.velocity = new Vector2(0, parentRb.velocity.y); // Reset horizontal velocity
             float horizontalForce = distanceFromPlayer > 0 ? jumpStrength : -jumpStrength; // Determine the direction of the horizontal force
             parentRb.AddForce(new Vector2(horizontalForce, jumpHeight), ForceMode2D.Impulse); // Apply the jump force
-            anim.SetTrigger("JumpAttack"); // Trigger the JumpAttack animation
+            if (HasParameter("JumpAttack", anim))
+            {
+                anim.SetTrigger("JumpAttack"); // Trigger the JumpAttack animation
+            }
+
         }
     }
     public void StandAttack()
@@ -44,7 +56,10 @@ public class AttackHandler : MonoBehaviour
         parentRb.angularVelocity = 0;
 
         // Trigger the StandingAttack animation in the enemy
-        anim.SetTrigger("StandingAttack");
+        if (HasParameter("StandingAttack", anim))
+        {
+            anim.SetTrigger("StandingAttack");
+        }
         //anim.applyRootMotion = true;
 
         // Trigger the StandingAttack animation in the Weapon child object if it exists
@@ -54,7 +69,10 @@ public class AttackHandler : MonoBehaviour
             Animator weaponAnim = weapon.GetComponent<Animator>();
             if (weaponAnim != null)
             {
-                weaponAnim.SetTrigger("StandingAttack");
+                if (HasParameter("StandingAttack", weaponAnim))
+                {
+                    weaponAnim.SetTrigger("StandingAttack");
+                }
             }
         }
     }
@@ -72,7 +90,10 @@ public class AttackHandler : MonoBehaviour
     private IEnumerator RangedAttackCoroutine(GameObject projectilePrefab, Transform projectileSpawnPoint)
     {
         // Play the firing animation (if any)
-        anim.SetTrigger("FireProjectile");
+        if (HasParameter("StandingAttack", anim))
+        {
+            anim.SetTrigger("FireProjectile");
+        }
 
         // Instantiate the projectile at the specified position and attach it to the weapon initially
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);

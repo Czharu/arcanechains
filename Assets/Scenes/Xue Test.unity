@@ -6595,7 +6595,7 @@ MonoBehaviour:
   jumpHeight: 22
   jumpStrength: 22
   enableStandAttack: 1
-  standAttackDistance: 0.7
+  standAttackDistance: 1.5
   enableRangedAttack: 0
   rangedAttackDistanceMin: 3
   rangedAttackDistanceMax: 17

@@ -53,6 +53,14 @@ public class EnemyAIGroundedChase : MonoBehaviour
         enemyChild = transform.GetChild(0); // Get the child GameObject (assuming it's the first child)
         childCollider = enemyChild.GetComponent<BoxCollider2D>(); // Get the child's BoxCollider2D
     }
+    private bool HasParameter(string paramName, Animator animator)// to get rid of animator parameter caution events
+    {
+        foreach (AnimatorControllerParameter param in animator.parameters)
+        {
+            if (param.name == paramName) return true;
+        }
+        return false;
+    }
 
     // Update is called once per frame
     private void FixedUpdate()
@@ -66,18 +74,20 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     if (distanceFromPlayer < -flipOffset && chasingRight)
                     {
                         chasingRight = false;
-                        if (!IsRoller){
-                        Flip();
+                        if (!IsRoller)
+                        {
+                            Flip();
                         }
-                        
+
                     }
                     else if (distanceFromPlayer > flipOffset && !chasingRight)
                     {
                         chasingRight = true;
-                        if (!IsRoller){
-                        Flip();
+                        if (!IsRoller)
+                        {
+                            Flip();
                         }
-                        
+
                     }
                     if (IsRoller)
                     {
@@ -85,7 +95,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     }
                     else
                     {
-                    rb.velocity = new Vector2(chasingRight ? moveSpeed : -moveSpeed, rb.velocity.y);// simplified movement direction code
+                        rb.velocity = new Vector2(chasingRight ? moveSpeed : -moveSpeed, rb.velocity.y);// simplified movement direction code
                     }
                 }
 
@@ -119,7 +129,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     isChasing = false;
                     anim.SetTrigger("RangedAttack"); // Trigger the initial ranged attack animation
                     StartCoroutine(RangedAttackCoroutine());
-                    
+
                 }
                 else
                 {
@@ -130,16 +140,22 @@ public class EnemyAIGroundedChase : MonoBehaviour
             {
                 if (jumpCooldown > 0) jumpCooldown--;
                 if (standAttackCooldown > 0) standAttackCooldown--;
-                
+
             }
             // Set the animation state
             if (isChasing)
             {
-                anim.SetBool("Chase", true);
+                if (HasParameter("Chase", anim))
+                {
+                    anim.SetBool("Chase", true);
+                }
             }
             else
             {
-                anim.SetBool("Chase", false);
+                if (HasParameter("Chase", anim))
+                {
+                    anim.SetBool("Chase", true);
+                }
             }
         }
     }
@@ -195,6 +211,9 @@ public class EnemyAIGroundedChase : MonoBehaviour
             attackHandler?.RangedAttack(projectilePrefab, projectileSpawnPoint);
             yield return new WaitForSeconds(timeBetweenProjectiles);
         }
-        anim.SetTrigger("RangedAttackFinished"); // Trigger the return bacck to normal
+        if (HasParameter("RangedAttackFinished", anim))
+        {
+            anim.SetTrigger("RangedAttackFinished"); // Trigger the return back to normal
+        }
     }
 }
