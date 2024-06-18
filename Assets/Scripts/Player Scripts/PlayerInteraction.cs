@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//The PlayerInteraction script updates the health bar and handles player death.
 public class PlayerInteraction : MonoBehaviour
 {
     private Animator anim;
@@ -21,8 +22,9 @@ public class PlayerInteraction : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         playerStats = GetComponent<PlayerStats>();
-        currentHealthPoints = maxHealthPoints;
-        healthBar.SetMaxHealth(maxHealthPoints);
+        currentHealthPoints = playerStats.maxHealth; // Initialize with max health from PlayerStats
+        healthBar.SetMaxHealth(playerStats.maxHealth);
+        healthBar.SetHealth(currentHealthPoints);
     }
 
     /* Update is called once per frame
@@ -32,17 +34,18 @@ public class PlayerInteraction : MonoBehaviour
     }
     */
 
-    public void Heal(int i){
-        playerStats.Heal(i);
-        healthBar.SetHealth(currentHealthPoints);
+    public void Heal(float amount)
+    {
+        playerStats.Heal(amount);
     }
 
-    public void Damage(int i){
-        playerStats.TakeDamage(i);
-        healthBar.SetHealth(playerStats.currentHealth);
-        if(playerStats.currentHealth <= 0){
-            DeathSequence();
-        }
+    public void Damage(float amount)
+    {
+        playerStats.TakeDamage(amount);
+    }
+    public void UpdateHealthBar(float currentHealth)
+    {
+        healthBar.SetHealth(currentHealth);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
@@ -51,7 +54,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private void DeathSequence(){
+    public void DeathSequence(){
         deathSoundEffect.Play();
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("death");

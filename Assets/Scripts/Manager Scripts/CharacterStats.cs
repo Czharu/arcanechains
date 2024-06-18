@@ -17,7 +17,7 @@ public class CharacterStats : MonoBehaviour
 
    }
 
-   public void TakeDamage(float damage){
+   public virtual void TakeDamage(float damage){
     if(calcHiterat() == true){
     damage -= armor.GetValue();
     damage = Mathf.Clamp(damage, 0, float.MaxValue);
@@ -29,7 +29,7 @@ public class CharacterStats : MonoBehaviour
    }
    }
 
-       public void Heal(float i){
+       public virtual void Heal(float i){
         if(currentHealth < maxHealth){
         currentHealth += i;
         }

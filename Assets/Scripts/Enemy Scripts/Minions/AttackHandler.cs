@@ -10,13 +10,25 @@ public class AttackHandler : MonoBehaviour
     [SerializeField] private float projectileGravity = 1f; // Gravity scale for the projectile
     [SerializeField] private float projectileForwardVelocity = 5f; // Forward velocity for the projectile
     [SerializeField] private bool flipProjectile180 = false; // Option to flip the projectile 180 degrees upon spawning
-
+    [SerializeField] private GameObject standAttackHitbox; // Reference to the hitbox GameObject
+    [SerializeField] private float standAttackDamageMulti = 1f; // Damage multiplier for stand attack
+    [SerializeField] private float standAttackTime = 0.5f; // Time before the hitbox is disabled if no damage is dealt
+    private CharacterStats enemyStats; // Reference to the enemy's stats
+    public float StandAttackDamageMulti { get { return standAttackDamageMulti; } } // Public property to access the multiplier
 
 
     void Start()
     {
         parentRb = GetComponentInParent<Rigidbody2D>(); // Get the Rigidbody2D component from the parent
         anim = GetComponent<Animator>(); // Initialize the Animator component
+        enemyStats = GetComponent<CharacterStats>(); // Initialize the enemy stats component
+        // Find the StandAttackHitbox child GameObject
+        standAttackHitbox = transform.Find("StandAttackHitbox")?.gameObject;
+        if (standAttackHitbox != null)
+        {
+            standAttackHitbox.SetActive(false); // Ensure hitbox is initially disabled
+            standAttackHitbox.GetComponent<Collider2D>().isTrigger = true; // Ensure it's a trigger collider
+        }
 
     }
     private bool HasParameter(string paramName, Animator animator)// to get rid of animator parameter caution events
@@ -75,9 +87,26 @@ public class AttackHandler : MonoBehaviour
                 }
             }
         }
+
+    }
+    public void AnimStandAttack()//called from an animation clip event
+    {
+        if (standAttackHitbox != null)
+        {
+            standAttackHitbox.SetActive(true);
+            StartCoroutine(DisableHitboxAfterTime(standAttackTime));
+        }
+    }
+    private IEnumerator DisableHitboxAfterTime(float time)//disable the damage hitbox after Time
+    {
+        yield return new WaitForSeconds(time);
+        if (standAttackHitbox != null)
+        {
+            standAttackHitbox.SetActive(false);
+        }
     }
 
-    public void EndStandAttack()//not needed yet
+    public void EndStandAttack()//not needed yet, possible combo attacks later
     {
         // Disable root motion after the standing attack
         //anim.applyRootMotion = false;
