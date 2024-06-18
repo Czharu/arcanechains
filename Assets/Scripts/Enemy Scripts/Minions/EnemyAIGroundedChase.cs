@@ -27,6 +27,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     //Stand attak also is the minimum distane that chase is deactivated at
     // Ranged attack settings
     [SerializeField] private bool enableRangedAttack = true; // Enable/Disable ranged attack
+    [SerializeField] private float RangedAttackAnimDelay = 0.5f; //Delay for a first ranged animation to play before ranged attack formation
     [SerializeField] private int rangedAttackDistanceMin = 3; // Minimum distance for ranged attack
     [SerializeField] private int rangedAttackDistanceMax = 17; // Maximum distance for ranged attack
     [SerializeField] private GameObject projectilePrefab; // Prefab for the projectile
@@ -128,7 +129,8 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     rangedAttackCooldown = 200; // Cooldown duration for the next ranged attack
                     isChasing = false;
                     anim.SetTrigger("RangedAttack"); // Trigger the initial ranged attack animation
-                    StartCoroutine(RangedAttackCoroutine());
+
+                    StartCoroutine(RangedAttackCoroutine(RangedAttackAnimDelay));
 
                 }
                 else
@@ -204,10 +206,12 @@ public class EnemyAIGroundedChase : MonoBehaviour
             rb.angularVelocity = -targetVelocity * 100; // Adjust multiplier as needed for smooth rolling
         }
     }
-    private IEnumerator RangedAttackCoroutine()
+    
+    private IEnumerator RangedAttackCoroutine(float delay)
     {
         for (int i = 0; i < numberOfProjectiles; i++)
         {
+            yield return new WaitForSeconds(delay);
             attackHandler?.RangedAttack(projectilePrefab, projectileSpawnPoint);
             yield return new WaitForSeconds(timeBetweenProjectiles);
         }
