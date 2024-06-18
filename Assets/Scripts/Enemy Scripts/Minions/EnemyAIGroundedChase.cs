@@ -24,6 +24,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     [SerializeField] private float jumpStrength = 5f; // Strength of the horizontal jump    
     [SerializeField] private bool enableStandAttack = true; // Enable/Disable standing attack
     [SerializeField] private int standAttackDistance = 2; // Distance at which the enemy performs standing attack
+    //Stand attak also is the minimum distane that chase is deactivated at
     // Ranged attack settings
     [SerializeField] private bool enableRangedAttack = true; // Enable/Disable ranged attack
     [SerializeField] private int rangedAttackDistanceMin = 3; // Minimum distance for ranged attack
@@ -42,6 +43,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     private Transform enemyChild;
     private BoxCollider2D childCollider; // Reference to the child's BoxCollider2D
     // Start is called before the first frame update
+    [SerializeField] private bool IsRoller = false; // Enable/Disable flip
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -64,14 +66,27 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     if (distanceFromPlayer < -flipOffset && chasingRight)
                     {
                         chasingRight = false;
+                        if (!IsRoller){
                         Flip();
+                        }
+                        
                     }
                     else if (distanceFromPlayer > flipOffset && !chasingRight)
                     {
                         chasingRight = true;
+                        if (!IsRoller){
                         Flip();
+                        }
+                        
                     }
+                    if (IsRoller)
+                    {
+                        Roll();
+                    }
+                    else
+                    {
                     rb.velocity = new Vector2(chasingRight ? moveSpeed : -moveSpeed, rb.velocity.y);// simplified movement direction code
+                    }
                 }
 
                 else
@@ -162,6 +177,15 @@ public class EnemyAIGroundedChase : MonoBehaviour
             Vector3 localScale = enemyChild.localScale;
             localScale.x = chasingRight ? Mathf.Abs(localScale.x) : -Mathf.Abs(localScale.x);
             enemyChild.localScale = localScale;
+        }
+    }
+    void Roll()
+    {
+        if (IsGrounded())
+        {
+            float targetVelocity = chasingRight ? moveSpeed : -moveSpeed;
+            rb.velocity = new Vector2(targetVelocity, rb.velocity.y);
+            rb.angularVelocity = -targetVelocity * 100; // Adjust multiplier as needed for smooth rolling
         }
     }
     private IEnumerator RangedAttackCoroutine()
