@@ -72,29 +72,32 @@ public class EnemyAIGroundedChase : MonoBehaviour
             {
                 if (isChasing) //revised code such that it calculates if the enemy should be flipped
                 {
-                    if (distanceFromPlayer < -flipOffset && chasingRight)
+                    if (IsGrounded()) // Ensure enemy only changes direction when grounded
                     {
-                        chasingRight = false;
-                        if (!IsRoller)
+                        if (distanceFromPlayer < -flipOffset && chasingRight)
                         {
-                            Flip();
-                        }
+                            chasingRight = false;
+                            if (!IsRoller)
+                            {
+                                Flip();
+                            }
 
-                    }
-                    else if (distanceFromPlayer > flipOffset && !chasingRight)
-                    {
-                        chasingRight = true;
-                        if (!IsRoller)
+                        }
+                        else if (distanceFromPlayer > flipOffset && !chasingRight)
                         {
-                            Flip();
-                        }
+                            chasingRight = true;
+                            if (!IsRoller)
+                            {
+                                Flip();
+                            }
 
+                        }
                     }
                     if (IsRoller)
                     {
                         Roll();
                     }
-                    else
+                    else if (IsGrounded())
                     {
                         rb.velocity = new Vector2(chasingRight ? moveSpeed : -moveSpeed, rb.velocity.y);// simplified movement direction code
                     }
@@ -189,6 +192,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
         }
     }
     void Flip()// flips the direction the enemy is facing when grounded based on side of the player it is
+    //slight issue, a small hop prevents flipping when the interaction is meant to keep the enemy moving same direction
     {
         if (IsGrounded())
         {
@@ -206,7 +210,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
             rb.angularVelocity = -targetVelocity * 100; // Adjust multiplier as needed for smooth rolling
         }
     }
-    
+
     private IEnumerator RangedAttackCoroutine(float delay)
     {
         for (int i = 0; i < numberOfProjectiles; i++)

@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private bool flip180; // Should the projectile be flipped 180 degrees?
     public float damage; // Damage value for the projectile
     [SerializeField] private LayerMask groundLayer; // Layer mask for the ground
+    [SerializeField] private bool impaleOnCollision = true; // Toggle to determine behavior on collision
 
     void Start()
     {
@@ -31,7 +32,7 @@ public class Projectile : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)//function to deal damage
     {
         // Check if the projectile hits the player
         if (collision.CompareTag("Player"))
@@ -40,17 +41,52 @@ public class Projectile : MonoBehaviour
             if (playerStats != null)
             {
                 playerStats.TakeDamage(damage);
-                Destroy(gameObject); // Destroy the projectile after dealing damage
+                if (impaleOnCollision) // **Check the toggle to determine behavior**
+                {
+                    ImpaleProjectile(collision.transform); // Impale the projectile on the player
+                }
+                else
+                {
+                    Destroy(gameObject); // Destroy the projectile after dealing damage
+                }
             }
         }
         else if (IsGroundLayer(collision.gameObject))
         {
-            Destroy(gameObject); // Destroy the projectile if it hits the ground
+            if (impaleOnCollision) // **Check the toggle to determine behavior**
+                {
+                    ImpaleProjectile(collision.transform); // Impale the projectile on the player
+                }
+                else
+                {
+                    Destroy(gameObject); // Destroy the projectile after dealing damage
+                }
         }
     }
     private bool IsGroundLayer(GameObject obj)
     {
         // Check if the object is in the ground layer
         return (groundLayer.value & (1 << obj.layer)) > 0;
+    }
+    private void ImpaleProjectile(Transform target)
+    {
+        // Make the projectile a child of the target object
+        transform.parent = target;
+
+        // Disable Rigidbody2D to stop any further physics interactions
+        rb.isKinematic = true;
+        rb.velocity = Vector2.zero;
+
+        // Optionally, disable the collider to stop any further collisions
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+        {
+            col.enabled = false;
+        }
+
+        // Optionally, disable any scripts or components that should no longer be active
+
+        // (e.g., you might want to disable this script itself)
+        this.enabled = false;
     }
 }
