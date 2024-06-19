@@ -5277,7 +5277,7 @@ GameObject:
   - component: {fileID: 1289190169}
   - component: {fileID: 1289190174}
   - component: {fileID: 1289190173}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: One Way Platform
   m_TagString: OneWayPlatform
   m_Icon: {fileID: 0}

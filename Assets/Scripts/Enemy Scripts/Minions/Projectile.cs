@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     public float damage; // Damage value for the projectile
     [SerializeField] private LayerMask groundLayer; // Layer mask for the ground
     [SerializeField] private bool impaleOnCollision = true; // Toggle to determine behavior on collision
+    private string poolTag;
 
     void Start()
     {
@@ -41,26 +42,26 @@ public class Projectile : MonoBehaviour
             if (playerStats != null)
             {
                 playerStats.TakeDamage(damage);
-                if (impaleOnCollision) // **Check the toggle to determine behavior**
+                if (impaleOnCollision) // Check the toggle to determine behavior
                 {
                     ImpaleProjectile(collision.transform); // Impale the projectile on the player
                 }
                 else
                 {
-                    Destroy(gameObject); // Destroy the projectile after dealing damage
+                    ReturnToPool(); // Deactivate the projectile after dealing damage
                 }
             }
         }
         else if (IsGroundLayer(collision.gameObject))
         {
-            if (impaleOnCollision) // **Check the toggle to determine behavior**
-                {
-                    ImpaleProjectile(collision.transform); // Impale the projectile on the player
-                }
-                else
-                {
-                    Destroy(gameObject); // Destroy the projectile after dealing damage
-                }
+            if (impaleOnCollision) // Check the toggle to determine behavior
+            {
+                ImpaleProjectile(collision.transform); // Impale the projectile on the ground
+            }
+            else
+            {
+                ReturnToPool(); // Deactivate the projectile if it hits the ground
+            }
         }
     }
     private bool IsGroundLayer(GameObject obj)
@@ -87,6 +88,27 @@ public class Projectile : MonoBehaviour
         // Optionally, disable any scripts or components that should no longer be active
 
         // (e.g., you might want to disable this script itself)
-        this.enabled = false;
+        //this.enabled = false;
+    }
+    public void ResetProjectile()
+    {
+        // Reset any properties if necessary
+        rb.isKinematic = false;
+        rb.velocity = Vector2.zero;
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+        {
+            col.enabled = true;
+        }
+        this.enabled = true;
+        transform.parent = null; // Ensure the projectile is detached from any previous parent
+    }
+    public void SetPoolTag(string tag)
+    {
+        poolTag = tag;
+    }
+    private void ReturnToPool()
+    {
+        ObjectPooler.Instance.ReturnToPool(poolTag, gameObject);
     }
 }

@@ -119,26 +119,22 @@ public class AttackHandler : MonoBehaviour
     private IEnumerator RangedAttackCoroutine(GameObject projectilePrefab, Transform projectileSpawnPoint, bool facingRight)
     {
         // Play the firing animation (if any)
-        if (HasParameter("StandingAttack", anim))
+        if (HasParameter("FireProjectile", anim))
         {
             anim.SetTrigger("FireProjectile");
         }
 
         // Instantiate the projectile at the specified position and attach it to the weapon initially
-        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
-        projectile.transform.parent = projectileSpawnPoint;
+        GameObject projectile = ObjectPooler.Instance.SpawnFromPool(projectilePrefab.tag, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+        
+        projectile.transform.parent = projectileSpawnPoint; // Reattach to the spawn point
 
         // Adjust the initial rotation if needed
         if (flipProjectile180)
         {
             projectile.transform.Rotate(0, 0, 180);
         }
-        // Set the damage value on the projectile
-        Projectile projScript = projectile.GetComponent<Projectile>();
-        if (projScript != null)
-        {
-            projScript.damage = enemyStats.damage.GetValue();
-        }
+        
 
         // Get the projectile's Rigidbody2D component
         Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
@@ -150,6 +146,15 @@ public class AttackHandler : MonoBehaviour
 
         // Wait for the specified delay before firing the projectile
         yield return new WaitForSeconds(projectileDelay);
+
+        // Set the damage value on the projectile
+        Projectile projScript = projectile.GetComponent<Projectile>();
+        if (projScript != null)
+        {
+            projScript.ResetProjectile();
+            projScript.damage = enemyStats.damage.GetValue();
+            projScript.SetPoolTag(projectilePrefab.tag); // Set the pool tag for the projectile
+        }
 
         // Detach the projectile from the spawn point
         projectile.transform.parent = null;
@@ -173,8 +178,9 @@ public class AttackHandler : MonoBehaviour
             // Set initial forward velocity
             float direction = transform.localScale.x > 0 ? 1 : -1; // Determine the direction based on the scale
             projectileRb.velocity = projectile.transform.right * projectileForwardVelocity;
-            // Set initial velocity or force here
-            // Example: projectileRb.velocity = new Vector2(speed, 0);
+            // Set initial 
+            // 
+
         }
 
     }

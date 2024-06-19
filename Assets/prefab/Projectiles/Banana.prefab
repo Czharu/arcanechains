@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7995094406262473175}
   m_Layer: 0
   m_Name: Banana
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  impaleOnCollision: 1
 --- !u!58 &7995094406262473175
 CircleCollider2D:
   m_ObjectHideFlags: 0
