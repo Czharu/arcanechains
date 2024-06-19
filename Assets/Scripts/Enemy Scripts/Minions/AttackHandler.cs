@@ -133,6 +133,12 @@ public class AttackHandler : MonoBehaviour
         {
             projectile.transform.Rotate(0, 0, 180);
         }
+        // Set the damage value on the projectile
+        Projectile projScript = projectile.GetComponent<Projectile>();
+        if (projScript != null)
+        {
+            projScript.damage = enemyStats.damage.GetValue();
+        }
 
         // Get the projectile's Rigidbody2D component
         Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
