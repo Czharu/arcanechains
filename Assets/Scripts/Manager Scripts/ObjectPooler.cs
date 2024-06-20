@@ -52,11 +52,21 @@ public class ObjectPooler : MonoBehaviour
             return null;
         }
 
-        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
-        if (objectToSpawn.activeSelf)
+        RecycleImpaledProjectiles(tag); // Recycles impaled projectiles first
+
+
+        if (IsPoolFullyUtilized(tag)) // Check if the whole pool is used up
         {
-            RecycleOldestActiveObject(tag);
+            ExpandPool(tag, prefab);
         }
+
+        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        //if (objectToSpawn.activeSelf)
+        //{
+        //    Debug.LogWarning("Object to spawn is active, expanding pool again.");
+        //    ExpandPool(tag, prefab);
+        //    objectToSpawn = poolDictionary[tag].Dequeue();
+        //}
 
         // Update the objectToSpawn's components to match the prefab
         UpdateComponents(objectToSpawn, prefab);
@@ -74,10 +84,69 @@ public class ObjectPooler : MonoBehaviour
 
         activeObjectsDictionary[tag].Add(objectToSpawn);
 
-        poolDictionary[tag].Enqueue(objectToSpawn);
+        //poolDictionary[tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
     }
+
+    private void ExpandPool(string tag, GameObject prefab)
+    {
+        if (!poolDictionary.ContainsKey(tag))
+        {
+            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
+            return;
+        }
+
+        Queue<GameObject> objectPool = poolDictionary[tag];
+
+        for (int i = 0; i < 1; i++) // You can adjust the number of objects to add each time the pool expands
+        {
+            GameObject obj = Instantiate(prefab);
+            obj.SetActive(false);
+            objectPool.Enqueue(obj);
+        }
+
+        Debug.Log("Expanded pool with tag: " + tag);
+    }
+
+    private bool IsPoolFullyUtilized(string tag)
+    {
+        if (!poolDictionary.ContainsKey(tag))
+        {
+            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
+            return false;
+        }
+
+        // Check if all objects in the pool are active
+        foreach (var obj in poolDictionary[tag])
+        {
+            if (!obj.activeInHierarchy)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void RecycleImpaledProjectiles(string tag)//recycleimpaledprojectiles
+    {
+        if (activeObjectsDictionary.ContainsKey(tag))
+        {
+            List<GameObject> activeObjects = activeObjectsDictionary[tag];
+            for (int i = 0; i < activeObjects.Count; i++)
+            {
+                GameObject obj = activeObjects[i];
+                var projectile = obj.GetComponent<Projectile>();
+                if (projectile != null && projectile.isImpaled) // Check if the projectile is impaled
+                {
+                    projectile.ResetProjectile(); // Reset and deactivate the projectile
+                    ReturnToPool(tag, obj); // Return it to the pool
+                    break;
+                }
+            }
+        }
+    }
+
 
     private void UpdateComponents(GameObject objectToSpawn, GameObject prefab)
     {
@@ -114,6 +183,7 @@ public class ObjectPooler : MonoBehaviour
             projectile.groundLayer = prefabProjectile.groundLayer;
             projectile.impaleOnCollision = prefabProjectile.impaleOnCollision;
             projectile.damage = prefabProjectile.damage;
+            projectile.isImpaled = prefabProjectile.isImpaled;
         }
 
         // Update CapsuleCollider2D
@@ -162,15 +232,15 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    private void RecycleOldestActiveObject(string tag)
-    {
-        if (activeObjectsDictionary[tag].Count > 0)
-        {
-            GameObject oldestObject = activeObjectsDictionary[tag][0];
-            oldestObject.SetActive(false);
-            activeObjectsDictionary[tag].RemoveAt(0);
-        }
-    }
+    //private void RecycleOldestActiveObject(string tag)
+    //{
+    //    if (activeObjectsDictionary[tag].Count > 0)
+    //    {
+            //GameObject oldestObject = activeObjectsDictionary[tag][0];
+            //oldestObject.SetActive(false);
+            //activeObjectsDictionary[tag].RemoveAt(0);
+        //}
+    //}
 
     public void ReturnToPool(string tag, GameObject objectToReturn)
     {
@@ -185,5 +255,6 @@ public class ObjectPooler : MonoBehaviour
             activeObjectsDictionary[tag].Remove(objectToReturn);
         }
         objectToReturn.SetActive(false);
+        poolDictionary[tag].Enqueue(objectToReturn); // Ensure returned object is added back to the pool
     }
 }

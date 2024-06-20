@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] public LayerMask groundLayer; // Layer mask for the ground
     [SerializeField] public bool impaleOnCollision = true; // Toggle to determine behavior on collision
     [SerializeField] private string poolTag;
+    public bool isImpaled = false; // Flag to indicate if the projectile is impaled
 
     void Start()
     {
@@ -50,7 +51,7 @@ public class Projectile : MonoBehaviour
                 else
                 {
                     ReturnToPool(); // Deactivate the projectile after dealing damage
-                    Debug.Log(poolTag);
+                    //Debug.Log(poolTag);
                 }
             }
         }
@@ -63,7 +64,7 @@ public class Projectile : MonoBehaviour
             else
             {
                 ReturnToPool(); // Deactivate the projectile if it hits the ground
-                Debug.Log(poolTag);
+                //Debug.Log(poolTag);
             }
         }
     }
@@ -90,6 +91,8 @@ public class Projectile : MonoBehaviour
             col.enabled = false;
         }
 
+        isImpaled = true; // Flag to indicate if the projectile is impaled
+
         // Optionally, disable any scripts or components that should no longer be active
 
         // (e.g., you might want to disable this script itself)
@@ -108,6 +111,7 @@ public class Projectile : MonoBehaviour
         }
         this.enabled = true;
         transform.parent = null; // Ensure the projectile is detached from any previous parent
+        isImpaled = false; // Reset the impaled flag 
     }
 
     public void SetPoolTag(string tag)

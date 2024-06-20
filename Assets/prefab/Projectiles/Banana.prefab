@@ -131,8 +131,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  impaleOnCollision: 0
+  impaleOnCollision: 1
   poolTag: Projectile
+  isImpaled: 0
 --- !u!70 &3676922670858840354
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
