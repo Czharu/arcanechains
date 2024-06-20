@@ -44,8 +44,7 @@ public class ObjectPooler : MonoBehaviour
             activeObjectsDictionary.Add(pool.tag, activeObjects);
         }
     }
-
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation, GameObject prefab)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
@@ -58,9 +57,20 @@ public class ObjectPooler : MonoBehaviour
         {
             RecycleOldestActiveObject(tag);
         }
+
+        // Update the objectToSpawn's components to match the prefab
+        UpdateComponents(objectToSpawn, prefab);
+
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
+
+        // Set the pool tag for the objectToSpawn
+        var projectile = objectToSpawn.GetComponent<Projectile>();
+        if (projectile != null)
+        {
+            projectile.SetPoolTag(tag);
+        }
 
         activeObjectsDictionary[tag].Add(objectToSpawn);
 
@@ -68,6 +78,90 @@ public class ObjectPooler : MonoBehaviour
 
         return objectToSpawn;
     }
+
+    private void UpdateComponents(GameObject objectToSpawn, GameObject prefab)
+    {
+        // Update SpriteRenderer
+        var spriteRenderer = objectToSpawn.GetComponent<SpriteRenderer>();
+        var prefabSpriteRenderer = prefab.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null && prefabSpriteRenderer != null)
+        {
+            spriteRenderer.sprite = prefabSpriteRenderer.sprite;
+            spriteRenderer.color = prefabSpriteRenderer.color;
+            spriteRenderer.flipX = prefabSpriteRenderer.flipX;
+            spriteRenderer.flipY = prefabSpriteRenderer.flipY;
+        }
+
+        // Update Rigidbody2D
+        var rigidbody2D = objectToSpawn.GetComponent<Rigidbody2D>();
+        var prefabRigidbody2D = prefab.GetComponent<Rigidbody2D>();
+        if (rigidbody2D != null && prefabRigidbody2D != null)
+        {
+            rigidbody2D.gravityScale = prefabRigidbody2D.gravityScale;
+            rigidbody2D.mass = prefabRigidbody2D.mass;
+            rigidbody2D.drag = prefabRigidbody2D.drag;
+            rigidbody2D.angularDrag = prefabRigidbody2D.angularDrag;
+            rigidbody2D.interpolation = prefabRigidbody2D.interpolation;
+            rigidbody2D.constraints = prefabRigidbody2D.constraints;
+        }
+
+        // Update Projectile script
+        var projectile = objectToSpawn.GetComponent<Projectile>();
+        var prefabProjectile = prefab.GetComponent<Projectile>();
+        if (projectile != null && prefabProjectile != null)
+        {
+            projectile.flip180 = prefabProjectile.flip180;
+            projectile.groundLayer = prefabProjectile.groundLayer;
+            projectile.impaleOnCollision = prefabProjectile.impaleOnCollision;
+            projectile.damage = prefabProjectile.damage;
+        }
+
+        // Update CapsuleCollider2D
+        var collider2D = objectToSpawn.GetComponent<CapsuleCollider2D>();
+        var prefabCollider2D = prefab.GetComponent<CapsuleCollider2D>();
+        if (collider2D != null && prefabCollider2D != null)
+        {
+            collider2D.size = prefabCollider2D.size;
+            collider2D.offset = prefabCollider2D.offset;
+            collider2D.direction = prefabCollider2D.direction;
+        }
+
+        // Disable any components not present on the prefab
+        DisableExtraComponents(objectToSpawn, prefab);
+    }
+
+    private void DisableExtraComponents(GameObject objectToSpawn, GameObject prefab)
+    {
+        var componentsToSpawn = objectToSpawn.GetComponents<Component>();
+        var componentsInPrefab = prefab.GetComponents<Component>();
+
+        foreach (var component in componentsToSpawn)
+        {
+            bool found = false;
+            foreach (var prefabComponent in componentsInPrefab)
+            {
+                if (component.GetType() == prefabComponent.GetType())
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                if (component is Behaviour behaviour)
+                {
+                    behaviour.enabled = false;
+                }
+                else if (component is Collider2D collider)
+                {
+                    collider.enabled = false;
+                }
+                // Add more checks if needed
+            }
+        }
+    }
+
     private void RecycleOldestActiveObject(string tag)
     {
         if (activeObjectsDictionary[tag].Count > 0)
@@ -77,8 +171,15 @@ public class ObjectPooler : MonoBehaviour
             activeObjectsDictionary[tag].RemoveAt(0);
         }
     }
+
     public void ReturnToPool(string tag, GameObject objectToReturn)
     {
+        if (string.IsNullOrEmpty(tag))
+        {
+            Debug.LogWarning("Trying to return an object to the pool with an empty or null tag.");
+            return;
+        }
+
         if (activeObjectsDictionary.ContainsKey(tag))
         {
             activeObjectsDictionary[tag].Remove(objectToReturn);

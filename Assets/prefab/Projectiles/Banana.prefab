@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2112396001542897628}
   - component: {fileID: 8937493979919919579}
   - component: {fileID: 5832032121798826280}
-  - component: {fileID: 7995094406262473175}
+  - component: {fileID: 3676922670858840354}
   m_Layer: 0
   m_Name: Banana
   m_TagString: Projectile
@@ -131,9 +131,10 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  impaleOnCollision: 1
---- !u!58 &7995094406262473175
-CircleCollider2D:
+  impaleOnCollision: 0
+  poolTag: Projectile
+--- !u!70 &3676922670858840354
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -147,7 +148,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1840
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -164,6 +165,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09955734, y: 0.0037568808}
-  serializedVersion: 2
-  m_Radius: 0.4342546
+  m_Offset: {x: -0.124353155, y: 0.024291415}
+  m_Size: {x: 0.89528006, y: 0.61751884}
+  m_Direction: 1

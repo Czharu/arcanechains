@@ -16,7 +16,6 @@ public class AttackHandler : MonoBehaviour
     private CharacterStats enemyStats; // Reference to the enemy's stats
     public float StandAttackDamageMulti { get { return standAttackDamageMulti; } } // Public property to access the multiplier
 
-
     void Start()
     {
         parentRb = GetComponentInParent<Rigidbody2D>(); // Get the Rigidbody2D component from the parent
@@ -31,6 +30,7 @@ public class AttackHandler : MonoBehaviour
         }
 
     }
+
     private bool HasParameter(string paramName, Animator animator)// to get rid of animator parameter caution events
     {
         foreach (AnimatorControllerParameter param in animator.parameters)
@@ -39,7 +39,6 @@ public class AttackHandler : MonoBehaviour
         }
         return false;
     }
-
 
     public void JumpAttack(Vector2 targetPosition, int jumpHeight, float jumpStrength)
     {
@@ -54,9 +53,9 @@ public class AttackHandler : MonoBehaviour
             {
                 anim.SetTrigger("JumpAttack"); // Trigger the JumpAttack animation
             }
-
         }
     }
+
     public void StandAttack()
     {
         // Stop the enemy's movement alternative
@@ -87,8 +86,8 @@ public class AttackHandler : MonoBehaviour
                 }
             }
         }
-
     }
+
     public void AnimStandAttack()//called from an animation clip event
     {
         if (standAttackHitbox != null)
@@ -97,6 +96,7 @@ public class AttackHandler : MonoBehaviour
             StartCoroutine(DisableHitboxAfterTime(standAttackTime));
         }
     }
+
     private IEnumerator DisableHitboxAfterTime(float time)//disable the damage hitbox after Time
     {
         yield return new WaitForSeconds(time);
@@ -116,6 +116,7 @@ public class AttackHandler : MonoBehaviour
     {
         StartCoroutine(RangedAttackCoroutine(projectilePrefab, projectileSpawnPoint, facingRight));
     }
+
     private IEnumerator RangedAttackCoroutine(GameObject projectilePrefab, Transform projectileSpawnPoint, bool facingRight)
     {
         // Play the firing animation (if any)
@@ -125,8 +126,13 @@ public class AttackHandler : MonoBehaviour
         }
 
         // Instantiate the projectile at the specified position and attach it to the weapon initially
-        GameObject projectile = ObjectPooler.Instance.SpawnFromPool(projectilePrefab.tag, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+        GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectile", projectileSpawnPoint.position, projectileSpawnPoint.rotation, projectilePrefab);
+
         
+        Projectile projScript = projectile.GetComponent<Projectile>();
+        if (projScript != null){
+            projScript.SetPoolTag("Projectile"); // Set the pool tag for the projectile
+        }
         projectile.transform.parent = projectileSpawnPoint; // Reattach to the spawn point
 
         // Adjust the initial rotation if needed
@@ -134,13 +140,12 @@ public class AttackHandler : MonoBehaviour
         {
             projectile.transform.Rotate(0, 0, 180);
         }
-        
 
         // Get the projectile's Rigidbody2D component
         Rigidbody2D projectileRb = projectile.GetComponent<Rigidbody2D>();
         if (projectileRb != null)
         {
-            // **Set the Rigidbody2D to kinematic mode initially**
+            // Set the Rigidbody2D to kinematic mode initially
             projectileRb.isKinematic = true;
         }
 
@@ -148,12 +153,12 @@ public class AttackHandler : MonoBehaviour
         yield return new WaitForSeconds(projectileDelay);
 
         // Set the damage value on the projectile
-        Projectile projScript = projectile.GetComponent<Projectile>();
+        
         if (projScript != null)
         {
             projScript.ResetProjectile();
             projScript.damage = enemyStats.damage.GetValue();
-            projScript.SetPoolTag(projectilePrefab.tag); // Set the pool tag for the projectile
+            projScript.SetPoolTag("Projectile"); // Set the pool tag for the projectile
         }
 
         // Detach the projectile from the spawn point
@@ -170,7 +175,7 @@ public class AttackHandler : MonoBehaviour
 
         if (projectileRb != null)
         {
-            // **Set the Rigidbody2D to dynamic mode to apply gravity**
+            // Set the Rigidbody2D to dynamic mode to apply gravity
             projectileRb.isKinematic = false;
             // Set gravity scale
             projectileRb.gravityScale = projectileGravity;
@@ -178,11 +183,7 @@ public class AttackHandler : MonoBehaviour
             // Set initial forward velocity
             float direction = transform.localScale.x > 0 ? 1 : -1; // Determine the direction based on the scale
             projectileRb.velocity = projectile.transform.right * projectileForwardVelocity;
-            // Set initial 
-            // 
-
         }
-
     }
 
     private bool IsGrounded()//trigger box collider to check if grounded for jump
@@ -190,5 +191,4 @@ public class AttackHandler : MonoBehaviour
         BoxCollider2D coll = GetComponent<BoxCollider2D>();
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .2f, LayerMask.GetMask("Ground"));
     }
-
 }

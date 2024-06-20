@@ -5,11 +5,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private Rigidbody2D rb;
-    [SerializeField] private bool flip180; // Should the projectile be flipped 180 degrees?
+    [SerializeField] public bool flip180; // Should the projectile be flipped 180 degrees?
     public float damage; // Damage value for the projectile
-    [SerializeField] private LayerMask groundLayer; // Layer mask for the ground
-    [SerializeField] private bool impaleOnCollision = true; // Toggle to determine behavior on collision
-    private string poolTag;
+    [SerializeField] public LayerMask groundLayer; // Layer mask for the ground
+    [SerializeField] public bool impaleOnCollision = true; // Toggle to determine behavior on collision
+    [SerializeField] private string poolTag;
 
     void Start()
     {
@@ -33,6 +33,7 @@ public class Projectile : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)//function to deal damage
     {
         // Check if the projectile hits the player
@@ -49,6 +50,7 @@ public class Projectile : MonoBehaviour
                 else
                 {
                     ReturnToPool(); // Deactivate the projectile after dealing damage
+                    Debug.Log(poolTag);
                 }
             }
         }
@@ -61,14 +63,17 @@ public class Projectile : MonoBehaviour
             else
             {
                 ReturnToPool(); // Deactivate the projectile if it hits the ground
+                Debug.Log(poolTag);
             }
         }
     }
+
     private bool IsGroundLayer(GameObject obj)
     {
         // Check if the object is in the ground layer
         return (groundLayer.value & (1 << obj.layer)) > 0;
     }
+
     private void ImpaleProjectile(Transform target)
     {
         // Make the projectile a child of the target object
@@ -90,6 +95,7 @@ public class Projectile : MonoBehaviour
         // (e.g., you might want to disable this script itself)
         //this.enabled = false;
     }
+
     public void ResetProjectile()
     {
         // Reset any properties if necessary
@@ -103,12 +109,20 @@ public class Projectile : MonoBehaviour
         this.enabled = true;
         transform.parent = null; // Ensure the projectile is detached from any previous parent
     }
+
     public void SetPoolTag(string tag)
     {
         poolTag = tag;
     }
+
     private void ReturnToPool()
     {
+        if (string.IsNullOrEmpty(poolTag))
+        {
+            Debug.LogWarning("Pool tag is not set for projectile.");
+            //Debug.Log(poolTag);
+            return;
+        }
         ObjectPooler.Instance.ReturnToPool(poolTag, gameObject);
     }
 }

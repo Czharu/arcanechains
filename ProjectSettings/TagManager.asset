@@ -15,6 +15,7 @@ TagManager:
   - DoorRight
   - DoorDown
   - DoorLeft
+  - Projectile
   layers:
   - Default
   - TransparentFX
