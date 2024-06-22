@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StandAttackHitbox : MonoBehaviour
+//Script to disable the hitbox after dealing damage, stats pulled from the parent attackhandler
 {
     private AttackHandler attackHandler;
 

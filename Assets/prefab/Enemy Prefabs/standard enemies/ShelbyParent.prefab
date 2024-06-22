@@ -209,7 +209,7 @@ MonoBehaviour:
   projectileGravity: 0
   projectileForwardVelocity: 5
   flipProjectile180: 0
-  standAttackHitbox: {fileID: 0}
+  standAttackHitbox: {fileID: 7673970075946592253}
   standAttackDamageMulti: 1
   standAttackTime: 0.5
 --- !u!114 &4869226796819682208
@@ -474,6 +474,7 @@ MonoBehaviour:
   enableStandAttack: 1
   standAttackDistance: 1.5
   enableRangedAttack: 0
+  RangedAttackAnimDelay: 0.5
   rangedAttackDistanceMin: 3
   rangedAttackDistanceMax: 17
   projectilePrefab: {fileID: 0}

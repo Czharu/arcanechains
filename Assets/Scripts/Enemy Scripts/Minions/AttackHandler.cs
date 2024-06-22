@@ -15,6 +15,7 @@ public class AttackHandler : MonoBehaviour
     [SerializeField] private float standAttackTime = 0.5f; // Time before the hitbox is disabled if no damage is dealt
     private CharacterStats enemyStats; // Reference to the enemy's stats
     public float StandAttackDamageMulti { get { return standAttackDamageMulti; } } // Public property to access the multiplier
+    
 
     void Start()
     {
@@ -22,7 +23,7 @@ public class AttackHandler : MonoBehaviour
         anim = GetComponent<Animator>(); // Initialize the Animator component
         enemyStats = GetComponent<CharacterStats>(); // Initialize the enemy stats component
         // Find the StandAttackHitbox child GameObject
-        standAttackHitbox = transform.Find("StandAttackHitbox")?.gameObject;
+        //standAttackHitbox = transform.Find("StandAttackHitbox")?.gameObject; this has a performance hit instead of assigning it in inspector
         if (standAttackHitbox != null)
         {
             standAttackHitbox.SetActive(false); // Ensure hitbox is initially disabled
@@ -88,8 +89,9 @@ public class AttackHandler : MonoBehaviour
         }
     }
 
-    public void AnimStandAttack()//called from an animation clip event
+    public void AnimStandAttack()//called from an animation clip event that finds the child "StandAttackHitbox" and enables it so it can trigger damage
     {
+        //Debug.Log("connect");
         if (standAttackHitbox != null)
         {
             standAttackHitbox.SetActive(true);
@@ -97,7 +99,7 @@ public class AttackHandler : MonoBehaviour
         }
     }
 
-    private IEnumerator DisableHitboxAfterTime(float time)//disable the damage hitbox after Time
+    private IEnumerator DisableHitboxAfterTime(float time)//disable the damage hitbox after Time, can be changed to be called from animation lip if needed
     {
         yield return new WaitForSeconds(time);
         if (standAttackHitbox != null)
