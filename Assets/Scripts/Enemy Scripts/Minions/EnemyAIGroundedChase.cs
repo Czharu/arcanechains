@@ -8,7 +8,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
     public Transform playerTransform; // Reference to the player's transform
     private bool isChasing;
 
-    public bool chasingRight = true;
+    public bool chasingRight = true; //this is used as a debug. if the enemy's initial landing doesn't flip set this.
     public float chaseDistance = 7f; // Distance at which the enemy starts chasing
     private Rigidbody2D rb;
     private BoxCollider2D coll;

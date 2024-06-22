@@ -211,7 +211,7 @@ MonoBehaviour:
   flipProjectile180: 0
   standAttackHitbox: {fileID: 7673970075946592253}
   standAttackDamageMulti: 1
-  standAttackTime: 0.5
+  standAttackTime: 0.25
 --- !u!114 &4869226796819682208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,7 +355,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -374,7 +374,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.040228844, y: -0.05883932}
   serializedVersion: 2
-  m_Radius: 1.3315792
+  m_Radius: 1.5
 --- !u!114 &7315792458991824319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +433,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 6.355766
+  m_Mass: 7.8539815
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1

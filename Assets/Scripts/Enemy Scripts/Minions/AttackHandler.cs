@@ -15,7 +15,7 @@ public class AttackHandler : MonoBehaviour
     [SerializeField] private float standAttackTime = 0.5f; // Time before the hitbox is disabled if no damage is dealt
     private CharacterStats enemyStats; // Reference to the enemy's stats
     public float StandAttackDamageMulti { get { return standAttackDamageMulti; } } // Public property to access the multiplier
-    
+
 
     void Start()
     {
@@ -92,11 +92,23 @@ public class AttackHandler : MonoBehaviour
     public void AnimStandAttack()//called from an animation clip event that finds the child "StandAttackHitbox" and enables it so it can trigger damage
     {
         //Debug.Log("connect");
+        Collider2D hitboxCollider = standAttackHitbox.GetComponent<Collider2D>();
+        if (hitboxCollider != null)
+        {
+            hitboxCollider.enabled = false;
+            StartCoroutine(ReEnableCollider(hitboxCollider));
+        }
         if (standAttackHitbox != null)
         {
             standAttackHitbox.SetActive(true);
             StartCoroutine(DisableHitboxAfterTime(standAttackTime));
         }
+    }
+    private IEnumerator ReEnableCollider(Collider2D collider)// this is needed to fix a bug where if the player and the hitbox collider have not moved the player only takes one instance of damage and ignores future ones
+    {
+        // Wait for a frame to ensure the collider is re-enabled in the next physics update
+        yield return null;
+        collider.enabled = true;
     }
 
     private IEnumerator DisableHitboxAfterTime(float time)//disable the damage hitbox after Time, can be changed to be called from animation lip if needed
@@ -130,9 +142,10 @@ public class AttackHandler : MonoBehaviour
         // Instantiate the projectile at the specified position and attach it to the weapon initially
         GameObject projectile = ObjectPooler.Instance.SpawnFromPool("Projectile", projectileSpawnPoint.position, projectileSpawnPoint.rotation, projectilePrefab);
 
-        
+
         Projectile projScript = projectile.GetComponent<Projectile>();
-        if (projScript != null){
+        if (projScript != null)
+        {
             projScript.SetPoolTag("Projectile"); // Set the pool tag for the projectile
         }
         projectile.transform.parent = projectileSpawnPoint; // Reattach to the spawn point
@@ -155,7 +168,7 @@ public class AttackHandler : MonoBehaviour
         yield return new WaitForSeconds(projectileDelay);
 
         // Set the damage value on the projectile
-        
+
         if (projScript != null)
         {
             projScript.ResetProjectile();
