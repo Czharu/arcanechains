@@ -8,6 +8,13 @@ public class PivotAimRangedWeapon : MonoBehaviour
     public Transform rangedWeaponPivot; // Reference to the pivot point
     public Transform crossbowTipTransform; // Reference to the tip of the crossbow
 
+    
+    void Start()
+    {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;//find player, an be set in inspector instead for performance if needed
+ 
+    }
+
     void Update()
     {
         if (playerTransform != null && rangedWeaponPivot != null && crossbowTipTransform != null)

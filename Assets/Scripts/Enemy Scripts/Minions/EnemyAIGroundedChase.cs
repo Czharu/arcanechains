@@ -52,7 +52,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
         anim = GetComponentInChildren<Animator>(); // Initialize the Animator component
         attackHandler = GetComponentInChildren<AttackHandler>(); // Get the AttackHandler component
         enemyChild = transform.GetChild(0); // Get the child GameObject (assuming it's the first child)
-        childCollider = enemyChild.GetComponent<BoxCollider2D>(); // Get the child's BoxCollider2D
+        childCollider = enemyChild.GetComponent<BoxCollider2D>(); // Get the child's BoxCollider2D        
     }
     private bool HasParameter(string paramName, Animator animator)// to get rid of animator parameter caution events
     {
@@ -131,7 +131,10 @@ public class EnemyAIGroundedChase : MonoBehaviour
                 {
                     rangedAttackCooldown = 200; // Cooldown duration for the next ranged attack
                     isChasing = false;
-                    anim.SetTrigger("RangedAttack"); // Trigger the initial ranged attack animation
+                    if (HasParameter("RangedAttack", anim))
+                    {
+                        anim.SetTrigger("RangedAttack"); // Trigger the initial ranged attack animation
+                    }
 
                     StartCoroutine(RangedAttackCoroutine(RangedAttackAnimDelay));
 

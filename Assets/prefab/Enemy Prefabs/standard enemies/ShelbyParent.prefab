@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0605d8b855c254f42a6636f013e360f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 8
   playerTransform: {fileID: 0}
   chasingRight: 1
   chaseDistance: 20
