@@ -146,6 +146,7 @@ public class AttackHandler : MonoBehaviour
         Projectile projScript = projectile.GetComponent<Projectile>();
         if (projScript != null)
         {
+            projScript.isFiring = false; // Set isFiring to false initially
             projScript.SetPoolTag("Projectile"); // Set the pool tag for the projectile
         }
         projectile.transform.parent = projectileSpawnPoint; // Reattach to the spawn point
@@ -171,6 +172,7 @@ public class AttackHandler : MonoBehaviour
 
         if (projScript != null)
         {
+            projScript.isFiring = true; // Set isFiring to true after delay
             projScript.ResetProjectile();
             projScript.damage = enemyStats.damage.GetValue();
             projScript.SetPoolTag("Projectile"); // Set the pool tag for the projectile

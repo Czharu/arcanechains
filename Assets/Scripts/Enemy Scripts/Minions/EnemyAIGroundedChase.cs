@@ -45,6 +45,8 @@ public class EnemyAIGroundedChase : MonoBehaviour
     private BoxCollider2D childCollider; // Reference to the child's BoxCollider2D
     // Start is called before the first frame update
     [SerializeField] private bool IsRoller = false; // Enable/Disable flip
+    [SerializeField] private int RangedAttackCD = 200;
+
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -135,7 +137,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
                 //removed chase requirement for ranged attack
                 if (enableRangedAttack && Mathf.Abs(distanceFromPlayer) >= rangedAttackDistanceMin && Mathf.Abs(distanceFromPlayer) <= rangedAttackDistanceMax && rangedAttackCooldown == 0) // Ranged attack when within range and enabled
                 {
-                    rangedAttackCooldown = CalculateCooldown(200); // Cooldown duration for the next ranged attack
+                    rangedAttackCooldown = CalculateCooldown(RangedAttackCD); // Cooldown duration for the next ranged attack
                     isChasing = false;
                     if (HasParameter("RangedAttack", anim))
                     {

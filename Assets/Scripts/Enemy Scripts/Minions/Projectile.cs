@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] public bool impaleOnCollision = true; // Toggle to determine behavior on collision
     [SerializeField] private string poolTag;
     public bool isImpaled = false; // Flag to indicate if the projectile is impaled
+    public bool isFiring = false; // Flag to indicate if the projectile is in the process of being fired
 
     void Start()
     {
@@ -37,6 +38,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)//function to deal damage
     {
+        if (!isFiring) return; // Do not interact if not in the process of being fired
         // Check if the projectile hits the player
         if (collision.CompareTag("Player"))
         {
@@ -112,6 +114,7 @@ public class Projectile : MonoBehaviour
         this.enabled = true;
         transform.parent = null; // Ensure the projectile is detached from any previous parent
         isImpaled = false; // Reset the impaled flag 
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z); // Ensure x-scale is positive
     }
 
     public void SetPoolTag(string tag)
