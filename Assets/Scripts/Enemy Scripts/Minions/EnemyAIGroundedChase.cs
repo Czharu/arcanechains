@@ -62,6 +62,12 @@ public class EnemyAIGroundedChase : MonoBehaviour
         }
         return false;
     }
+    // Method to calculate cooldown with RNG variability
+    private int CalculateCooldown(int baseCooldown)
+    {
+        float rngFactor = Random.Range(0.95f, 1.35f); // ±% variability to attack cooldowns
+        return Mathf.RoundToInt(baseCooldown * rngFactor);
+    }
 
     // Update is called once per frame
     private void FixedUpdate()
@@ -116,7 +122,7 @@ public class EnemyAIGroundedChase : MonoBehaviour
                     {
                         isChasing = false;
                         attackHandler?.JumpAttack(playerTransform.position, jumpHeight, jumpStrength);
-                        jumpCooldown = 100; // Cooldown duration for the next jump attack
+                        jumpCooldown = CalculateCooldown(100); // Cooldown duration for the next jump attack
                     }
                 }
                 // Standing attack when close enough to the player and stand attack is enabled
@@ -124,12 +130,12 @@ public class EnemyAIGroundedChase : MonoBehaviour
                 {
                     isChasing = false;
                     attackHandler?.StandAttack();
-                    standAttackCooldown = 100; // Cooldown duration for the next standing attack
+                    jumpCooldown = CalculateCooldown(100); // Cooldown duration for the next standing attack
                 }
                 //removed chase requirement for ranged attack
                 if (enableRangedAttack && Mathf.Abs(distanceFromPlayer) >= rangedAttackDistanceMin && Mathf.Abs(distanceFromPlayer) <= rangedAttackDistanceMax && rangedAttackCooldown == 0) // Ranged attack when within range and enabled
                 {
-                    rangedAttackCooldown = 200; // Cooldown duration for the next ranged attack
+                    rangedAttackCooldown = CalculateCooldown(200); // Cooldown duration for the next ranged attack
                     isChasing = false;
                     if (HasParameter("RangedAttack", anim))
                     {
