@@ -207,9 +207,9 @@ public class LevelGeneration : MonoBehaviour
 
     GameObject PickEndRoomPrefab(bool up, bool right, bool down, bool left)
     {
-        if (up && !right && !down && !left) return endRoomD_Prefab; // Up door, so the end room should have a Down door
+        if (up && !right && !down && !left) return endRoomU_Prefab; // Up door, so the end room should have a Down door
         else if (!up && right && !down && !left) return endRoomR_Prefab; // Right door, so the end room should have a Left door
-        else if (!up && !right && down && !left) return endRoomU_Prefab; // Down door, so the end room should have an Up door
+        else if (!up && !right && down && !left) return endRoomD_Prefab; // Down door, so the end room should have an Up door
         else if (!up && !right && !down && left) return endRoomL_Prefab; // Left door, so the end room should have a Right door
         return defaultRoomPrefab[Random.Range(0, defaultRoomPrefab.Length)]; // Fallback if no condition is met
     }
