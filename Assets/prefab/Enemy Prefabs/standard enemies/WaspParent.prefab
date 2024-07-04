@@ -125,7 +125,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866171242630759333}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0605d8b855c254f42a6636f013e360f7, type: 3}
   m_Name: 
@@ -156,6 +156,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   IsRoller: 0
+  RangedAttackCD: 200
 --- !u!50 &977907711604855966
 Rigidbody2D:
   serializedVersion: 4
@@ -522,6 +523,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6365142882496779326, guid: 6a88427c6f4e91845a1d3184cd9a7ba5, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 4193421973236463499, guid: 88169eceb236c6045bff974258e2d3eb, type: 3}
+    - target: {fileID: 6365142882496779326, guid: 6a88427c6f4e91845a1d3184cd9a7ba5, type: 3}
+      propertyPath: projectileSpawnPoint
+      value: 
+      objectReference: {fileID: 39036695461740958}
     - target: {fileID: 6981626134545843213, guid: 6a88427c6f4e91845a1d3184cd9a7ba5, type: 3}
       propertyPath: m_RootOrder
       value: -1

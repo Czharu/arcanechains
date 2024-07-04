@@ -49,10 +49,12 @@ public class LevelGeneration : MonoBehaviour
     public GameObject[] roomURDL_Prefabs;
 
     public GameObject[] defaultRoomPrefab;
-    public GameObject[] specialRoomPrefab;// starting room
+    public GameObject[] specialRoomPrefab; // starting room
 
-    public GameObject[] endRoomPrefab; //ending room
-
+    public GameObject endRoomU_Prefab; // ending room with Up door
+    public GameObject endRoomR_Prefab; // ending room with Right door
+    public GameObject endRoomD_Prefab; // ending room with Down door
+    public GameObject endRoomL_Prefab; // ending room with Left door
 
     public GameObject prefab;
     // Add additional data as necessary
@@ -158,7 +160,14 @@ public class LevelGeneration : MonoBehaviour
                     roomData.right = right;
                     roomData.down = down;
                     roomData.left = left;
-                    roomData.prefab = (roomData.type == 2) ? endRoomPrefab[0] : PickPrefab(up, right, down, left); // Now this call will work because we have the door information
+                    if (roomData.type == 2)
+                    {
+                        roomData.prefab = PickEndRoomPrefab(up, right, down, left);
+                    }
+                    else
+                    {
+                        roomData.prefab = PickPrefab(up, right, down, left); // Now this call will work because we have the door information
+                    }
                 }
 
 
@@ -193,6 +202,15 @@ public class LevelGeneration : MonoBehaviour
         // Add more conditions for each room type
 
         // Add a default return at the end of the method
+        return defaultRoomPrefab[Random.Range(0, defaultRoomPrefab.Length)]; // Fallback if no condition is met
+    }
+
+    GameObject PickEndRoomPrefab(bool up, bool right, bool down, bool left)
+    {
+        if (up && !right && !down && !left) return endRoomD_Prefab; // Up door, so the end room should have a Down door
+        else if (!up && right && !down && !left) return endRoomR_Prefab; // Right door, so the end room should have a Left door
+        else if (!up && !right && down && !left) return endRoomU_Prefab; // Down door, so the end room should have an Up door
+        else if (!up && !right && !down && left) return endRoomL_Prefab; // Left door, so the end room should have a Right door
         return defaultRoomPrefab[Random.Range(0, defaultRoomPrefab.Length)]; // Fallback if no condition is met
     }
 
@@ -389,7 +407,7 @@ public class LevelGeneration : MonoBehaviour
                 continue;
             }
             Vector2 drawPos = room.gridPos;
-            drawPos.x = drawPos.x * 2 + 50;//move minimap out the way
+            drawPos.x = drawPos.x * 2 + 50; //move minimap out the way
             drawPos.y = drawPos.y * 2 + 50;
             MapSpriteSelector mapper = ObjectPersistence.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
             mapper.type = room.type;
@@ -403,7 +421,3 @@ public class LevelGeneration : MonoBehaviour
     }
 
 }
-
-
-
-

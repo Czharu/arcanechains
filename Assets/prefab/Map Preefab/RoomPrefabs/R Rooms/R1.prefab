@@ -35,7 +35,7 @@ Transform:
   - {fileID: 2912836264427415490}
   - {fileID: 7604704332161843281}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &3583384644569760371
 Grid:
@@ -22328,16 +22328,8 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.3816
-      objectReference: {fileID: 0}
-    - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.9436
-      objectReference: {fileID: 0}
-    - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.4525
+      value: 10.32
       objectReference: {fileID: 0}
     - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -22349,19 +22341,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -22373,70 +22365,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 6764400026350735507, guid: 34014f4965116974883c5578257fc50d, type: 3}
       propertyPath: m_Name
       value: DoorRight
       objectReference: {fileID: 0}
+    - target: {fileID: 7576138995255046766, guid: 34014f4965116974883c5578257fc50d, type: 3}
+      propertyPath: enemiesParent
+      value: 
+      objectReference: {fileID: 5531523448809809136}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6764400026350735507, guid: 34014f4965116974883c5578257fc50d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2895620225930498770}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34014f4965116974883c5578257fc50d, type: 3}
---- !u!1 &706344376592235777 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6764400026350735507, guid: 34014f4965116974883c5578257fc50d, type: 3}
-  m_PrefabInstance: {fileID: 6058055682192092562}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &2895620225930498770
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706344376592235777}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2}
-  m_EdgeRadius: 0
 --- !u!4 &6823481348949692580 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
