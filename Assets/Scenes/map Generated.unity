@@ -188,10 +188,26 @@ MonoBehaviour:
   - {fileID: 4412762335797385986, guid: 340250df77c9fcc4db85d2623ada4312, type: 3}
   defaultRoomPrefab:
   - {fileID: 2688474651273127910, guid: 5a43583a997b65a4d957a666c9e81842, type: 3}
-  specialRoomPrefab:
-  - {fileID: 3406074551966920461, guid: 0bbfbda7b4a49d740a536798ac8d734d, type: 3}
-  endRoomPrefab:
-  - {fileID: 2688474651273127910, guid: 8db273323d7fb5d40a2559838937aa93, type: 3}
+  specialRoomPrefabs:
+  - {fileID: 1413279012194124635, guid: a260460bfa0fa8846ba8452c23b65e43, type: 3}
+  - {fileID: 3629789206297785307, guid: e477ebdea87814b4292ca1b6b8bdd5a7, type: 3}
+  - {fileID: 7165807065611545490, guid: 72d412d904c39f442aa67e0a4c53ce25, type: 3}
+  - {fileID: 3252242789937963011, guid: 99c5feade7097a64e982148bc1e62cdd, type: 3}
+  - {fileID: 8761898715047978503, guid: dbd883ef4c5af1f46b06b44da017e0eb, type: 3}
+  - {fileID: 7216659159470330597, guid: 8eeab9a45470a7444ae40b741a23df77, type: 3}
+  - {fileID: 2932407147142984227, guid: 2d6926a2d2f50494680f1dac7afbcce5, type: 3}
+  - {fileID: 8305135355482342124, guid: 32dc63556eae8ae4eb66a2f5c96be336, type: 3}
+  - {fileID: 3138707314309510513, guid: 99a04ba0e473fcd47af905025725afc9, type: 3}
+  - {fileID: 138059889593685593, guid: 2fcba3dcec08bb440a3f57870875802f, type: 3}
+  - {fileID: 1916891663279685517, guid: e9ecd147592eddd4a8f6a21b0141c3f6, type: 3}
+  - {fileID: 6114388821055918921, guid: 313bd8c3b8abba44192bffebc49e0386, type: 3}
+  - {fileID: 1925494882479630258, guid: 74e5484bd42dfea45bbfb0c64144f3af, type: 3}
+  - {fileID: 267753007820380429, guid: dab97924c89201c458be2b34ebc5f092, type: 3}
+  - {fileID: 2888442473196815776, guid: ed12b7bb6e5427146ae75ecf32eef037, type: 3}
+  endRoomU_Prefab: {fileID: 5937634018840049945, guid: d51766ec1e9a46a4787c9551ab9a0dc0, type: 3}
+  endRoomR_Prefab: {fileID: 3152318555147856516, guid: 659ece4cc9892e04696f0cc0b231ca06, type: 3}
+  endRoomD_Prefab: {fileID: 1147814651637318597, guid: 9bd8dd6fd1b1f4841ba90fe1170be746, type: 3}
+  endRoomL_Prefab: {fileID: 4415086231749783339, guid: c37d47ec0d8fcfb45b5ccd9bd0d0feb4, type: 3}
   prefab: {fileID: 622450131799948420, guid: c3414fe027eedfa468182406fe226c8e, type: 3}
 --- !u!4 &751617635
 Transform:

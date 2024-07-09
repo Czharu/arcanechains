@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//https://www.youtube.com/watch?v=nADIYwgKHv4
 public class LevelGeneration : MonoBehaviour
 {
     public static LevelGeneration Instance;
@@ -49,7 +48,7 @@ public class LevelGeneration : MonoBehaviour
     public GameObject[] roomURDL_Prefabs;
 
     public GameObject[] defaultRoomPrefab;
-    public GameObject[] specialRoomPrefab; // starting room
+    public GameObject[] specialRoomPrefabs; // starting room
 
     public GameObject endRoomU_Prefab; // ending room with Up door
     public GameObject endRoomR_Prefab; // ending room with Right door
@@ -77,20 +76,20 @@ public class LevelGeneration : MonoBehaviour
     {
         //setup
         rooms = new Room[gridSizeX * 2, gridSizeY * 2];
-        rooms[gridSizeX, gridSizeY] = new Room(Vector2.zero, 1); //i'm retarded and this i think sets 1st minimap room to type 1?
+        rooms[gridSizeX, gridSizeY] = new Room(Vector2.zero, 1); // Initialize the first room
         takenPositions.Insert(0, Vector2.zero);
         Vector2 checkPos = Vector2.zero;
-        //magic numbers to cratee leses clump or stuff
-        float randomCompare = 0.2f, randomCompareStart = 0.2f, randomCompareEnd = 0.01f;
 
-        // Instantiate starting (special) room directly as i don't know why it skips this room
+        // Add the start room data directly
         RoomData startRoomData = new RoomData
         {
             position = Vector2.zero,
             type = 0,
-            prefab = specialRoomPrefab[0], // Assuming specialRoomPrefab is an array of one
+            prefab = PickStartRoomPrefab(true, true, true, true) // Assume the start room has all doors for now, adjust as needed
         };
         generatedRoomData.Add(startRoomData);
+
+        float randomCompare = 0.2f, randomCompareStart = 0.2f, randomCompareEnd = 0.01f;
 
         //add rooms
         for (int i = 1; i < numberOfRooms; i++)
@@ -113,30 +112,19 @@ public class LevelGeneration : MonoBehaviour
                     print("error: could not create with fewer neighbors than : " + NumberOfNeighbors(checkPos, takenPositions));
             }
             //finalize position
-            int roomType = (i < numberOfRooms - 1) ? 0 : 2; // If it's the last room, set type to 2 for the end room // Determine the room type here
+            int roomType = (i < numberOfRooms - 1) ? 0 : 2; // If it's the last room, set type to 2 for the end room
 
-            rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, roomType); //roomType is minimap coloring here
-            takenPositions.Insert(0, checkPos); //this is probs where it could be refactored if needed.
-                                                //
+            rooms[(int)checkPos.x + gridSizeX, (int)checkPos.y + gridSizeY] = new Room(checkPos, roomType);
+            takenPositions.Insert(0, checkPos);
 
-
-
-
-
-
+            // Create and store room data instead of instantiating the room
+            RoomData newRoomData = new RoomData
             {
+                position = checkPos,
+                type = roomType,
+            };
 
-
-                // Create and store room data instead of instantiating the room
-                RoomData newRoomData = new RoomData
-                {
-                    position = checkPos,
-                    type = roomType, // You'll create this method to determine the room type
-
-                };
-
-                generatedRoomData.Add(newRoomData);
-            }
+            generatedRoomData.Add(newRoomData);
         }
 
         // Step 2: Assign door configurations
@@ -164,17 +152,18 @@ public class LevelGeneration : MonoBehaviour
                     {
                         roomData.prefab = PickEndRoomPrefab(up, right, down, left);
                     }
+                    else if (roomData.position == Vector2.zero)
+                    {
+                        roomData.prefab = PickStartRoomPrefab(up, right, down, left);
+                        Debug.Log($"Start Room Selected: {roomData.prefab.name}");
+                    }
                     else
                     {
-                        roomData.prefab = PickPrefab(up, right, down, left); // Now this call will work because we have the door information
+                        roomData.prefab = PickPrefab(up, right, down, left);
                     }
                 }
-
-
-
             }
         }
-
     }
 
     GameObject PickPrefab(bool up, bool right, bool down, bool left)
@@ -214,6 +203,34 @@ public class LevelGeneration : MonoBehaviour
         return defaultRoomPrefab[Random.Range(0, defaultRoomPrefab.Length)]; // Fallback if no condition is met
     }
 
+    GameObject PickStartRoomPrefab(bool up, bool right, bool down, bool left)
+    {
+        // Your logic to pick the correct start room prefab based on door configuration
+        // One Door
+        if (up && !right && !down && !left) return specialRoomPrefabs[0]; //U
+        else if (!up && right && !down && !left) return specialRoomPrefabs[1]; //R
+        else if (!up && !right && down && !left) return specialRoomPrefabs[2]; //D
+        else if (!up && !right && !down && left) return specialRoomPrefabs[3]; //L
+        // Two Door
+        else if (up && right && !down && !left) return specialRoomPrefabs[4]; //UR
+        else if (up && !right && down && !left) return specialRoomPrefabs[5]; //UD
+        else if (up && !right && !down && left) return specialRoomPrefabs[6]; //UL
+        else if (!up && right && down && !left) return specialRoomPrefabs[7]; //RD
+        else if (!up && right && !down && left) return specialRoomPrefabs[8]; //RL
+        else if (!up && !right && down && left) return specialRoomPrefabs[9]; //DL
+        // Three Door
+        else if (up && right && down && !left) return specialRoomPrefabs[10]; //URD
+        else if (up && right && !down && left) return specialRoomPrefabs[11]; //URL
+        else if (up && !right && down && left) return specialRoomPrefabs[12]; //UDL
+        else if (!up && right && down && left) return specialRoomPrefabs[13]; //RDL
+        // Four Door
+        else if (up && right && down && left) return specialRoomPrefabs[14]; //URDL
+        // Add more conditions for each room type
+
+        // Add a default return at the end of the method
+        return defaultRoomPrefab[Random.Range(0, defaultRoomPrefab.Length)]; // Fallback if no condition is met
+    }
+
     int DetermineRoomType()
     {
         // Logic to determine the room type
@@ -221,7 +238,7 @@ public class LevelGeneration : MonoBehaviour
         return 0;
     }
 
-    public void InstantiateGameplayRooms() //You will need to call InstantiateGameplayRooms() when you want to generate the actual gameplay rooms, perhaps after the player finishes the planning phase or presses a 'Start Game' button.
+    public void InstantiateGameplayRooms()
     {
         foreach (RoomData roomData in generatedRoomData)
         {
@@ -229,16 +246,22 @@ public class LevelGeneration : MonoBehaviour
             // Calculate the position where the room should be instantiated
             Vector3 roomPosition = new Vector3(roomData.position.x * 100, roomData.position.y * 100, 0); // Multiply by 10 or room size
 
-            // Instantiate the room prefab at the calculated position
-            GameObject roomInstance = Instantiate(roomData.prefab, roomPosition, Quaternion.identity);
+            // Ensure the prefab is not null before instantiating
+            if (roomData.prefab != null)
+            {
+                // Instantiate the room prefab at the calculated position
+                GameObject roomInstance = Instantiate(roomData.prefab, roomPosition, Quaternion.identity);
 
-            // Assuming doors are named and have the Door script attached
-            // SetupDoors(roomInstance, roomData);
-            // Assign doors to be telleported to
-            roomData.doorUp = roomInstance.transform.Find("DoorUp")?.gameObject;
-            roomData.doorDown = roomInstance.transform.Find("DoorDown")?.gameObject;
-            roomData.doorLeft = roomInstance.transform.Find("DoorLeft")?.gameObject;
-            roomData.doorRight = roomInstance.transform.Find("DoorRight")?.gameObject;
+                // Assuming doors are named and have the Door script attached
+                roomData.doorUp = roomInstance.transform.Find("DoorUp")?.gameObject;
+                roomData.doorDown = roomInstance.transform.Find("DoorDown")?.gameObject;
+                roomData.doorLeft = roomInstance.transform.Find("DoorLeft")?.gameObject;
+                roomData.doorRight = roomInstance.transform.Find("DoorRight")?.gameObject;
+            }
+            else
+            {
+                Debug.LogError($"Prefab is null for room at position {roomData.position}");
+            }
         }
     }
 
@@ -419,5 +442,4 @@ public class LevelGeneration : MonoBehaviour
 
         }
     }
-
 }
