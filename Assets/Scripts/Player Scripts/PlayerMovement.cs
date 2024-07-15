@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;// include the appropriate namespace for the Tilemap classes
-
+//Player Controller Script
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference attack;
     [SerializeField] private RotateWeaponOnClick weaponParent;
     private float horizontal;
+
+    private List<Follower> followers = new List<Follower>();//followers
 
     // Start is called before the first frame update
     void Start()
@@ -177,4 +179,19 @@ public class PlayerMovement : MonoBehaviour
     {
         weaponParent.Attack();
     }
+    //follower mechanic
+    public void AddFollower(GameObject followerObject)
+    {
+        Follower newFollower = followerObject.GetComponent<Follower>();
+        if (followers.Count == 0)
+        {
+            newFollower.SetTarget(this.transform);
+        }
+        else
+        {
+            newFollower.SetTarget(followers[followers.Count - 1].transform);
+        }
+        followers.Add(newFollower);
+    }
+
 }

@@ -1050,6 +1050,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: cb6573be-0592-4923-9db8-ce0d67a0865c
     m_ActionName: PlayerInput/Down[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2571c69e-ca7b-48c7-879a-bff83a318c34
+    m_ActionName: PlayerInput/Interact[/Keyboard/f]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerInput
@@ -1074,6 +1078,7 @@ MonoBehaviour:
     baseValue: 0
   evasion:
     baseValue: 0
+  playerInteraction: {fileID: 0}
 --- !u!114 &3356983856917599898
 MonoBehaviour:
   m_ObjectHideFlags: 0
