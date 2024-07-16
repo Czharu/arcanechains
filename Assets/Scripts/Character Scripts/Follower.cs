@@ -11,9 +11,9 @@ public class Follower : MonoBehaviour
 
     void Start()
     {
+        delayFrames = Mathf.RoundToInt(followDelay / Time.deltaTime); // Initialize delayFrames only once
         if (target != null)
         {
-            delayFrames = Mathf.RoundToInt(followDelay / Time.deltaTime);
             StartCoroutine(FollowTarget());
         }
     }
@@ -21,14 +21,21 @@ public class Follower : MonoBehaviour
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
-        delayFrames = Mathf.RoundToInt(followDelay / Time.deltaTime);
+        if (!isActiveAndEnabled)
+        {
         StartCoroutine(FollowTarget());
+        }
     }
 
     private IEnumerator FollowTarget()
     {
         while (true)
         {
+            if (target == null)
+            {
+                Debug.Log("Follower follower target not found");
+                yield break; // Exit the coroutine if the target is null
+            }
             positions.Enqueue(target.position);
 
             if (positions.Count > delayFrames)

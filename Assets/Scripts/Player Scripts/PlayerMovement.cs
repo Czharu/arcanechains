@@ -193,5 +193,83 @@ public class PlayerMovement : MonoBehaviour
         }
         followers.Add(newFollower);
     }
+    public bool HasFollowers()//check for death save
+    {
+        return followers.Count > 0;
+    }
+
+    public void TriggerFollowerSave(Vector3 damagePosition)
+    {
+        if (followers.Count > 0)
+        {
+            StartCoroutine(FollowerSaveSequence(damagePosition));
+        }
+    }
+    private IEnumerator FollowerSaveSequence(Vector3 damagePosition)
+    {
+        Time.timeScale = 0; // Pause the game
+        Follower topFollower = followers[0];
+
+        // Change the sorting order to bring the follower to the front
+        SpriteRenderer followerRenderer = topFollower.GetComponent<SpriteRenderer>();
+        if (followerRenderer != null)
+        {
+            followerRenderer.sortingOrder = 10; // Set this to a value higher than the player's sorting order
+        }
+
+        // Dash to the player's damage position
+        topFollower.transform.position = damagePosition;
+
+        // Play follower dying animation (assuming you have an animator and animation for this)
+        Animator followerAnimator = topFollower.GetComponent<Animator>();
+        if (followerAnimator != null)
+        {
+            followerAnimator.SetTrigger("die");
+            // Wait until the follower is in the die animation state
+            while (!followerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+            {
+                yield return null; // Wait for the next frame
+            }
+
+            // Wait for the animation to finish using unscaled time
+            float animationTime = followerAnimator.GetCurrentAnimatorStateInfo(0).length;
+            float elapsedTime = 0f;
+            while (elapsedTime < animationTime)
+            {
+                followerAnimator.Update(Time.unscaledDeltaTime);
+                elapsedTime += Time.unscaledDeltaTime;
+                yield return null;
+            }
+        }
+        else
+        {
+            Debug.Log("Follower Animator not found");
+        }
+
+        // Heal the player
+        GetComponent<PlayerStats>().Heal(100);
+
+        // Remove the follower from the list and destroy the game object
+        followers.RemoveAt(0);
+        Destroy(topFollower.gameObject);
+        UpdateFollowerTargets();
+
+        Time.timeScale = 1; // Resume the game
+    }
+
+    private void UpdateFollowerTargets()
+    {
+        for (int i = 0; i < followers.Count; i++)
+        {
+            if (i == 0)
+            {
+                followers[i].SetTarget(this.transform);
+            }
+            else
+            {
+                followers[i].SetTarget(followers[i - 1].transform);
+            }
+        }
+    }
 
 }
