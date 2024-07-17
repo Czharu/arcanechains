@@ -5,9 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
 public class Item : ScriptableObject
 {
-    public new string name = "New Item";
+    public string itemName = "New Item";
     public Sprite icon = null;
     public bool isDefaultItem = false;
+    public int price = 0; //price field
 
     public virtual void Use (){
         //Use the item
@@ -18,4 +19,4 @@ public class Item : ScriptableObject
         Inventory.instance.Remove(this);
     }
 
-}
+} 
