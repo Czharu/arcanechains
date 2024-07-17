@@ -33,14 +33,14 @@ Transform:
   - {fileID: 5979426296428060227}
   - {fileID: 8309137090049595280}
   - {fileID: 5593346924738966375}
-  - {fileID: 5760986035661465591}
+  - {fileID: 8134147971597742986}
   - {fileID: 2711845824903773599}
   - {fileID: 900960863956408688}
   - {fileID: 6024629611375554569}
   - {fileID: 7469155639186518621}
   - {fileID: 1778993528986779294}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &1203367603666065328
 Grid:
@@ -6077,6 +6077,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7469155639186518621}
   - component: {fileID: 5654836377184576756}
+  - component: {fileID: 5365794605442836026}
   m_Layer: 0
   m_Name: Bonfiresmall
   m_TagString: Untagged
@@ -6151,6 +6152,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5365794605442836026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3356826310260879839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a02d37d1f9a3194095f6ef31c9665a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastExitName: Camp Exit
 --- !u!1 &3869389592123251815
 GameObject:
   m_ObjectHideFlags: 0
@@ -35055,7 +35069,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 614a8685821d162439180f5827003da0, type: 3}
---- !u!4 &5760986035661465591 stripped
+--- !u!4 &8134147971597742986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 634942176987343270, guid: 614a8685821d162439180f5827003da0, type: 3}
   m_PrefabInstance: {fileID: 8659728223106652716}

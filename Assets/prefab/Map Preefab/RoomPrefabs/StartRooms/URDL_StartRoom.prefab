@@ -34102,6 +34102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3978732444303839256}
   - component: {fileID: 670985905723875631}
+  - component: {fileID: 2975122408639722416}
   m_Layer: 0
   m_Name: Bonfiresmall
   m_TagString: Untagged
@@ -34176,6 +34177,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2975122408639722416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6932697791431821057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a02d37d1f9a3194095f6ef31c9665a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastExitName: Camp Exit
 --- !u!1 &7597152968329660643
 GameObject:
   m_ObjectHideFlags: 0

@@ -5504,16 +5504,16 @@ Transform:
   m_Children:
   - {fileID: 1573547504532918772}
   - {fileID: 3955895549373971316}
-  - {fileID: 1446280257577257535}
+  - {fileID: 4452924864932147066}
   - {fileID: 1429015108657066220}
   - {fileID: 6434519823741357369}
-  - {fileID: 7980333361188617767}
+  - {fileID: 7172416973201680552}
   - {fileID: 7791861783477696425}
   - {fileID: 6266006724445899653}
   - {fileID: 191069360206941428}
   - {fileID: 2213777861613417959}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &7028218666899951613
 Grid:
@@ -29784,6 +29784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 191069360206941428}
   - component: {fileID: 8607002417622710176}
+  - component: {fileID: 7307716259562042950}
   m_Layer: 0
   m_Name: Bonfiresmall
   m_TagString: Untagged
@@ -29858,6 +29859,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7307716259562042950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6286574503404365364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a02d37d1f9a3194095f6ef31c9665a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastExitName: Camp Exit
 --- !u!1001 &1835084915936677338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30001,7 +30015,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44422524ff7630b4db04023ae9a31e54, type: 3}
---- !u!4 &1446280257577257535 stripped
+--- !u!4 &4452924864932147066 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 768658714169901016, guid: 44422524ff7630b4db04023ae9a31e54, type: 3}
   m_PrefabInstance: {fileID: 3990510968711024802}
@@ -30149,7 +30163,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbdd47417f4d8948b2d30b9ac522a44, type: 3}
---- !u!4 &7980333361188617767 stripped
+--- !u!4 &7172416973201680552 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4556538719493348024, guid: 7bbdd47417f4d8948b2d30b9ac522a44, type: 3}
   m_PrefabInstance: {fileID: 6680413772527301136}

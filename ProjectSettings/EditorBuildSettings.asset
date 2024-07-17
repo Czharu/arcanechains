@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 1 Boss Scene.unity
     guid: 36903dfac453c4f41bda93de4c19222b
+  - enabled: 1
+    path: Assets/Scenes/Campsite_Village.unity
+    guid: 9541aef275790ae4fa4193e9723fca6e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: f4c639baee7e2024da89e49d418b3da4, type: 2}

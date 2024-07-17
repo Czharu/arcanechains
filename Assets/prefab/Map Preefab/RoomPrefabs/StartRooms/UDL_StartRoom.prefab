@@ -653,6 +653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3518585850156811069}
   - component: {fileID: 1256452745504393069}
+  - component: {fileID: 4115334736411520445}
   m_Layer: 0
   m_Name: Bonfiresmall
   m_TagString: Untagged
@@ -727,6 +728,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4115334736411520445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593305444416526480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a02d37d1f9a3194095f6ef31c9665a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastExitName: Camp Exit
 --- !u!1 &1925494882479630258
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,15 +773,15 @@ Transform:
   - {fileID: 3296540478485534173}
   - {fileID: 2342994290818126911}
   - {fileID: 5682826260198402792}
-  - {fileID: 5680392566345246726}
+  - {fileID: 157069212226622268}
   - {fileID: 1478382493748499124}
-  - {fileID: 2555672197435859370}
+  - {fileID: 6758809430116744509}
   - {fileID: 5482093668064371983}
   - {fileID: 6779265909961284805}
   - {fileID: 3518585850156811069}
   - {fileID: 8289204685445217725}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &9158699762415465674
 Grid:
@@ -34919,7 +34933,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34014f4965116974883c5578257fc50d, type: 3}
---- !u!4 &5680392566345246726 stripped
+--- !u!4 &157069212226622268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 766572538992983350, guid: 34014f4965116974883c5578257fc50d, type: 3}
   m_PrefabInstance: {fileID: 616267696473239050}
@@ -35141,7 +35155,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbdd47417f4d8948b2d30b9ac522a44, type: 3}
---- !u!4 &2555672197435859370 stripped
+--- !u!4 &6758809430116744509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4556538719493348024, guid: 7bbdd47417f4d8948b2d30b9ac522a44, type: 3}
   m_PrefabInstance: {fileID: 7129214217841665925}
