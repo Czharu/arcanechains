@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+//script to manage talking functionality
 public class TalkingOverlayController : MonoBehaviour
 {
     public GameObject talkingOverlay;
@@ -11,6 +11,7 @@ public class TalkingOverlayController : MonoBehaviour
     public TMP_Text dialogText;
     public Button actionButton1; // e.g., Shop Button
     public Button actionButton2; // e.g., Close Button
+    public InteractPromptController interactPromptController;
 
     void Start()
     {
@@ -28,10 +29,21 @@ public class TalkingOverlayController : MonoBehaviour
         actionButton2.GetComponentInChildren<TMP_Text>().text = action2Text;
         actionButton2.onClick.RemoveAllListeners();
         actionButton2.onClick.AddListener(action2);
+
+        if (interactPromptController != null)
+        {
+            interactPromptController.HideInteractPrompt();
+        }
     }
 
     public void HideOverlay()
     {
         talkingOverlay.SetActive(false);
+
+        // Re-enable the interact prompt when the overlay is hidden
+        if (interactPromptController != null)
+        {
+            interactPromptController.ShowInteractPrompt();
+        }
     }
 }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro; // Import TextMeshPro namespace
-
+//Script to make the interact button appear and trigger
 public class InteractPromptController : MonoBehaviour
 {
     public GameObject interactPrompt; // Reference to the UI element
     private TMP_Text promptText; // The TextMeshPro component of the prompt
     public TalkingOverlayController talkingOverlayController; // Reference to the TalkingOverlayController
-
     private bool isInteracting = false;
     private GameObject player; // Store the player GameObject
+    private PlayerInput playerInput;
 
     private void Start()
     {
@@ -34,7 +34,7 @@ public class InteractPromptController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             player = other.gameObject; // Store reference to the player GameObject
-            var playerInput = other.GetComponent<PlayerInput>();
+            playerInput = other.GetComponent<PlayerInput>();
             playerInput.actions["Interact"].performed += OnInteract;
 
             // Display the interact prompt
@@ -47,7 +47,6 @@ public class InteractPromptController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            var playerInput = other.GetComponent<PlayerInput>();
             playerInput.actions["Interact"].performed -= OnInteract;
             player = null; // Clear reference to the player GameObject
 
@@ -64,6 +63,12 @@ public class InteractPromptController : MonoBehaviour
 
         // Show the talking overlay
         ShowTalkingOverlay();
+
+        // Hide the interact prompt when talking begins
+        interactPrompt.SetActive(false);
+
+        // Remove the interaction action handler
+        playerInput.actions["Interact"].performed -= OnInteract;
 
         isInteracting = false;  // Reset interaction flag after handling
     }
@@ -101,6 +106,32 @@ public class InteractPromptController : MonoBehaviour
         // Implement the logic to open the merchant's shop
         Debug.Log("Opening shop for Croc");
         talkingOverlayController.HideOverlay();
-        // Show the merchant's inventory UI here
+        Merchant merchant = FindObjectOfType<Merchant>();
+        if (merchant != null)
+        {
+            FindObjectOfType<MerchantUI>().OpenMerchantUI(merchant);
+        }
+        else
+        {
+            Debug.LogError("Merchant not found in the scene.");
+        }
+    }
+
+    public void ShowInteractPrompt()
+    {
+        if (player != null)
+        {
+            interactPrompt.SetActive(true);
+            playerInput.actions["Interact"].performed += OnInteract;
+        }
+    }
+
+    public void HideInteractPrompt()
+    {
+        if (player != null)
+        {
+            interactPrompt.SetActive(false);
+            playerInput.actions["Interact"].performed -= OnInteract;
+        }
     }
 }
