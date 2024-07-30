@@ -16,6 +16,7 @@ TagManager:
   - DoorDown
   - DoorLeft
   - Projectile
+  - Inventory
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Import TextMeshPro namespace
+using TMPro;
+using UnityEngine.InputSystem;
+using System;
+using Unity.VisualScripting; // Import TextMeshPro namespace
 //a script to manage the merchant UI and bind it to the current merchant:
 
 public class MerchantUI : MonoBehaviour
@@ -12,8 +15,9 @@ public class MerchantUI : MonoBehaviour
     public GameObject inventoryItemPrefab; // Prefab for displaying items
     public Button closeButton; // Reference to the close button
     public InteractPromptController interactPromptController;
-
     private Merchant currentMerchant;
+
+    public GameObject inventory;
 
     void Start()
     {
@@ -22,23 +26,34 @@ public class MerchantUI : MonoBehaviour
 
     public void OpenMerchantUI(Merchant merchant)
     {
+        Debug.Log("OPENING MERCHANT UI");
         if (merchant == null)
         {
             Debug.LogError("Merchant is null.");
             return;
         }
-
         currentMerchant = merchant;
         merchantNameText.text = currentMerchant.merchantName;
         UpdateInventory();
         gameObject.SetActive(true); // Show the UI
         interactPromptController.HideInteractPrompt(); // Hide the interact prompt when the Merchant UI is shown
+        
     }
 
     public void CloseMerchantUI()
     {
+        CloseInventory();
         gameObject.SetActive(false); // Hide the UI
         interactPromptController.ShowInteractPrompt(); // Re-enable the interact prompt when the Merchant UI is hidden
+    }
+
+    public void OpenInventory(){
+        inventory.GetComponent<InventoryUI>().OpenInventoryFromMerchant();
+        //GameObject.FindWithTag("Inventory").GetComponent<InventoryUI>().OpenInventoryFromMerchant(); //opens intentory
+    }
+
+    public void CloseInventory(){
+        inventory.GetComponent<InventoryUI>().CloseInventory();
     }
 
     private void UpdateInventory()
