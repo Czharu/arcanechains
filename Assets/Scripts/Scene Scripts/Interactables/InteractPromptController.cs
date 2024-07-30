@@ -110,6 +110,7 @@ public class InteractPromptController : MonoBehaviour
         if (merchant != null)
         {
             FindObjectOfType<MerchantUI>().OpenMerchantUI(merchant);
+            FindObjectOfType<MerchantUI>().OpenInventory();
         }
         else
         {

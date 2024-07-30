@@ -6,7 +6,11 @@ public class InventoryUI : MonoBehaviour
 
     public Transform itemsParent;
     public GameObject inventoryUI;
-    public static bool inventoryIsOpen = true;
+    public static bool inventoryIsClosed = true;
+
+    public bool inventoryOpenFromMerchant = false;
+
+    private bool inventoryInUse = false;
 
     InventorySlot[] slots;
 
@@ -21,9 +25,26 @@ public class InventoryUI : MonoBehaviour
 
   public void OpenInventory(InputAction.CallbackContext context)
     {
+        if(inventoryInUse == false){
         inventoryUI.SetActive(!inventoryUI.activeSelf);
-        inventoryIsOpen = !inventoryIsOpen;
-        
+        inventoryIsClosed = !inventoryIsClosed;
+        }
+    }
+
+    public void OpenInventoryFromMerchant(){
+        if((inventoryIsClosed == false) && (!inventoryInUse)){
+
+        }
+        else{
+        inventoryUI.SetActive(!inventoryUI.activeSelf);
+        inventoryIsClosed = !inventoryIsClosed; 
+        }
+        inventoryInUse = true;
+    }
+
+    public void CloseInventory(){
+        OpenInventoryFromMerchant();
+        inventoryInUse = false;
     }
 
     void UpdateUI(){
@@ -38,6 +59,6 @@ public class InventoryUI : MonoBehaviour
     }
 
     public bool GetInventoryState(){
-        return inventoryIsOpen;
+        return inventoryIsClosed;
     }
 }
