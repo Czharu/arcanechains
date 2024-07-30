@@ -3304,6 +3304,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8939584505158053744, guid: f43fabcad6adda643a8286177678c33e, type: 3}
   m_PrefabInstance: {fileID: 6261265949514091488}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1330200552 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7793608215652846449, guid: f43fabcad6adda643a8286177678c33e, type: 3}
+  m_PrefabInstance: {fileID: 6261265949514091488}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1337874094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7829297018903147751, guid: 4483219ae3cc89b4daeff7394c9048af, type: 3}
@@ -3523,6 +3528,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4883053195179216794, guid: f78a9d8c56028fb428efe9d63b2b329e, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1330200552}
     - target: {fileID: 8244643415420590961, guid: f78a9d8c56028fb428efe9d63b2b329e, type: 3}
       propertyPath: m_RootOrder
       value: 15
