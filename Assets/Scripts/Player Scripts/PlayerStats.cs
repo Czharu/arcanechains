@@ -50,6 +50,9 @@ public class PlayerStats : CharacterStats
             armor.AddModifier(newItem.armorModifier);
             evasion.AddModifier(newItem.evasionModifier);
             damage.AddModifier(newItem.damageModifier);
+            if(newItem.weaponType != WeaponType.NonWeapon){
+                weaponTypeEquipped = newItem.weaponType;
+            }
         }
 
         if (oldItem != null)
