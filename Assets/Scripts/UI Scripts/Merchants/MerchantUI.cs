@@ -24,6 +24,41 @@ public class MerchantUI : MonoBehaviour
         closeButton.onClick.AddListener(CloseMerchantUI);
     }
 
+    private void OnEnable()
+    {
+        // Find the Inventory GameObject under the Player's Canvas when this script is enabled
+        AssignInventory();
+    }
+
+    public void AssignInventory()
+    {
+        GameObject player = GameObject.FindWithTag("Player"); // Assuming the player has the tag "Player"
+        if (player != null)
+        {
+            Transform canvasTransform = player.transform.Find("Canvas");
+            if (canvasTransform != null)
+            {
+                Transform inventoryTransform = canvasTransform.Find("Inventory");
+                if (inventoryTransform != null)
+                {
+                    inventory = inventoryTransform.gameObject;
+                }
+                else
+                {
+                    Debug.LogError("Inventory GameObject not found under Player's Canvas.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Canvas GameObject not found under Player.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found.");
+        }
+    }
+
     public void OpenMerchantUI(Merchant merchant)
     {
         Debug.Log("OPENING MERCHANT UI");
