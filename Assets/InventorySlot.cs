@@ -26,6 +26,8 @@ public class InventorySlot : MonoBehaviour
     }
 
     public void OnRemoveButton (){
+        GameObject player = GameObject.FindWithTag("Player");
+        BaseItemScript.DropItem(player.transform.position, item);
         Inventory.instance.Remove(item);
     }
 

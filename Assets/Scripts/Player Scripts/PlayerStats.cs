@@ -50,6 +50,7 @@ public class PlayerStats : CharacterStats
             armor.AddModifier(newItem.armorModifier);
             evasion.AddModifier(newItem.evasionModifier);
             damage.AddModifier(newItem.damageModifier);
+            attackSpeed.AddModifier(newItem.attackspeedModifier);
             if(newItem.weaponType != WeaponType.NonWeapon){
                 weaponTypeEquipped = newItem.weaponType;
             }
@@ -57,9 +58,10 @@ public class PlayerStats : CharacterStats
 
         if (oldItem != null)
         {
-            armor.RemoveModifier(newItem.armorModifier);
-            evasion.RemoveModifier(newItem.evasionModifier);
-            damage.RemoveModifier(newItem.damageModifier);
+            armor.RemoveModifier(oldItem.armorModifier);
+            evasion.RemoveModifier(oldItem.evasionModifier);
+            damage.RemoveModifier(oldItem.damageModifier);
+            attackSpeed.RemoveModifier(oldItem.attackspeedModifier);
         }
     }
 

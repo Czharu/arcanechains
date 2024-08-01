@@ -8,7 +8,10 @@ public class CharacterStats : MonoBehaviour
    public Stat damage;
    public Stat armor;
    public Stat evasion;
+   public Stat attackSpeed;
    public WeaponType weaponTypeEquipped;
+
+
 
    private void Awake() {
     currentHealth = maxHealth;

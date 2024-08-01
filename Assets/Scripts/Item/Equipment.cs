@@ -11,6 +11,7 @@ public class Equipment : Item
     public int armorModifier;
     public int damageModifier;
     public int evasionModifier;
+    public float attackspeedModifier;
 
     public override void Use()
     {

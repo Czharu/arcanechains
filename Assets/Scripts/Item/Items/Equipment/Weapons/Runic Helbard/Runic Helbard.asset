@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b6a439202c85843a8cfc3a67aafd13, type: 3}
   m_Name: Runic Helbard
   m_EditorClassIdentifier: 
-  itemName: New Item
+  itemName: Runic Helbard
   icon: {fileID: 21300000, guid: 569f9acaeabf1104f9e87e5db345593c, type: 3}
   isDefaultItem: 0
   price: 0
@@ -21,3 +21,4 @@ MonoBehaviour:
   armorModifier: 0
   damageModifier: 35
   evasionModifier: 0
+  attackspeedModifier: 0.3
