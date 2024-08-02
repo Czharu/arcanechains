@@ -21,7 +21,7 @@ public class BaseItemScript : MonoBehaviour
 
         BaseItemScript itemDrop = SpawnItem(dropPosition + randomDirection, item);
 
-        float forceStrength = Random.Range(.5f, .5f);
+        float forceStrength = Random.Range(.3f, .3f);
 
         itemDrop.GetComponent<Rigidbody2D>().AddForce(randomDirection * forceStrength, ForceMode2D.Impulse);
 
