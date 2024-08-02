@@ -29,12 +29,15 @@ public class BaseItemScript : MonoBehaviour
     }
     private Item item;
     private SpriteRenderer spriteRenderer;
+    private ItemPickup itemPickupScript;
 
     private void Awake(){
         spriteRenderer = GetComponent<SpriteRenderer>();
+        itemPickupScript = GetComponent<ItemPickup>();
     }
      public void SetItem (Item item) {
         this.item = item;
         spriteRenderer.sprite = item.icon;
+        itemPickupScript.item = item;
     }
 }
