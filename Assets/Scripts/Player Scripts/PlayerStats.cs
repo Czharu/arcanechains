@@ -63,6 +63,7 @@ public class PlayerStats : CharacterStats
             damage.RemoveModifier(oldItem.damageModifier);
             attackSpeed.RemoveModifier(oldItem.attackspeedModifier);
         }
+        ClassManagerScript.instance.CheckRequirements(); // Checks For Class Passives
     }
 
 }
