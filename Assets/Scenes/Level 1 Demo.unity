@@ -27493,6 +27493,10 @@ PrefabInstance:
       propertyPath: swiftness.baseValue
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 2518013910384137101, guid: f43fabcad6adda643a8286177678c33e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3433447413730918071, guid: f43fabcad6adda643a8286177678c33e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
