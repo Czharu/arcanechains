@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour
 
     #endregion
 
+    [SerializeField] public Transform basicItemPrefab;
     public List<Item> items = new List<Item>();
 
     public bool Add (Item item){

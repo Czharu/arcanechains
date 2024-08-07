@@ -8,7 +8,18 @@ public class CharacterStats : MonoBehaviour
    public Stat damage;
    public Stat armor;
    public Stat evasion;
+   public Stat attackSpeed;
+   public Stat strength;
+   public Stat dexterity;
+   public Stat arcana;
+   public Stat vitality;
+   public Stat toughness;
+   public Stat swiftness;
+   public Stat precision;
+
    public WeaponType weaponTypeEquipped;
+
+
 
    private void Awake() {
     currentHealth = maxHealth;

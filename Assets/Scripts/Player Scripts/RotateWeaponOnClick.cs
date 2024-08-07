@@ -81,7 +81,7 @@ public class RotateWeaponOnClick : MonoBehaviour
 
     private IEnumerator DelayAttack()
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(playerStats.attackSpeed.GetValue());
         attackBlocked = false;
     }
 
