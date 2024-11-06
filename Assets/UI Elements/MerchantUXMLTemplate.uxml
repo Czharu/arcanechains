@@ -1,0 +1,103 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="NPC_CHAT_UI" style="flex-grow: 1; background-color: rgba(255, 0, 204, 0); width: 100%; height: 100%; align-self: auto; justify-content: flex-start; align-items: center; flex-direction: column-reverse; flex-basis: 100%; display: none;">
+        <ui:VisualElement name="NPC_CHATBOX" style="flex-grow: 0; background-color: rgb(22, 9, 19); width: 100%; height: auto; align-items: auto; justify-content: flex-start; align-self: auto; position: relative; bottom: 0; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/TalkUI.png?fileID=2800000&amp;guid=e66b481f754c638418ca307141842c20&amp;type=3#TalkUI&apos;); flex-direction: row; opacity: 1; display: flex; visibility: visible; overflow: visible; flex-basis: 35%;">
+            <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: auto; padding-left: 1.5%; padding-right: 0.5%; padding-top: 1.5%; padding-bottom: 1.5%;">
+                <ui:VisualElement name="NPC_CHAT_IMAGE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/npc_image_Icon.png?fileID=2800000&amp;guid=f60f75ea07000044087dab2abea245f4&amp;type=3#npc_image_Icon&apos;); justify-content: flex-start; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 76%; height: 100%; padding-left: 2%; padding-right: 2%; padding-top: 1.5%; padding-bottom: 1.5%;">
+                <ui:Label tabindex="-1" text="NPC_NAME" display-tooltip-when-elided="true" name="NPC_NAME" style="width: 100%; height: 20%; margin-bottom: 1%; -unity-font-style: bold; font-size: 50%; color: rgb(255, 255, 255); flex-shrink: 1; flex-grow: 1;" />
+                <ui:Label tabindex="-1" text="NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT NPC_TEXT " display-tooltip-when-elided="true" name="NPC_TEXT" style="width: 100%; height: 75%; font-size: 30px; color: rgb(255, 255, 255); white-space: normal; flex-shrink: 1; flex-grow: 1;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="BUTTON_AREA" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); align-self: flex-end; width: 472px; height: auto; position: relative; flex-direction: column; align-items: center; justify-content: space-around; margin-bottom: 0; top: auto; left: auto; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/smolbutton.png?fileID=2800000&amp;guid=c476d1447c2d3504aba48f57f29ed371&amp;type=3#smolbutton&apos;); flex-basis: 191px; -unity-background-scale-mode: scale-to-fit; padding-left: 1%; padding-right: 1%; padding-top: 1%; padding-bottom: 1%;">
+            <ui:Button text="BUTTON_A" display-tooltip-when-elided="true" name="BUTTON_A" style="width: 100%; height: 40%; -unity-font-style: bold;" />
+            <ui:Button text="BUTTON_B" display-tooltip-when-elided="true" name="BUTTON_B" style="width: 100%; height: 40%; -unity-font-style: bold;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="MERCHANT_SHOP_UI" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 100%; flex-basis: 100%; flex-direction: row; display: none;">
+        <ui:VisualElement name="MERCHANT_SHOP_WINDOW" style="flex-grow: initial; background-color: rgba(0, 0, 0, 0); width: 856px; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/leftshopui.png?fileID=2800000&amp;guid=faf4b7613cdc715469166a4525787c8e&amp;type=3#leftshopui&apos;); padding-left: 2%; padding-right: 2%; padding-top: 2%; padding-bottom: 2%;">
+            <ui:Label tabindex="-1" text="MERCHANT_NPC_NAME" display-tooltip-when-elided="true" name="MERCHANT_NPC_NAME" style="-unity-text-align: upper-center; font-size: 50px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+            <ui:VisualElement name="MERCHAN_ITEM_SLOT_1" style="flex-grow: 0; background-color: rgb(0, 0, 0); margin-bottom: 1%; margin-left: 1%; margin-right: 1%; margin-top: 1%; flex-direction: row; flex-basis: auto; height: 130px; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20UI.png?fileID=2800000&amp;guid=b64ca1750f957fc418df2d46fae9f896&amp;type=3#Inventory UI&apos;);">
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 20%; flex-basis: initial; margin-left: 1.5%; margin-right: 1.5%; margin-top: 1.5%; margin-bottom: 1.5%;">
+                    <ui:VisualElement name="MERCHANT_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/ITEM_image_Icon.png?fileID=21300000&amp;guid=83266e3d67734d847a032f06fbdfea62&amp;type=3#ITEM_image_Icon&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; width: 70%;">
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 70px; justify-content: space-around;">
+                        <ui:Label tabindex="-1" text="ITEM_NAME ITEM_NAME ITEM_NAME" display-tooltip-when-elided="true" name="ITEM_NAME" style="color: rgb(255, 255, 255); justify-content: flex-start; align-items: stretch; font-size: 25px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 30px; padding-left: 10px;">
+                        <ui:Label tabindex="-1" text="ITEM_PRICE ITEM_PRICE ITEM_PRICE ITEM_PRICE" display-tooltip-when-elided="true" name="ITEM_PRICE" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 172, 107); align-self: flex-start;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="MERCHAN_ITEM_SLOT_1" style="flex-grow: 0; background-color: rgb(0, 0, 0); margin-bottom: 1%; margin-left: 1%; margin-right: 1%; margin-top: 1%; flex-direction: row; flex-basis: auto; height: 130px; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20UI.png?fileID=2800000&amp;guid=b64ca1750f957fc418df2d46fae9f896&amp;type=3#Inventory UI&apos;);">
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 20%; flex-basis: initial; margin-left: 1.5%; margin-right: 1.5%; margin-top: 1.5%; margin-bottom: 1.5%;">
+                    <ui:VisualElement name="MERCHANT_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/ITEM_image_Icon.png?fileID=21300000&amp;guid=83266e3d67734d847a032f06fbdfea62&amp;type=3#ITEM_image_Icon&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; width: 70%;">
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 70px; justify-content: space-around;">
+                        <ui:Label tabindex="-1" text="ITEM_NAME ITEM_NAME ITEM_NAME" display-tooltip-when-elided="true" name="ITEM_NAME" style="color: rgb(255, 255, 255); justify-content: flex-start; align-items: stretch; font-size: 25px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 30px; padding-left: 10px;">
+                        <ui:Label tabindex="-1" text="ITEM_PRICE ITEM_PRICE ITEM_PRICE ITEM_PRICE" display-tooltip-when-elided="true" name="ITEM_PRICE" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 172, 107); align-self: flex-start;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="MERCHAN_ITEM_SLOT_1" style="flex-grow: 0; background-color: rgb(0, 0, 0); margin-bottom: 1%; margin-left: 1%; margin-right: 1%; margin-top: 1%; flex-direction: row; flex-basis: auto; height: 130px; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20UI.png?fileID=2800000&amp;guid=b64ca1750f957fc418df2d46fae9f896&amp;type=3#Inventory UI&apos;);">
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 20%; flex-basis: initial; margin-left: 1.5%; margin-right: 1.5%; margin-top: 1.5%; margin-bottom: 1.5%;">
+                    <ui:VisualElement name="MERCHANT_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/ITEM_image_Icon.png?fileID=21300000&amp;guid=83266e3d67734d847a032f06fbdfea62&amp;type=3#ITEM_image_Icon&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; width: 70%;">
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 70px; justify-content: space-around;">
+                        <ui:Label tabindex="-1" text="ITEM_NAME ITEM_NAME ITEM_NAME" display-tooltip-when-elided="true" name="ITEM_NAME" style="color: rgb(255, 255, 255); justify-content: flex-start; align-items: stretch; font-size: 25px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 30px; padding-left: 10px;">
+                        <ui:Label tabindex="-1" text="ITEM_PRICE ITEM_PRICE ITEM_PRICE ITEM_PRICE" display-tooltip-when-elided="true" name="ITEM_PRICE" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 172, 107); align-self: flex-start;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="MERCHAN_ITEM_SLOT_1" style="flex-grow: 0; background-color: rgb(0, 0, 0); margin-bottom: 1%; margin-left: 1%; margin-right: 1%; margin-top: 1%; flex-direction: row; flex-basis: auto; height: 130px; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20UI.png?fileID=2800000&amp;guid=b64ca1750f957fc418df2d46fae9f896&amp;type=3#Inventory UI&apos;);">
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 20%; flex-basis: initial; margin-left: 1.5%; margin-right: 1.5%; margin-top: 1.5%; margin-bottom: 1.5%;">
+                    <ui:VisualElement name="MERCHANT_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/ITEM_image_Icon.png?fileID=21300000&amp;guid=83266e3d67734d847a032f06fbdfea62&amp;type=3#ITEM_image_Icon&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; width: 70%;">
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 70px; justify-content: space-around;">
+                        <ui:Label tabindex="-1" text="ITEM_NAME ITEM_NAME ITEM_NAME" display-tooltip-when-elided="true" name="ITEM_NAME" style="color: rgb(255, 255, 255); justify-content: flex-start; align-items: stretch; font-size: 25px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 30px; padding-left: 10px;">
+                        <ui:Label tabindex="-1" text="ITEM_PRICE ITEM_PRICE ITEM_PRICE ITEM_PRICE" display-tooltip-when-elided="true" name="ITEM_PRICE" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 172, 107); align-self: flex-start;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="MERCHAN_ITEM_SLOT_1" style="flex-grow: 0; background-color: rgb(0, 0, 0); margin-bottom: 1%; margin-left: 1%; margin-right: 1%; margin-top: 1%; flex-direction: row; flex-basis: auto; height: 130px; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20UI.png?fileID=2800000&amp;guid=b64ca1750f957fc418df2d46fae9f896&amp;type=3#Inventory UI&apos;);">
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 20%; flex-basis: initial; margin-left: 1.5%; margin-right: 1.5%; margin-top: 1.5%; margin-bottom: 1.5%;">
+                    <ui:VisualElement name="MERCHANT_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/ITEM_image_Icon.png?fileID=21300000&amp;guid=83266e3d67734d847a032f06fbdfea62&amp;type=3#ITEM_image_Icon&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; width: 70%;">
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 70px; justify-content: space-around;">
+                        <ui:Label tabindex="-1" text="ITEM_NAME ITEM_NAME ITEM_NAME" display-tooltip-when-elided="true" name="ITEM_NAME" style="color: rgb(255, 255, 255); justify-content: flex-start; align-items: stretch; font-size: 25px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 30px; padding-left: 10px;">
+                        <ui:Label tabindex="-1" text="ITEM_PRICE ITEM_PRICE ITEM_PRICE ITEM_PRICE" display-tooltip-when-elided="true" name="ITEM_PRICE" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 172, 107); align-self: flex-start;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="MERCHAN_ITEM_SLOT_1" style="flex-grow: 0; background-color: rgb(0, 0, 0); margin-bottom: 1%; margin-left: 1%; margin-right: 1%; margin-top: 1%; flex-direction: row; flex-basis: auto; height: 130px; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20UI.png?fileID=2800000&amp;guid=b64ca1750f957fc418df2d46fae9f896&amp;type=3#Inventory UI&apos;);">
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 20%; flex-basis: initial; margin-left: 1.5%; margin-right: 1.5%; margin-top: 1.5%; margin-bottom: 1.5%;">
+                    <ui:VisualElement name="MERCHANT_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/ITEM_image_Icon.png?fileID=21300000&amp;guid=83266e3d67734d847a032f06fbdfea62&amp;type=3#ITEM_image_Icon&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-basis: initial; width: 70%;">
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 70px; justify-content: space-around;">
+                        <ui:Label tabindex="-1" text="ITEM_NAME ITEM_NAME ITEM_NAME" display-tooltip-when-elided="true" name="ITEM_NAME" style="color: rgb(255, 255, 255); justify-content: flex-start; align-items: stretch; font-size: 25px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); height: 30px; padding-left: 10px;">
+                        <ui:Label tabindex="-1" text="ITEM_PRICE ITEM_PRICE ITEM_PRICE ITEM_PRICE" display-tooltip-when-elided="true" name="ITEM_PRICE" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 172, 107); align-self: flex-start;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/smolbutton.png?fileID=2800000&amp;guid=c476d1447c2d3504aba48f57f29ed371&amp;type=3#smolbutton&apos;); flex-basis: auto; width: 158px; height: 64px; padding-left: 8px; padding-right: 8px; padding-top: 8px; padding-bottom: 8px;">
+            <ui:VisualElement name="MERCHANT_SHOP_UI_CLOSE_BUTTON" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/X.png?fileID=21300000&amp;guid=b9eb826fbdcd2224b8f565d949082236&amp;type=3#X&apos;); -unity-background-scale-mode: scale-to-fit;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
