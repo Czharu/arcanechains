@@ -63,3 +63,6 @@ TagManager:
   - name: Projectile
     uniqueID: 2798645927
     locked: 0
+  - name: UI Sorting Layer
+    uniqueID: 4087411315
+    locked: 0
