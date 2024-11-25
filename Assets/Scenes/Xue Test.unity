@@ -1796,7 +1796,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactPrompt: {fileID: 117376243}
-  interactButtonLabelText: {fileID: 0}
+  actionName: Interact
+--- !u!114 &919639357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919639350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83028728ec370e4e8ea9dc7e13bee80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiGameObject: {fileID: 1353995955}
 --- !u!1001 &985945951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1877,6 +1890,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9088115287299778575, guid: f78a9d8c56028fb428efe9d63b2b329e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 919639356}
+    - targetCorrespondingSourceObject: {fileID: 9088115287299778575, guid: f78a9d8c56028fb428efe9d63b2b329e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 919639357}
   m_SourcePrefab: {fileID: 100100000, guid: f78a9d8c56028fb428efe9d63b2b329e, type: 3}
 --- !u!1 &992482463
 GameObject:
