@@ -144,4 +144,22 @@ public class InteractPromptScript : MonoBehaviour
             interactPrompt.SetActive(true);
         }
     }
+    public void DisableInteraction()
+    {
+        if (interactPrompt != null)
+        {
+            interactPrompt.SetActive(false);
+        }
+        isInteracting = true; // Prevent further interactions
+    }
+
+    public void EnableInteraction()
+    {
+        if (isInRange && interactPrompt != null)
+        {
+            interactPrompt.SetActive(true);
+        }
+        isInteracting = false; // Allow new interactions
+    }
+
 }

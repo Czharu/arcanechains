@@ -4,7 +4,7 @@ using UnityEngine;
 
 //a Merchant class to handle different types of merchants and their inventories:
 
-public class Merchant : MonoBehaviour
+public class MerchantInventory : MonoBehaviour
 {
     public string merchantName;
     public List<Item> inventory = new List<Item>(); // Assuming you have an Item class
