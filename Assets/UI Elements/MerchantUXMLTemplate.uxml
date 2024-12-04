@@ -239,7 +239,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="INVENTORY_SELL_CONFIRMATION_BOX" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; left: 504px; top: 268px; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/smolbutton.png?fileID=2800000&amp;guid=c476d1447c2d3504aba48f57f29ed371&amp;type=3#smolbutton&apos;); height: 524px; width: 1006px;">
+            <ui:VisualElement name="INVENTORY_SELL_CONFIRMATION_BOX" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; left: 504px; top: 268px; background-image: url(&apos;project://database/Assets/UI%20Elements/UI/smolbutton.png?fileID=2800000&amp;guid=c476d1447c2d3504aba48f57f29ed371&amp;type=3#smolbutton&apos;); height: 524px; width: 1006px; display: none;">
                 <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 50px; margin-right: 50px; margin-top: 50px; margin-bottom: 50px;">
                     <ui:Label tabindex="-1" text="Label" display-tooltip-when-elided="true" style="height: 254px; width: 898px;" />
                     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; display: flex;">
