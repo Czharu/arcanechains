@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Collections;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class Inventory : MonoBehaviour
     public static Inventory instance;
     [SerializeField] public Transform basicItemPrefab;
 
-    public delegate void OnItemChanged();
-    public OnItemChanged OnItemChangedCallback;
+    public delegate void ItemChangedDelegate();
+    public ItemChangedDelegate OnItemChangedCallback;
 
     [SerializeField] private int space = 20; // Maximum inventory size
     [SerializeField] private UIDocument inventoryUIDocument;
@@ -18,6 +19,8 @@ public class Inventory : MonoBehaviour
     private VisualElement inventoryUI;
     private List<VisualElement> itemSlots = new List<VisualElement>();
     private List<Item> items = new List<Item>(); // Holds all inventory items
+
+    private bool isUpdatingUI = false;
 
     private void Awake()
     {
@@ -43,21 +46,36 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        OnItemChangedCallback += UpdateUI; // Subscribe to update UI when items change
+        AddItemChangeListener(UpdateUI); // Use safe listener management
         UpdateUI(); // Perform the initial UI update
     }
 
-    public void AddItemChangeListener(OnItemChanged listener)
+    private void NotifyItemChanged()
+    {
+        if (OnItemChangedCallback != null && !isUpdatingUI)
+        {
+            StartCoroutine(UpdateUICo());
+        }
+    }
+
+    private IEnumerator UpdateUICo()
+    {
+        isUpdatingUI = true;
+        yield return null; // Wait for the end of the frame
+        UpdateUI();
+        isUpdatingUI = false;
+    }
+
+    public void AddItemChangeListener(ItemChangedDelegate listener)
     {
         OnItemChangedCallback -= listener; // Remove any existing subscription
         OnItemChangedCallback += listener; // Add new subscription
     }
 
-    public void RemoveItemChangeListener(OnItemChanged listener)
+    public void RemoveItemChangeListener(ItemChangedDelegate listener)
     {
         OnItemChangedCallback -= listener; // Remove the listener safely
     }
-
 
     #endregion
 
@@ -73,7 +91,7 @@ public class Inventory : MonoBehaviour
         }
 
         items.Add(item);
-        OnItemChangedCallback?.Invoke(); // Notify UI to update
+        NotifyItemChanged(); // Notify using the debounced handler
         return true;
     }
 
@@ -84,7 +102,7 @@ public class Inventory : MonoBehaviour
     {
         if (items.Remove(item))
         {
-            OnItemChangedCallback?.Invoke(); // Notify UI to update
+            NotifyItemChanged(); // Notify using the debounced handler
         }
     }
 
