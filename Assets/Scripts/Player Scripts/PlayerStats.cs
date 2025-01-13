@@ -8,9 +8,14 @@ public class PlayerStats : CharacterStats
     public PlayerInteraction playerInteraction; // Reference to the PlayerInteraction script
     private PlayerMovement playerMovement; // Reference to the PlayerMovement script
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
+        if (EquipmentManager.instance != null)
+        {
+            EquipmentManager.instance.onEquipmentChanged -= OnEquipmentChanged; // Remove if already subscribed
+            EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged; // Subscribe once
+        }
+
         playerInteraction = GetComponent<PlayerInteraction>();
         playerMovement = GetComponent<PlayerMovement>();
     }
@@ -51,7 +56,8 @@ public class PlayerStats : CharacterStats
             evasion.AddModifier(newItem.evasionModifier);
             damage.AddModifier(newItem.damageModifier);
             attackSpeed.AddModifier(newItem.attackspeedModifier);
-            if(newItem.weaponType != WeaponType.NonWeapon){
+            if (newItem.weaponType != WeaponType.NonWeapon)
+            {
                 weaponTypeEquipped = newItem.weaponType;
             }
         }

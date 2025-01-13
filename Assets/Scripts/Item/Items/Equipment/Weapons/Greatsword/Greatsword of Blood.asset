@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b6a439202c85843a8cfc3a67aafd13, type: 3}
   m_Name: Greatsword of Blood
   m_EditorClassIdentifier: 
-  name: Greatsword of Blood
+  itemName: New Item
   icon: {fileID: 21300000, guid: 48cc90e97826725409461389f998ab7c, type: 3}
   isDefaultItem: 0
+  price: 0
   equipSlot: 0
-  armorModifier: 0
+  weaponType: 0
+  armorModifier: 10
   damageModifier: 40
   evasionModifier: 0
+  attackspeedModifier: 4

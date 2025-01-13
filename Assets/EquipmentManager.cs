@@ -5,10 +5,12 @@ using UnityEngine;
 public class EquipmentManager : MonoBehaviour
 {
     public static EquipmentManager instance;
+    private bool isEquipping = false; //recursive issue
 
     #region instance
 
-    private void Awake() {
+    private void Awake()
+    {
         instance = this;
     }
 
@@ -18,50 +20,66 @@ public class EquipmentManager : MonoBehaviour
 
     Equipment[] currentEquipment;
 
-    public delegate void OnEquipmentChanged (Equipment newItem, Equipment oldItem);
+    public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
     public OnEquipmentChanged onEquipmentChanged;
 
-    private void Start() {
+    
 
+    private void Start()
+    {
         inventory = Inventory.instance;
 
         int numSlots = System.Enum.GetNames(typeof(EquipmentSlot)).Length;
         currentEquipment = new Equipment[numSlots];
     }
 
-    public void Equip(Equipment newItem){
-        int slotIndex = (int)newItem.equipSlot;
+    public void Equip(Equipment newItem)
+    {
+        if (isEquipping) return; // Prevent reentrant calls
+        isEquipping = true;
 
+        int slotIndex = (int)newItem.equipSlot;
         Equipment oldItem = null;
 
-        if(currentEquipment[slotIndex] != null){
-
+        if (currentEquipment[slotIndex] != null)
+        {
             oldItem = currentEquipment[slotIndex];
-            inventory.Add(oldItem);
-        }
-
-        if(onEquipmentChanged != null){
-            onEquipmentChanged.Invoke(newItem, oldItem);
+            if (!inventory.Add(oldItem))
+            {
+                Debug.LogError($"Failed to add old equipment {oldItem.itemName} to inventory.");
+            }
         }
 
         currentEquipment[slotIndex] = newItem;
 
+        onEquipmentChanged?.Invoke(newItem, oldItem);
+
+        Debug.Log($"Equipped: {newItem.itemName} in slot {slotIndex}");
+
+        isEquipping = false;
     }
 
-    public void Unequip (int slotIndex){
-        if(currentEquipment[slotIndex] != null){
+    public void Unequip(int slotIndex)
+    {
+        if (isEquipping) return; // Prevent reentrant calls
+        isEquipping = true;
+
+        if (currentEquipment[slotIndex] != null)
+        {
             Equipment oldItem = currentEquipment[slotIndex];
-            inventory.Add(oldItem);
+            if (inventory.Add(oldItem))
+            {
+                onEquipmentChanged?.Invoke(null, oldItem);
+                currentEquipment[slotIndex] = null;
 
-            currentEquipment[slotIndex] = null;
-
-            if(onEquipmentChanged != null){
-            onEquipmentChanged.Invoke(null, oldItem);
+                Debug.Log($"Unequipped: {oldItem.itemName} from slot {slotIndex}");
+            }
+            else
+            {
+                Debug.LogError("Failed to add unequipped item back to inventory.");
+            }
         }
 
-        }
-
+        isEquipping = false;
     }
-
-
 }

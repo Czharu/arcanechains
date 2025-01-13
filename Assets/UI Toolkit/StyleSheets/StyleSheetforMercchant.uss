@@ -1,0 +1,9 @@
+.unity-button:hover {
+    background-color: rgb(255, 0, 229);
+    -unity-background-image-tint-color: rgb(255, 0, 210);
+}
+
+.unity-button {
+    visibility: visible;
+    opacity: 0;
+}

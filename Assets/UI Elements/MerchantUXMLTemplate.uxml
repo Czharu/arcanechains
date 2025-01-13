@@ -122,28 +122,28 @@
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_1" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" class="unity-button" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; opacity: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_2" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" class="unity-button" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_3" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" class="unity-button" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_4" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" class="unity-button" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
@@ -152,28 +152,28 @@
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_5" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_6" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_7" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_8" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
@@ -182,28 +182,28 @@
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_9" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_10" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_11" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_12" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
@@ -212,29 +212,36 @@
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_13" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_14" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_15" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="INVENTORY_ITEMSLOT_16" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
                         <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
                             <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
-                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON" style="visibility: hidden; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                                <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                             </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="EQUIPMENT_1" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; height: 192px; width: 192px; top: -180px; right: 382px;">
+                    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Elements/UI/Inventory%20Slot.png?fileID=2800000&amp;guid=4504037f9bca68946afbd66eb8ed45ef&amp;type=3#Inventory Slot&apos;); margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px;">
+                        <ui:VisualElement name="INV_ITEM_SPRITE" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;">
+                            <ui:Button text="Button" display-tooltip-when-elided="true" name="INV_ITEM_BUTTON_1" style="visibility: visible; flex-shrink: 1; flex-grow: 1; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
