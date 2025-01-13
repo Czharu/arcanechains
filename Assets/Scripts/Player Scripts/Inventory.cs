@@ -111,6 +111,9 @@ public class Inventory : MonoBehaviour
     /// </summary>
     private void UpdateUI()
     {
+
+
+        // FIX THIS FOR LOOP YOU FAT PIECE OF SHIT OR ELSE
         for (int i = 0; i < itemSlots.Count; i++)
         {
             var slot = itemSlots[i];
