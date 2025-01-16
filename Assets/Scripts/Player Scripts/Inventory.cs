@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections;
 
 public class Inventory : MonoBehaviour
 {
@@ -19,8 +18,7 @@ public class Inventory : MonoBehaviour
     private VisualElement inventoryUI;
     private List<VisualElement> itemSlots = new List<VisualElement>();
     private List<Item> items = new List<Item>(); // Holds all inventory items
-
-    private bool isUpdatingUI = false;
+    private Dictionary<int, Button> itemButtons = new Dictionary<int, Button>(); // Store button references
 
     private void Awake()
     {
@@ -43,27 +41,20 @@ public class Inventory : MonoBehaviour
             if (slot != null)
             {
                 itemSlots.Add(slot);
+
+                // Set up button once and store reference
+                var button = slot.Q<Button>("INV_ITEM_BUTTON_1");
+                if (button != null)
+                {
+                    int index = i - 1; // Corrected index
+                    itemButtons[index] = button; // Store reference
+                    button.clicked += () => OnItemClicked(index); // Assign static callback
+                }
             }
         }
 
         AddItemChangeListener(UpdateUI); // Use safe listener management
         UpdateUI(); // Perform the initial UI update
-    }
-
-    private void NotifyItemChanged()
-    {
-        if (OnItemChangedCallback != null && !isUpdatingUI)
-        {
-            StartCoroutine(UpdateUICo());
-        }
-    }
-
-    private IEnumerator UpdateUICo()
-    {
-        isUpdatingUI = true;
-        yield return null; // Wait for the end of the frame
-        UpdateUI();
-        isUpdatingUI = false;
     }
 
     public void AddItemChangeListener(ItemChangedDelegate listener)
@@ -91,7 +82,7 @@ public class Inventory : MonoBehaviour
         }
 
         items.Add(item);
-        NotifyItemChanged(); // Notify using the debounced handler
+        OnItemChangedCallback?.Invoke(); // Notify using the debounced handler
         return true;
     }
 
@@ -102,7 +93,7 @@ public class Inventory : MonoBehaviour
     {
         if (items.Remove(item))
         {
-            NotifyItemChanged(); // Notify using the debounced handler
+            OnItemChangedCallback?.Invoke(); // Notify using the debounced handler
         }
     }
 
@@ -111,9 +102,6 @@ public class Inventory : MonoBehaviour
     /// </summary>
     private void UpdateUI()
     {
-
-
-        // FIX THIS FOR LOOP YOU FAT PIECE OF SHIT OR ELSE
         for (int i = 0; i < itemSlots.Count; i++)
         {
             var slot = itemSlots[i];
@@ -124,11 +112,6 @@ public class Inventory : MonoBehaviour
                 var item = items[i];
                 spriteElement.style.backgroundImage = new StyleBackground(item.icon);
                 spriteElement.style.visibility = Visibility.Visible;
-
-                var button = slot.Q<Button>("INV_ITEM_BUTTON_1");
-                button.clicked -= null; // Clear previous listeners
-                int capturedIndex = i; // Capture the index for closure
-                button.clicked += () => OnItemClicked(capturedIndex);
             }
             else
             {
