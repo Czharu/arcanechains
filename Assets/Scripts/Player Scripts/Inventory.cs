@@ -132,11 +132,23 @@ public class Inventory : MonoBehaviour
         var item = items[index];
         if (item is Equipment equipment)
         {
-            Debug.Log($"Equipping item: {equipment.itemName} from inventory.");
+            Debug.Log($"Equipping item: {equipment.itemName} from inventory slot {index}.");
             if (EquipmentManager.instance != null)
             {
-                EquipmentManager.instance.Equip(equipment);
-                Remove(equipment); // Remove the item from the inventory after equipping
+                // Equip the new item and get the previously equipped one
+                Equipment previousEquipment = EquipmentManager.instance.Equip(equipment);
+
+                // Swap positions
+                if (previousEquipment != null)
+                {
+                    items[index] = previousEquipment; // Place the unequipped item at the original inventory slot
+                }
+                else
+                {
+                    items.RemoveAt(index); // Remove only if no replacement exists
+                }
+
+                OnItemChangedCallback?.Invoke(); // Refresh UI
             }
         }
         else

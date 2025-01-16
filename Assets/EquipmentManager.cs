@@ -23,7 +23,7 @@ public class EquipmentManager : MonoBehaviour
     public delegate void OnEquipmentChanged(Equipment newItem, Equipment oldItem);
     public OnEquipmentChanged onEquipmentChanged;
 
-    
+
 
     private void Start()
     {
@@ -33,30 +33,22 @@ public class EquipmentManager : MonoBehaviour
         currentEquipment = new Equipment[numSlots];
     }
 
-    public void Equip(Equipment newItem)
+    public Equipment Equip(Equipment newItem)
     {
-        if (isEquipping) return; // Prevent reentrant calls
+        if (isEquipping) return null; // Prevent reentrant calls
         isEquipping = true;
 
         int slotIndex = (int)newItem.equipSlot;
-        Equipment oldItem = null;
+        Equipment oldItem = currentEquipment[slotIndex];
 
-        if (currentEquipment[slotIndex] != null)
-        {
-            oldItem = currentEquipment[slotIndex];
-            if (!inventory.Add(oldItem))
-            {
-                Debug.LogError($"Failed to add old equipment {oldItem.itemName} to inventory.");
-            }
-        }
+        currentEquipment[slotIndex] = newItem; // Set the new item in the equipped slot
 
-        currentEquipment[slotIndex] = newItem;
-
-        onEquipmentChanged?.Invoke(newItem, oldItem);
+        onEquipmentChanged?.Invoke(newItem, oldItem); // Notify listeners
 
         Debug.Log($"Equipped: {newItem.itemName} in slot {slotIndex}");
 
         isEquipping = false;
+        return oldItem; // Return old item so Inventory can swap it correctly
     }
 
     public void Unequip(int slotIndex)
@@ -82,4 +74,5 @@ public class EquipmentManager : MonoBehaviour
 
         isEquipping = false;
     }
+
 }
