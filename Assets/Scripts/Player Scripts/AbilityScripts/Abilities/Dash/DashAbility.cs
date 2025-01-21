@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Callbacks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [CreateAssetMenu]
 public class DashAbility : Ability
@@ -11,7 +12,7 @@ public class DashAbility : Ability
     public override void Activate(GameObject parent)
     {
         Rigidbody2D rigidbody = parent.GetComponent<Rigidbody2D>();
-        Vector2 force = (faceMouse() - rigidbody.position) * dashVelocity;
+        Vector2 force = (faceMouse() - rigidbody.position).normalized * dashVelocity;
         Debug.Log("DASHING");
         rigidbody.AddForce(force);
     }
@@ -19,14 +20,10 @@ public class DashAbility : Ability
     private Vector2 faceMouse()
         {
 
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
-        Vector2 direction = new Vector2(
-            mousePosition.x,
-            mousePosition.y
-        );
-        return direction;
+        return mousePosition;
     }
 }
 

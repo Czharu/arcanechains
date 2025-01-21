@@ -5640,7 +5640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9481f97957c43c3449e8e8e97f8792af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: 3298865cf2fb267448cda61e663ab052, type: 2}
+  ability: {fileID: 11400000, guid: b0c17bf9b17dfbc41912ff2b9b936c41, type: 2}
   key: 101
 --- !u!1 &1259491385
 GameObject:
