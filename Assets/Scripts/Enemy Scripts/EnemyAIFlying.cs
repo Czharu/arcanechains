@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.Animations;
 
 public class EnemyAIFlying : MonoBehaviour
 {
@@ -77,6 +78,7 @@ public class EnemyAIFlying : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (path == null)
         {
             return;
@@ -115,6 +117,7 @@ public class EnemyAIFlying : MonoBehaviour
             chasingRight = false;
             AdjustProjectileScale(); // Adjust the scale of any attached projectiles
         }
+        
 
         //ranged attack
         float distanceFromPlayer = target.position.x - transform.position.x;
@@ -138,6 +141,7 @@ public class EnemyAIFlying : MonoBehaviour
 
 
     }
+
 
     private IEnumerator RangedAttackCoroutine(float delay)
     {

@@ -82,9 +82,9 @@ GameObject:
   - component: {fileID: 4869226796819682208}
   - component: {fileID: 5214679318887225084}
   - component: {fileID: 5382564505249523900}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Shelby
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,6 +231,23 @@ MonoBehaviour:
     baseValue: 0
   evasion:
     baseValue: 0
+  attackSpeed:
+    baseValue: 0
+  strength:
+    baseValue: 0
+  dexterity:
+    baseValue: 0
+  arcana:
+    baseValue: 0
+  vitality:
+    baseValue: 0
+  toughness:
+    baseValue: 0
+  swiftness:
+    baseValue: 0
+  precision:
+    baseValue: 0
+  weaponTypeEquipped: 0
   coinPrefab: {fileID: 5731035647836046021, guid: b6974188f96c7be43a053b7d02ea5f39, type: 3}
   numberOfCoinsToDrop: 5
   destroyParent: 1
@@ -419,7 +436,7 @@ Transform:
   m_Children:
   - {fileID: 625251018244272678}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4004890003982619150
 Rigidbody2D:
@@ -486,3 +503,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   IsRoller: 1
+  RangedAttackCD: 200
