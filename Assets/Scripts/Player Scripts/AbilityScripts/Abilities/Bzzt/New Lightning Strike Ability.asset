@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 283bfe19fb0bad542b3ed51b5cae4eca, type: 3}
-  m_Name: New Dash Ability
+  m_Script: {fileID: 11500000, guid: 4d12b37534d48b54282907e1e64d407d, type: 3}
+  m_Name: New Lightning Strike Ability
   m_EditorClassIdentifier: 
-  name: DashAbility
+  name: Lightning Strike
   cooldownTime: 1
   activeTime: 1
-  dashVelocity: 1000
-  arrowPivot: {fileID: 0}
+  lightningBolt: {fileID: 6727311233308950022, guid: ae053f76be0c158499ea573cd9f1992b, type: 3}

@@ -29,6 +29,7 @@ public class FireballBehavior : MonoBehaviour
         SetDestroyTime();
         setVelocity();
 
+
         // Create the explosion collider dynamically and set it as a trigger
         explosionCollider = gameObject.AddComponent<CircleCollider2D>();
         explosionCollider.isTrigger = true;
@@ -62,7 +63,8 @@ public class FireballBehavior : MonoBehaviour
                 EnemyLife enemyLife = collider.GetComponent<EnemyLife>();
                 if (enemyLife != null)
                 {
-                    InflictDamage(enemyLife);
+                    Debug.Log("Fireball does " + damage + " Damage to " + collider.gameObject.name);
+                    enemyLife.Damage(damage, gameObject);
                 }
                 Explode();
             }
@@ -81,15 +83,10 @@ public class FireballBehavior : MonoBehaviour
 
     private void setDamage()
     {
-        damage = playerStats.damage.GetValue();
+        damage = playerStats.damage.GetValue(); // should be arcana
         explosionDamage = damage * 0.5f;
     }
 
-    private void InflictDamage(EnemyLife enemyLife)
-    {
-        Debug.Log("Fireball does " + damage + " Damage");
-        enemyLife.Damage(damage, gameObject);
-    }
 
     private void Explode()
     {
