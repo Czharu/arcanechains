@@ -29,8 +29,8 @@ TagManager:
   - Collectible
   - OneWayPlatform
   - HostileProjectiles
-  - 
-  - 
+  - PlayerProjectiles
+  - Enemy
   - 
   - 
   - 

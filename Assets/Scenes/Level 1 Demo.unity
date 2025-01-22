@@ -1444,6 +1444,25 @@ Transform:
   m_Father: {fileID: 640345570}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &994310991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4131828233163074353, guid: f43fabcad6adda643a8286177678c33e, type: 3}
+  m_PrefabInstance: {fileID: 6261265949514091488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &994311013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994310991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9481f97957c43c3449e8e8e97f8792af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: b0c17bf9b17dfbc41912ff2b9b936c41, type: 2}
+  key: 101
 --- !u!1 &1024998803
 GameObject:
   m_ObjectHideFlags: 0
@@ -27206,6 +27225,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bird That Drops Coins Better
       objectReference: {fileID: 0}
+    - target: {fileID: 1513795060112490068, guid: 915ab42359eedcd48af6ec9643a7d2b9, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2114648049356450918, guid: 915ab42359eedcd48af6ec9643a7d2b9, type: 3}
       propertyPath: coinPrefab
       value: 
@@ -27282,7 +27305,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4131828233163074353, guid: f43fabcad6adda643a8286177678c33e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 994311013}
   m_SourcePrefab: {fileID: 100100000, guid: f43fabcad6adda643a8286177678c33e, type: 3}
 --- !u!1001 &8408484934062743009
 PrefabInstance:
