@@ -67,6 +67,8 @@ public class LightningStrikeBehaviour : MonoBehaviour
 
     private IEnumerator GradualScatter()
     {
+        Animator anim = GetComponent<Animator>();
+        anim.SetBool("LightningHits", true);
         // Stop the lightning bolt's movement
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
