@@ -82,37 +82,66 @@ public class PlayerMovement : MonoBehaviour
 
     private bool JumpCheck()
     {
-        if (IsGrounded())
+        if (IsGrounded() || coyoteTimeCounter > 0) // Allows jumping within coyote time
         {
-            jumpStage = 1;
+            jumpStage = 1; // Reset jumps when grounded or in coyote time
             return true;
         }
-        else if (jumpStage == 1)
+        else if (jumpStage == 0) // Player fell off a ledge without jumping yet
+        {
+            jumpStage = 1; // Assign them their first jump in the air so they have air jump
+            return true;
+        }
+        else if (jumpStage == 1) // Allows double jump
         {
             jumpStage++;
             return true;
         }
-        else
-        {
-            return false;
-        }
-
+        return false;
     }
+
+
+    private float coyoteTime = 0.2f; // Time allowed to jump after falling
+    private float coyoteTimeCounter; // Tracks coyote time
 
     private bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, 0.1f, jumpableGround);
+
         if (raycastHit.collider != null)
         {
-            // Check if the collider belongs to a OneWayPlatform and if the player is above the platform
+            // Check for OneWayPlatform rules
             if (raycastHit.collider.gameObject.layer == LayerMask.NameToLayer("OneWayPlatform") &&
                 (transform.position.y > raycastHit.collider.bounds.center.y))
             {
+                coyoteTimeCounter = coyoteTime; // Reset coyote time
+                jumpStage = 1; // Ensure player gets normal jump reset
                 return true;
             }
         }
-        return raycastHit.collider != null;
+
+        bool isTouchingGround = raycastHit.collider != null;
+
+        if (isTouchingGround)
+        {
+            coyoteTimeCounter = coyoteTime; // Reset coyote time when on solid ground
+            jumpStage = 1; // Resext jump counter when touching ground
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime; // Decrease coyote time if not grounded
+
+            // **NEW FIX:** If the player falls off a ledge, reset jumpStage to allow air jump
+            if (jumpStage == 0)
+            {
+                jumpStage = 1; // Ensures they have an air jump available after falling
+            }
+        }
+
+        return isTouchingGround;
     }
+
+
 
     //Calls Player Input/Events components
     public void Move(InputAction.CallbackContext context)
