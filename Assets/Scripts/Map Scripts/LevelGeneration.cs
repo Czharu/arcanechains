@@ -6,6 +6,8 @@ public class LevelGeneration : MonoBehaviour
 {
     public static LevelGeneration Instance;
     public List<RoomData> generatedRoomData = new List<RoomData>();  // Make this public or provide a public getter to access it from GameManager
+    [SerializeField] private GameObject objectToActivate; // ✅ Assign this in the Inspector to ativate A_ object
+
 
     void Awake()
     {
@@ -70,6 +72,8 @@ public class LevelGeneration : MonoBehaviour
         SetRoomDoors();
         InstantiateGameplayRooms();
         DrawMap();
+        // ✅ Call A_ activatioon coroutine at the very end of Start()
+        StartCoroutine(ActivateAfterFrame());
     }
 
     void CreateRooms()
@@ -440,6 +444,19 @@ public class LevelGeneration : MonoBehaviour
             mapper.left = room.doorLeft;
             Debug.Log("room type" + room.type);
 
+        }
+    }
+    // ✅ New Coroutine that waits 1 frame before activating the object
+    private IEnumerator ActivateAfterFrame()
+    {
+        yield return null; // Waits for 1 frame
+        if (objectToActivate != null)
+        {
+            objectToActivate.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("objectToActivate is not assigned in LevelGeneration!");
         }
     }
 }
